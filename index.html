@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 镜头选购数据库｜快速选镜 + 品牌镜头库</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f4f5f7;color:#1f2937;font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",Arial,sans-serif}
+button,select,input{font-family:inherit}
+button{cursor:pointer}
+.container{width:96%;max-width:1700px;margin:28px auto 60px}
+.header{background:linear-gradient(135deg,#111827 0%,#24364d 100%);color:white;padding:38px 42px;border-radius:20px;margin-bottom:18px;box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.header h1{margin:0 0 12px;font-size:31px;font-weight:700;letter-spacing:1px}
+.header-subtitle{font-size:16px;color:#e5e7eb;margin-bottom:8px}
+.header-description{font-size:13px;color:#aeb8c6;line-height:1.8;max-width:1050px}
+.update{display:inline-block;margin-top:17px;padding:7px 13px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.12);border-radius:20px;font-size:12px;color:#dbe2ea}
+.sheet-nav{position:sticky;top:0;z-index:100;display:flex;gap:7px;overflow-x:auto;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);padding:9px;border-radius:13px;margin-bottom:18px;box-shadow:0 3px 16px rgba(0,0,0,.07)}
+.sheet-nav::-webkit-scrollbar{height:3px}.sheet-btn{flex:0 0 auto;border:0;padding:11px 18px;border-radius:8px;background:#f1f3f5;color:#444;font-size:14px;transition:.18s}.sheet-btn:hover{background:#e5e7eb}.sheet-btn.active{background:#111827;color:white;box-shadow:0 3px 10px rgba(17,24,39,.18)}
+.sheet{display:none}.sheet.active{display:block}
+.sheet-title{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin:5px 3px 15px}.sheet-title h2{margin:0;font-size:23px;color:#111827}.sheet-title span{color:#8a8f98;font-size:12px}
+.hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:14px;margin-bottom:15px}.card{background:white;border-radius:14px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.card h3{margin:0 0 8px;font-size:16px}.card p{margin:5px 0;color:#6b7280;font-size:12.5px;line-height:1.8}
+.wizard{background:white;border-radius:16px;padding:22px;box-shadow:0 3px 16px rgba(0,0,0,.05);margin-bottom:15px}
+.progress-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.progress-head h3{margin:0;font-size:19px}.count-pill{padding:7px 12px;border-radius:999px;background:#111827;color:white;font-size:12px;white-space:nowrap}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.step{border:1px solid #e6e9ed;border-radius:12px;padding:13px;background:#fafbfc;min-height:105px;transition:.2s}.step.active{border-color:#111827;background:white;box-shadow:0 3px 12px rgba(17,24,39,.08)}.step.done{background:#f6f8fa}.step-no{font-size:10px;color:#9ca3af;margin-bottom:6px}.step-title{font-size:13px;font-weight:800;color:#111827;margin-bottom:8px}.step-value{font-size:11.5px;color:#6b7280;line-height:1.5}
+.section-label{font-weight:800;font-size:13px;margin:16px 0 9px}.choice-grid{display:flex;flex-wrap:wrap;gap:8px}.choice{border:1px solid #dfe3e8;background:#fff;color:#374151;padding:9px 12px;border-radius:9px;font-size:12.5px;transition:.15s}.choice:hover{border-color:#9ca3af}.choice.selected{background:#111827;color:#fff;border-color:#111827}.choice.secondary.selected{background:#334155}.choice.disabled{opacity:.35;pointer-events:none}
+.helper{margin-top:9px;font-size:11px;color:#8a8f98;line-height:1.7}.wizard-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.primary{border:0;padding:10px 15px;border-radius:8px;background:#111827;color:white;font-size:12.5px}.ghost{border:1px solid #dfe3e8;padding:9px 14px;border-radius:8px;background:white;color:#4b5563;font-size:12.5px}.primary:hover{background:#1f2937}.ghost:hover{background:#f8fafc}
+.quick-summary{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;background:#eef1f4;color:#4b5563;font-size:10.5px}.chip strong{color:#111827}
+.recommend-box{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:15px}.recommend-card{background:white;border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.04);border-top:3px solid #111827}.recommend-card .rank{font-size:10px;color:#9ca3af}.recommend-card h3{font-size:16px;margin:5px 0 5px}.recommend-card .meta{font-size:11px;color:#6b7280;line-height:1.7}.match{font-size:28px;font-weight:900;margin:12px 0 3px}.match small{font-size:11px;color:#6b7280;font-weight:500}.proscons{font-size:11.5px;line-height:1.7;color:#4b5563;margin-top:8px}.proscons b{color:#111827}
+.filters{display:flex;align-items:center;flex-wrap:wrap;gap:9px;padding:14px;background:white;border-radius:13px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.04)}.filters select,.filters input{height:38px;border:1px solid #dfe3e8;background:white;border-radius:7px;padding:0 11px;font-size:13px;outline:none}.filters input{width:220px}.filters select:focus,.filters input:focus{border-color:#667085}.filter-reset{border:0;height:38px;padding:0 14px;border-radius:7px;background:#111827;color:white}
+.table-wrap{width:100%;overflow:auto;background:white;border-radius:14px;box-shadow:0 3px 16px rgba(0,0,0,.05)}table{width:100%;min-width:1720px;border-collapse:collapse}thead{position:sticky;top:0;z-index:10;background:#111827;color:white}th{padding:12px 9px;font-size:12px;font-weight:600;white-space:nowrap;border-right:1px solid rgba(255,255,255,.08);user-select:none}td{padding:11px 9px;text-align:center;font-size:12px;white-space:nowrap;border-bottom:1px solid #edf0f2}tbody tr:hover{background:#f8fafc}.model{text-align:left;font-weight:800;color:#111827}.maker{text-align:left;color:#4b5563}.price{font-weight:800;color:#111827;font-size:13px}.small-note{display:block;margin-top:3px;font-size:9px;color:#9ca3af}.score-cell{font-weight:800}.score-high{color:#166534}.score-mid{color:#92400e}.score-low{color:#6b7280}.total{font-weight:900;font-size:14px}.match-cell{font-weight:900;color:#111827}.sortable{cursor:pointer;position:relative;padding-right:22px}.sortable:hover{background:#1f2937}.sortable::after{content:"↕";position:absolute;right:7px;top:50%;transform:translateY(-50%);opacity:.55;font-size:10px}.sortable.sort-asc::after{content:"▲";opacity:1}.sortable.sort-desc::after{content:"▼";opacity:1}
+.tag{display:inline-block;padding:4px 8px;border-radius:5px;font-size:10px;line-height:1}.ff{background:#e8eefc;color:#3157a5}.apsc{background:#eaf5e7;color:#487a38}.m43{background:#f6eee6;color:#8a5b2f}.af{background:#eef8f1;color:#256b43}.mf{background:#f3f4f6;color:#6b7280}.native{background:#f4edff;color:#6d4bb5}.third{background:#edf7ff;color:#2e658e}.cn{background:#fff2e5;color:#9a5b1e}
+.legend{background:white;border-radius:13px;padding:17px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.04)}.legend-title{font-weight:700;margin-bottom:8px}.legend p{margin:5px 0;font-size:12px;color:#6b7280;line-height:1.75}.brand-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px;margin-bottom:15px}.brand-card{background:white;border-radius:13px;padding:19px;box-shadow:0 2px 10px rgba(0,0,0,.04)}.brand-card h3{margin:0 0 8px;font-size:16px}.brand-card p{margin:0;color:#6b7280;font-size:12px;line-height:1.7}.brand-card button{margin-top:12px;border:0;background:#111827;color:#fff;border-radius:7px;padding:8px 11px;font-size:11px}
+.notice{padding:11px 13px;background:#fff8e8;border:1px solid #f2dfae;color:#805c17;border-radius:10px;font-size:11.5px;line-height:1.7;margin-bottom:14px}.footer{margin-top:25px;padding:25px 10px;text-align:center;color:#9ca3af;font-size:11px;line-height:1.8}
+.empty{padding:34px;text-align:center;color:#9ca3af;background:#fff;border-radius:14px}.mobile-hint{display:none}
+@media(max-width:1100px){.steps{grid-template-columns:repeat(3,1fr)}.hero-grid{grid-template-columns:1fr}.recommend-box{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.container{width:94%;margin-top:15px}.header{padding:25px 22px;border-radius:15px}.header h1{font-size:23px}.header-subtitle{font-size:14px}.sheet-title{align-items:flex-start;flex-direction:column}.filters input{width:100%}.sheet-btn{padding:10px 15px}.steps{grid-template-columns:1fr 1fr}.recommend-box{grid-template-columns:1fr}.wizard{padding:16px}.progress-head{align-items:flex-start}.mobile-hint{display:block;font-size:10px;color:#9ca3af;margin:7px 0}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+  <h1>2026 镜头选购数据库</h1>
+  <div class="header-subtitle">先筛兼容 → 再选用途 → 再看焦段 / 光圈 / 定变焦 → 最后看预算</div>
+  <div class="header-description">不是替你选一支“最好”的镜头，而是帮你快速排除不适合自己的镜头。支持索尼 E、佳能 RF、尼康 Z、富士 X、L 卡口与 M4/3；包含原厂、适马、腾龙、唯卓仕、七工匠、铭匠、星曜、美科等。</div>
+  <span class="update" id="dbCount">镜头数据库加载中…</span>
+</div>
+
+<div class="sheet-nav" id="nav">
+  <button class="sheet-btn active" onclick="openSheet('guide',this)">快速选镜</button>
+  <button class="sheet-btn" onclick="openSheet('all',this)">镜头总库</button>
+  <button class="sheet-btn" onclick="openMount('E',this)">索尼 E</button>
+  <button class="sheet-btn" onclick="openMount('RF',this)">佳能 RF</button>
+  <button class="sheet-btn" onclick="openMount('Z',this)">尼康 Z</button>
+  <button class="sheet-btn" onclick="openMount('X',this)">富士 X</button>
+  <button class="sheet-btn" onclick="openMount('L',this)">L 卡口</button>
+  <button class="sheet-btn" onclick="openMount('M43',this)">M4/3</button>
+  <button class="sheet-btn" onclick="openSheet('score',this)">评分说明</button>
+</div>
+
+<section id="guide" class="sheet active">
+<div class="sheet-title"><h2>快速选镜</h2><span>每选一步，候选镜头都会自动收窄</span></div>
+<div class="hero-grid">
+  <div class="card"><h3>选镜顺序</h3><p><b>兼容性</b>决定能不能装；<b>用途</b>决定你真正要解决什么问题；<b>焦段/偏好</b>决定画面感；<b>定焦/变焦</b>决定使用方式；<b>预算</b>负责最后取舍。</p></div>
+  <div class="card"><h3>第一次买镜头？</h3><p>如果还不知道自己喜欢什么焦段，优先选覆盖常用焦段的变焦，再根据实际照片 EXIF 补定焦，通常比“猜自己喜欢 35 还是 50”更稳。</p></div>
+</div>
+<div class="wizard">
+  <div class="progress-head"><h3>按你的需求一步步筛</h3><div class="count-pill"><span id="guideCount">0</span> 支候选</div></div>
+  <div class="steps" id="stepSummary">
+    <div class="step active" data-step="mount"><div class="step-no">STEP 1</div><div class="step-title">相机品牌 / 卡口</div><div class="step-value" id="sumMount">尚未选择</div></div>
+    <div class="step" data-step="frame"><div class="step-no">STEP 2</div><div class="step-title">画幅</div><div class="step-value" id="sumFrame">尚未选择</div></div>
+    <div class="step" data-step="use"><div class="step-no">STEP 3</div><div class="step-title">主要拍什么</div><div class="step-value" id="sumUse">尚未选择</div></div>
+    <div class="step" data-step="pref"><div class="step-no">STEP 4</div><div class="step-title">更在意什么</div><div class="step-value" id="sumPref">可多选</div></div>
+    <div class="step" data-step="type"><div class="step-no">STEP 5</div><div class="step-title">定焦 / 变焦</div><div class="step-value" id="sumType">不限</div></div>
+    <div class="step" data-step="budget"><div class="step-no">STEP 6</div><div class="step-title">预算</div><div class="step-value" id="sumBudget">不限</div></div>
+  </div>
+
+  <div class="section-label">① 先选你的相机品牌 / 卡口</div>
+  <div class="choice-grid" id="mountChoices"></div>
+  <div class="helper">如果不确定卡口，可以先按品牌选择：索尼微单 = E；佳能 EOS R = RF；尼康 Z = Z；富士 X 系列 = X；松下 S / 适马 fp = L。</div>
+
+  <div class="section-label">② 你的相机是什么画幅？</div>
+  <div class="choice-grid" id="frameChoices"></div>
+  <div class="helper">全画幅机身优先推荐全画幅镜头；APS-C 机身既能使用对应卡口全画幅镜头，也能使用更轻便的 APS-C 镜头。</div>
+
+  <div class="section-label">③ 你主要准备拍什么？</div>
+  <div class="choice-grid" id="useChoices"></div>
+
+  <div class="section-label">④ 你最在意什么？（可多选）</div>
+  <div class="choice-grid" id="prefChoices"></div>
+
+  <div class="section-label">⑤ 定焦还是变焦？</div>
+  <div class="choice-grid" id="typeChoices"></div>
+
+  <div class="section-label">⑥ 单支镜头预算</div>
+  <div class="choice-grid" id="budgetChoices"></div>
+
+  <div class="wizard-actions"><button class="primary" onclick="showAllGuideResults()">查看完整推荐列表</button><button class="ghost" onclick="resetGuide()">重新选择</button></div>
+  <div class="quick-summary" id="quickSummary"></div>
+</div>
+
+<div class="sheet-title"><h2>当前最匹配</h2><span>“匹配度”按你的选择动态计算，不是镜头绝对排名</span></div>
+<div id="topRecommendations" class="recommend-box"></div>
+<div id="guideEmpty" class="empty" style="display:none">当前条件过窄，没有找到镜头。可以放宽预算、取消“只看定焦/变焦”，或减少偏好条件。</div>
+<div class="mobile-hint">手机端可左右滑动表格查看更多参数。</div>
+<div class="table-wrap" id="guideTableWrap"><table id="guideTable"><thead><tr>
+<th class="sortable">匹配度</th><th>品牌</th><th>镜头</th><th>卡口</th><th>画幅</th><th>类型</th><th>焦段</th><th>最大光圈</th><th>AF/MF</th><th>参考价位</th><th class="sortable">重量</th><th class="sortable">画质</th><th class="sortable">对焦</th><th class="sortable">便携</th><th class="sortable">视频</th><th class="sortable">性价比</th><th class="sortable">做工</th><th>适合用途</th>
+</tr></thead><tbody id="guideBody"></tbody></table></div>
+</section>
+
+<section id="all" class="sheet">
+<div class="sheet-title"><h2 id="libraryTitle">镜头总库</h2><span id="librarySub">可筛选、搜索并点击列名排序</span></div>
+<div class="notice">价格为用于筛选的“参考价位锚点”，并非实时成交价；同一型号会因活动、国补、渠道与二手成色波动。数据库重点用于建立选择逻辑，不作为购买报价单。</div>
+<div class="filters">
+  <select id="libMount" onchange="renderLibrary()"><option value="">全部卡口</option><option value="E">索尼 E</option><option value="RF">佳能 RF</option><option value="Z">尼康 Z</option><option value="X">富士 X</option><option value="L">L 卡口</option><option value="M43">M4/3</option></select>
+  <select id="libMaker" onchange="renderLibrary()"><option value="">全部品牌</option></select>
+  <select id="libFrame" onchange="renderLibrary()"><option value="">全部画幅</option><option value="FF">全画幅</option><option value="APS-C">APS-C</option><option value="M4/3">M4/3</option></select>
+  <select id="libType" onchange="renderLibrary()"><option value="">定焦 + 变焦</option><option value="变焦">变焦</option><option value="定焦">定焦</option></select>
+  <select id="libFocus" onchange="renderLibrary()"><option value="">AF + MF</option><option value="AF">自动对焦</option><option value="MF">手动对焦</option></select>
+  <select id="libOrigin" onchange="renderLibrary()"><option value="">原厂 + 副厂 + 国产</option><option value="原厂">原厂</option><option value="副厂">副厂</option><option value="国产">国产</option></select>
+  <input id="libSearch" type="text" placeholder="搜索镜头 / 焦段 / 用途..." oninput="renderLibrary()">
+  <button class="filter-reset" onclick="resetLibrary()">重置</button>
+</div>
+<div class="legend"><div class="legend-title">当前库：<span id="libraryCount">0</span> 支</div><p id="librarySummary">覆盖主流原厂和第三方镜头。</p></div>
+<div class="mobile-hint">手机端可左右滑动表格查看更多参数。</div>
+<div class="table-wrap"><table id="allTable"><thead><tr>
+<th>卡口</th><th>品牌</th><th>镜头</th><th>画幅</th><th>类型</th><th>焦段</th><th>最大光圈</th><th>AF/MF</th><th>身份</th><th>参考价位</th><th class="sortable">重量</th><th class="sortable">画质</th><th class="sortable">对焦</th><th class="sortable">便携</th><th class="sortable">视频</th><th class="sortable">性价比</th><th class="sortable">做工</th><th class="sortable">基础均分</th><th>适合用途</th>
+</tr></thead><tbody id="allBody"></tbody></table></div>
+</section>
+
+<section id="score" class="sheet">
+<div class="sheet-title"><h2>评分说明</h2><span>基础评分 + 场景匹配，两套分数分开看</span></div>
+<div class="legend"><div class="legend-title">六大基础维度</div><p>① <b>光学画质</b>：锐度、边缘表现、色散、畸变、逆光等综合表现。</p><p>② <b>对焦性能</b>：AF 速度、准确度、追焦、安静程度；手动镜头不与 AF 镜头粗暴比较。</p><p>③ <b>便携性</b>：体积、重量与长期携带负担。</p><p>④ <b>视频友好度</b>：对焦噪声、呼吸效应、稳定、变焦与操控体验。</p><p>⑤ <b>性价比</b>：放在“同卡口 + 同用途 + 同类型”里看价格与能力的交换关系。</p><p>⑥ <b>做工操控</b>：材质、密封、按键、光圈环、脚架环等。</p></div>
+<div class="brand-grid">
+<div class="brand-card"><h3>为什么不设“虚化总分”？</h3><p>超广角、微距、旅行变焦和 85mm 人像镜头本来就不是同一场考试。虚化改为“人像 / 大光圈”场景匹配因素，而不是让所有镜头统一比。</p></div>
+<div class="brand-card"><h3>为什么推荐结果会变化？</h3><p>同一支镜头对人像用户可能匹配 95，对旅行用户可能只有 70。需求变化，推荐就应该变化。</p></div>
+<div class="brand-card"><h3>手动镜头怎么处理？</h3><p>七工匠、铭匠、星曜等手动镜头仍进入镜头库，但对焦维度显示为“手动”，匹配算法会在活动、婚礼、儿童等题材降低优先级。</p></div>
+</div>
+</section>
+
+<div class="footer"><div>《2026 镜头选购数据库》</div><div>这是一个帮助用户“缩小选择范围”的工具，不构成绝对购买结论。建议在最终购买前确认镜头具体卡口版本、机身固件兼容性与实时价格。</div></div>
+</div>
+<script>
+function L(mount,system,maker,model,frame,type,focal,aperture,focus,weight,price,scores,uses,prefs,pros,cons,origin){
+  return {mount,system,maker,model,frame,type,focal,aperture,focus,weight,price,scores,uses,prefs,pros,cons,origin};
+}
+const lenses = [
+// ====================== SONY E — 原厂 ======================
+L('E','索尼','Sony','FE 12-24mm F2.8 GM','FF','变焦','12-24','F2.8','AF',847,19000,[9.5,9.5,5.8,9.2,6.5,9.6],['风光','建筑','商业','视频'],['超广角','大光圈','视频'],'极致超广、F2.8恒定','昂贵且较重','原厂'),
+L('E','索尼','Sony','FE 16-35mm F2.8 GM II','FF','变焦','16-35','F2.8','AF',547,15000,[9.6,9.7,7.9,9.5,7.3,9.5],['风光','旅行','商业','视频'],['超广角','大光圈','轻便','视频'],'轻量大三元广角、画质强','价格高','原厂'),
+L('E','索尼','Sony','FE PZ 16-35mm F4 G','FF','变焦','16-35','F4','AF',353,7200,[9.0,9.5,9.2,9.8,8.2,9.0],['旅行','风光','Vlog','视频'],['超广角','轻便','视频'],'电动变焦、非常轻','F4虚化有限','原厂'),
+L('E','索尼','Sony','FE 20-70mm F4 G','FF','变焦','20-70','F4','AF',488,7600,[9.2,9.6,8.7,9.5,8.6,9.1],['旅行','街拍','活动','视频'],['一镜走天下','轻便','视频'],'20mm起步很实用','F4暗光一般','原厂'),
+L('E','索尼','Sony','FE 24-50mm F2.8 G','FF','变焦','24-50','F2.8','AF',440,7600,[9.1,9.5,8.9,9.3,8.2,9.0],['旅行','街拍','人像','视频'],['大光圈','轻便','视频'],'小巧F2.8标准变焦','长焦端只有50mm','原厂'),
+L('E','索尼','Sony','FE 24-70mm F2.8 GM II','FF','变焦','24-70','F2.8','AF',695,14500,[9.7,9.8,7.5,9.6,7.2,9.7],['商业','人像','活动','婚礼','视频'],['大光圈','视频','专业可靠'],'大三元标准核心、综合强','价格高','原厂'),
+L('E','索尼','Sony','FE 24-105mm F4 G OSS','FF','变焦','24-105','F4','AF',663,6800,[9.0,9.3,7.8,9.1,8.9,9.0],['旅行','活动','商业','视频'],['一镜走天下','防抖','视频'],'焦段实用、OSS、可靠','F4虚化一般','原厂'),
+L('E','索尼','Sony','FE 28-70mm F2 GM','FF','变焦','28-70','F2','AF',918,21000,[9.8,9.8,5.5,9.3,5.8,9.7],['人像','婚礼','商业','活动'],['大光圈','专业可靠'],'F2变焦、替代多支定焦','贵且重','原厂'),
+L('E','索尼','Sony','FE 70-200mm F2.8 GM OSS II','FF','变焦','70-200','F2.8','AF',1045,17000,[9.8,9.9,6.2,9.5,7.0,9.8],['人像','婚礼','活动','体育','商业'],['长焦','大光圈','防抖','专业可靠'],'大三元长焦核心、AF与画质顶级','体积和预算要求高','原厂'),
+L('E','索尼','Sony','FE 70-200mm F4 Macro G OSS II','FF','变焦','70-200','F4','AF',794,10000,[9.4,9.7,7.4,9.4,8.0,9.4],['旅行','人像','活动','近摄'],['长焦','轻便','防抖','近摄'],'轻量长焦、近摄能力强','F4虚化弱于2.8','原厂'),
+L('E','索尼','Sony','FE 100-400mm F4.5-5.6 GM OSS','FF','变焦','100-400','F4.5-5.6','AF',1395,16500,[9.6,9.8,4.8,8.8,7.0,9.7],['生态','体育','风光'],['长焦','防抖','专业可靠'],'画质与追焦强','价格高','原厂'),
+L('E','索尼','Sony','FE 200-600mm F5.6-6.3 G OSS','FF','变焦','200-600','F5.6-6.3','AF',2115,12500,[9.2,9.6,2.8,8.5,8.6,9.2],['生态','体育','月亮'],['超长焦','防抖'],'内变焦、生态性价比高','非常重','原厂'),
+L('E','索尼','Sony','FE 20mm F1.8 G','FF','定焦','20','F1.8','AF',373,6000,[9.5,9.5,9.0,9.4,8.5,9.2],['风光','星空','Vlog','视频'],['超广角','大光圈','轻便','视频'],'星空/视频强、轻','单焦段','原厂'),
+L('E','索尼','Sony','FE 24mm F1.4 GM','FF','定焦','24','F1.4','AF',445,8900,[9.7,9.6,8.8,9.3,7.8,9.6],['环境人像','星空','街拍','视频'],['超广角','大光圈','轻便'],'24GM经典、高画质','价格较高','原厂'),
+L('E','索尼','Sony','FE 35mm F1.4 GM','FF','定焦','35','F1.4','AF',524,9300,[9.8,9.7,8.1,9.3,7.5,9.6],['人像','街拍','婚礼','商业'],['大光圈','轻便','专业可靠'],'35mm高画质标杆','价格高','原厂'),
+L('E','索尼','Sony','FE 40mm F2.5 G','FF','定焦','40','F2.5','AF',173,4000,[8.8,9.4,9.9,9.2,8.4,9.0],['街拍','旅行','日常'],['轻便','视频'],'极致便携、做工好','F2.5虚化有限','原厂'),
+L('E','索尼','Sony','FE 50mm F1.4 GM','FF','定焦','50','F1.4','AF',516,9000,[9.8,9.7,8.2,9.3,7.4,9.6],['人像','婚礼','商业','街拍'],['大光圈','轻便'],'高画质且相对轻','价格高','原厂'),
+L('E','索尼','Sony','FE 50mm F1.2 GM','FF','定焦','50','F1.2','AF',778,13000,[9.9,9.8,6.8,9.1,6.5,9.8],['人像','婚礼','商业'],['大光圈','专业可靠'],'F1.2旗舰虚化','贵且重','原厂'),
+L('E','索尼','Sony','FE 85mm F1.4 GM II','FF','定焦','85','F1.4','AF',642,12500,[9.8,9.8,7.6,9.3,6.9,9.7],['人像','约拍','婚礼','商业'],['人像虚化','大光圈','专业可靠'],'人像旗舰、AF快','价格高','原厂'),
+L('E','索尼','Sony','FE 90mm F2.8 Macro G OSS','FF','定焦','90','F2.8','AF',602,6500,[9.5,8.8,7.8,8.5,8.5,9.3],['微距','静物','产品','人像'],['近摄','防抖'],'1:1微距、解析力强','AF不算最快','原厂'),
+L('E','索尼','Sony','FE 135mm F1.8 GM','FF','定焦','135','F1.8','AF',950,12000,[9.9,9.7,5.8,9.0,7.0,9.7],['人像','舞台','商业'],['人像虚化','长焦','大光圈'],'压缩感与虚化顶级','焦段使用空间要求高','原厂'),
+// ====================== SONY E — Sigma/Tamron/Samyang ======================
+L('E','索尼','Sigma','14-24mm F2.8 DG DN Art','FF','变焦','14-24','F2.8','AF',795,7500,[9.5,9.2,6.2,8.9,9.0,9.2],['风光','建筑','星空'],['超广角','大光圈'],'超广大光圈性价比高','灯泡头滤镜不便','副厂'),
+L('E','索尼','Sigma','16-28mm F2.8 DG DN C','FF','变焦','16-28','F2.8','AF',450,5200,[9.1,9.1,9.0,9.1,9.3,8.7],['旅行','风光','视频'],['超广角','大光圈','轻便','视频'],'小巧恒定F2.8','焦段较短','副厂'),
+L('E','索尼','Sigma','24-70mm F2.8 DG DN II Art','FF','变焦','24-70','F2.8','AF',745,7800,[9.6,9.4,7.1,9.2,9.4,9.2],['商业','人像','婚礼','活动'],['大光圈','专业可靠'],'高画质、价格比原厂低','仍然不轻','副厂'),
+L('E','索尼','Sigma','28-70mm F2.8 DG DN C','FF','变焦','28-70','F2.8','AF',470,5200,[9.0,9.0,8.9,9.0,9.3,8.6],['旅行','人像','视频'],['大光圈','轻便','视频'],'轻量F2.8','广角少4mm','副厂'),
+L('E','索尼','Sigma','28-105mm F2.8 DG DN Art','FF','变焦','28-105','F2.8','AF',995,10500,[9.6,9.4,5.6,9.0,8.8,9.3],['商业','婚礼','活动','人像'],['一镜走天下','大光圈'],'焦段+F2.8兼得','较重','副厂'),
+L('E','索尼','Sigma','70-200mm F2.8 DG DN OS Sports','FF','变焦','70-200','F2.8','AF',1335,9200,[9.6,9.4,4.5,9.0,9.3,9.4],['人像','体育','婚礼','活动'],['长焦','大光圈','防抖'],'大三元长焦高性价比','比原厂重','副厂'),
+L('E','索尼','Sigma','35mm F1.4 DG DN Art','FF','定焦','35','F1.4','AF',645,4800,[9.4,9.0,7.2,8.8,9.4,9.1],['人像','街拍','婚礼'],['大光圈'],'画质强、价格友好','较重','副厂'),
+L('E','索尼','Sigma','50mm F1.2 DG DN Art','FF','定焦','50','F1.2','AF',745,9000,[9.8,9.3,6.9,9.0,8.6,9.3],['人像','婚礼','商业'],['大光圈'],'F1.2兼顾体积与画质','仍属高价位','副厂'),
+L('E','索尼','Sigma','85mm F1.4 DG DN Art','FF','定焦','85','F1.4','AF',630,6000,[9.7,9.2,7.7,8.8,9.6,9.2],['人像','约拍','婚礼'],['人像虚化','大光圈'],'人像高性价比标杆','无防抖','副厂'),
+L('E','索尼','Tamron','17-28mm F2.8 Di III RXD','FF','变焦','17-28','F2.8','AF',420,4500,[8.9,8.9,9.2,8.9,9.5,8.5],['旅行','风光','视频'],['超广角','大光圈','轻便'],'轻、便宜、实用','边缘和做工不及高端','副厂'),
+L('E','索尼','Tamron','20-40mm F2.8 Di III VXD','FF','变焦','20-40','F2.8','AF',365,4800,[9.0,9.2,9.5,9.4,9.3,8.6],['Vlog','旅行','街拍','视频'],['超广角','轻便','大光圈','视频'],'非常轻的视频/旅行焦段','长焦端短','副厂'),
+L('E','索尼','Tamron','28-75mm F2.8 Di III VXD G2','FF','变焦','28-75','F2.8','AF',540,5200,[9.3,9.3,8.3,9.2,9.6,8.8],['人像','活动','旅行','视频'],['大光圈','轻便','视频'],'高性价比标准变焦','28mm不够广','副厂'),
+L('E','索尼','Tamron','35-150mm F2-2.8 Di III VXD','FF','变焦','35-150','F2-2.8','AF',1165,9000,[9.5,9.3,4.4,8.7,9.1,9.0],['婚礼','活动','人像','商业'],['一镜走天下','大光圈'],'活动/婚礼一镜效率高','很重','副厂'),
+L('E','索尼','Tamron','50-400mm F4.5-6.3 Di III VC VXD','FF','变焦','50-400','F4.5-6.3','AF',1155,7800,[9.0,9.1,5.0,8.5,9.2,8.8],['旅行','生态','体育'],['一镜走天下','长焦','防抖'],'跨度大、旅行生态方便','光圈较小','副厂'),
+L('E','索尼','Tamron','70-180mm F2.8 Di III VC VXD G2','FF','变焦','70-180','F2.8','AF',855,7200,[9.3,9.3,6.8,9.1,9.4,8.9],['人像','活动','婚礼'],['长焦','大光圈','防抖'],'比70-200轻很多','少20mm长焦端','副厂'),
+L('E','索尼','Samyang','35mm F1.8 FE','FF','定焦','35','F1.8','AF',210,2600,[8.8,8.7,9.8,8.9,9.4,8.3],['街拍','旅行','人像'],['轻便','大光圈'],'小巧便宜','做工一般','副厂'),
+L('E','索尼','Samyang','75mm F1.8 FE','FF','定焦','75','F1.8','AF',230,2600,[8.8,8.6,9.8,8.7,9.5,8.2],['人像','旅行'],['人像虚化','轻便'],'超轻人像镜','边缘/追焦不及高端','副厂'),
+// ====================== VILTROX E ======================
+L('E','索尼','Viltrox 唯卓仕','AF 16mm F1.8 FE','FF','定焦','16','F1.8','AF',550,3600,[9.2,9.0,8.0,9.1,9.7,8.9],['星空','风光','建筑','视频'],['超广角','大光圈','视频'],'全画幅超广大光圈、高性价比','体积不算小','国产'),
+L('E','索尼','Viltrox 唯卓仕','AF 20mm F2.8 FE','FF','定焦','20','F2.8','AF',157,1100,[8.2,8.5,10.0,8.7,9.8,7.9],['旅行','街拍','Vlog'],['超广角','轻便'],'极轻极便宜','边缘画质普通','国产'),
+L('E','索尼','Viltrox 唯卓仕','AF 40mm F2.5 FE','FF','定焦','40','F2.5','AF',167,1100,[8.5,8.6,10.0,8.8,9.8,8.0],['街拍','旅行','日常'],['轻便'],'饼干化便携','光圈不算大','国产'),
+L('E','索尼','Viltrox 唯卓仕','AF 85mm F1.8 II FE','FF','定焦','85','F1.8','AF',484,2300,[9.0,8.7,8.2,8.4,9.7,8.5],['人像','约拍'],['人像虚化','大光圈'],'便宜好用的人像焦段','AF和逆光不及高端','国产'),
+L('E','索尼','Viltrox 唯卓仕','AF 135mm F1.8 LAB FE','FF','定焦','135','F1.8','AF',1235,6500,[9.8,9.5,4.6,9.0,9.8,9.3],['人像','舞台','商业'],['人像虚化','长焦','大光圈'],'旗舰画质、虚化强、性价比高','很重','国产'),
+L('E','索尼','Viltrox 唯卓仕','AF 13mm F1.4 E','APS-C','定焦','13','F1.4','AF',420,2800,[9.3,9.0,8.3,9.1,9.5,8.8],['星空','风光','Vlog'],['超广角','大光圈','视频'],'APS-C星空/视频强','不算很轻','国产'),
+L('E','索尼','Viltrox 唯卓仕','AF 27mm F1.2 Pro E','APS-C','定焦','27','F1.2','AF',560,3300,[9.7,9.2,7.2,8.8,9.7,9.1],['人像','街拍','商业'],['大光圈','人像虚化'],'APS-C画质旗舰','较大较重','国产'),
+L('E','索尼','Viltrox 唯卓仕','AF 75mm F1.2 Pro E','APS-C','定焦','75','F1.2','AF',670,3600,[9.7,9.1,6.5,8.7,9.7,9.1],['人像','约拍','舞台'],['人像虚化','大光圈'],'APS-C人像虚化强','焦段长且重','国产'),
+// ====================== CANON RF ======================
+L('RF','佳能','Canon','RF 10-20mm F4 L IS STM','FF','变焦','10-20','F4','AF',570,17000,[9.5,9.5,7.7,9.3,6.7,9.6],['风光','建筑','视频'],['超广角','防抖','视频'],'全画幅10mm极广','昂贵','原厂'),
+L('RF','佳能','Canon','RF 14-35mm F4 L IS USM','FF','变焦','14-35','F4','AF',540,9500,[9.2,9.5,8.0,9.4,7.7,9.5],['风光','旅行','视频'],['超广角','轻便','防抖'],'轻量L级广角','F4虚化一般','原厂'),
+L('RF','佳能','Canon','RF 15-35mm F2.8 L IS USM','FF','变焦','15-35','F2.8','AF',840,13500,[9.5,9.6,5.9,9.4,7.2,9.6],['风光','商业','婚礼','视频'],['超广角','大光圈','防抖'],'大三元广角、带IS','较重','原厂'),
+L('RF','佳能','Canon','RF 24-70mm F2.8 L IS USM','FF','变焦','24-70','F2.8','AF',900,14000,[9.6,9.7,5.5,9.4,7.0,9.7],['商业','婚礼','活动','人像'],['大光圈','防抖','专业可靠'],'大三元标准核心','贵且重','原厂'),
+L('RF','佳能','Canon','RF 24-105mm F4 L IS USM','FF','变焦','24-105','F4','AF',700,7800,[9.0,9.5,7.4,9.2,8.4,9.4],['旅行','活动','商业','视频'],['一镜走天下','防抖'],'焦段实用、L级可靠','F4暗光一般','原厂'),
+L('RF','佳能','Canon','RF 24-105mm F2.8 L IS USM Z','FF','变焦','24-105','F2.8','AF',1430,22000,[9.7,9.7,3.8,9.7,5.8,9.8],['商业','婚礼','视频','活动'],['一镜走天下','大光圈','视频','防抖'],'24-105 F2.8专业怪兽','巨大且昂贵','原厂'),
+L('RF','佳能','Canon','RF 28-70mm F2 L USM','FF','变焦','28-70','F2','AF',1430,19000,[9.8,9.6,3.5,8.8,6.0,9.8],['人像','婚礼','商业'],['大光圈'],'F2变焦、虚化强','非常重','原厂'),
+L('RF','佳能','Canon','RF 70-200mm F2.8 L IS USM','FF','变焦','70-200','F2.8','AF',1070,17500,[9.8,9.8,6.1,9.5,6.8,9.8],['人像','婚礼','体育','活动'],['长焦','大光圈','防抖'],'大三元长焦、收纳短','价格高','原厂'),
+L('RF','佳能','Canon','RF 70-200mm F4 L IS USM','FF','变焦','70-200','F4','AF',695,10500,[9.4,9.6,7.6,9.3,7.8,9.5],['旅行','人像','活动'],['长焦','轻便','防抖'],'轻量L长焦','F4虚化一般','原厂'),
+L('RF','佳能','Canon','RF 100-500mm F4.5-7.1 L IS USM','FF','变焦','100-500','F4.5-7.1','AF',1530,19000,[9.7,9.8,4.3,9.1,6.8,9.8],['生态','体育','风光'],['超长焦','防抖'],'生态旗舰','价格高、长端光圈小','原厂'),
+L('RF','佳能','Canon','RF 16mm F2.8 STM','FF','定焦','16','F2.8','AF',165,1800,[8.4,8.8,10.0,9.0,9.4,8.0],['Vlog','旅行','风光'],['超广角','轻便'],'超小超轻','畸变依赖校正','原厂'),
+L('RF','佳能','Canon','RF 24mm F1.8 Macro IS STM','FF','定焦','24','F1.8','AF',270,3800,[9.0,9.1,9.2,9.2,8.9,8.6],['旅行','环境人像','视频','近摄'],['大光圈','近摄','防抖','轻便'],'轻便+0.5x近摄','非L做工','原厂'),
+L('RF','佳能','Canon','RF 35mm F1.8 Macro IS STM','FF','定焦','35','F1.8','AF',305,3400,[9.0,8.9,9.0,9.0,9.2,8.5],['街拍','人像','近摄','视频'],['大光圈','近摄','防抖'],'35mm实用+近摄','AF声音一般','原厂'),
+L('RF','佳能','Canon','RF 50mm F1.8 STM','FF','定焦','50','F1.8','AF',160,1400,[8.5,8.7,10.0,8.2,9.8,7.8],['人像','入门','街拍'],['大光圈','轻便'],'最便宜入门定焦之一','做工/边缘一般','原厂'),
+L('RF','佳能','Canon','RF 85mm F2 Macro IS STM','FF','定焦','85','F2','AF',500,4200,[9.1,8.7,8.0,8.5,9.0,8.6],['人像','约拍','近摄'],['人像虚化','近摄','防抖'],'人像+0.5x近摄','对焦速度一般','原厂'),
+L('RF','佳能','Canon','RF 100mm F2.8 L Macro IS USM','FF','定焦','100','F2.8','AF',730,8500,[9.8,9.4,7.0,8.9,8.0,9.7],['微距','静物','产品','人像'],['近摄','防抖','专业可靠'],'1.4x微距旗舰','价格较高','原厂'),
+L('RF','佳能','Canon','RF 135mm F1.8 L IS USM','FF','定焦','135','F1.8','AF',935,15000,[9.9,9.8,5.8,9.2,6.7,9.8],['人像','婚礼','舞台'],['人像虚化','长焦','大光圈','防抖'],'135L虚化与画质顶级','贵且使用距离长','原厂'),
+L('RF','佳能','Sigma','10-18mm F2.8 DC DN C','APS-C','变焦','10-18','F2.8','AF',270,4300,[9.1,9.1,9.7,9.3,9.3,8.6],['Vlog','旅行','风光'],['超广角','大光圈','轻便','视频'],'RF-S超广F2.8轻便','仅APS-C','副厂'),
+L('RF','佳能','Sigma','18-50mm F2.8 DC DN C','APS-C','变焦','18-50','F2.8','AF',300,3800,[9.1,9.1,9.4,9.2,9.5,8.6],['旅行','人像','视频'],['大光圈','轻便','视频'],'APS-C标准F2.8性价比高','无防抖','副厂'),
+L('RF','佳能','Sigma','16mm F1.4 DC DN C','APS-C','定焦','16','F1.4','AF',405,2900,[9.2,9.0,8.5,9.1,9.5,8.6],['星空','Vlog','环境人像'],['超广角','大光圈'],'APS-C经典大光圈','相对较大','副厂'),
+L('RF','佳能','Sigma','23mm F1.4 DC DN C','APS-C','定焦','23','F1.4','AF',340,3200,[9.2,9.0,9.0,9.0,9.4,8.6],['街拍','人像','旅行'],['大光圈','轻便'],'等效约35mm实用','仅APS-C','副厂'),
+L('RF','佳能','Sigma','30mm F1.4 DC DN C','APS-C','定焦','30','F1.4','AF',285,2300,[9.0,8.9,9.3,8.8,9.7,8.4],['人像','街拍','日常'],['大光圈','轻便'],'便宜大光圈','边缘一般','副厂'),
+L('RF','佳能','Sigma','56mm F1.4 DC DN C','APS-C','定焦','56','F1.4','AF',280,2800,[9.4,9.0,9.4,8.8,9.7,8.6],['人像','约拍'],['人像虚化','大光圈','轻便'],'APS-C人像高性价比','焦段单一','副厂'),
+L('RF','佳能','Tamron','11-20mm F2.8 Di III-A RXD','APS-C','变焦','11-20','F2.8','AF',340,4200,[9.0,8.9,9.1,9.1,9.2,8.5],['Vlog','旅行','风光'],['超广角','大光圈','轻便'],'APS-C超广F2.8','仅APS-C','副厂'),
+// ====================== NIKON Z ======================
+L('Z','尼康','Nikon','NIKKOR Z 14-24mm F2.8 S','FF','变焦','14-24','F2.8','AF',650,15000,[9.8,9.7,7.4,9.4,7.1,9.8],['风光','建筑','星空','商业'],['超广角','大光圈','专业可靠'],'大三元超广旗舰','价格高','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 17-28mm F2.8','FF','变焦','17-28','F2.8','AF',450,6500,[9.0,9.2,9.0,9.2,9.1,8.8],['旅行','风光','视频'],['超广角','轻便','大光圈'],'轻量F2.8','非S-Line','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 24-70mm F2.8 S','FF','变焦','24-70','F2.8','AF',805,14500,[9.8,9.8,6.6,9.5,7.0,9.8],['商业','婚礼','活动','人像'],['大光圈','专业可靠'],'大三元标准旗舰','价格高','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 24-70mm F4 S','FF','变焦','24-70','F4','AF',500,4300,[9.1,9.4,8.6,9.2,9.5,9.0],['旅行','风光','日常'],['轻便','视频'],'二手/拆机性价比高','F4虚化一般','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 24-120mm F4 S','FF','变焦','24-120','F4','AF',630,7200,[9.4,9.5,8.0,9.2,9.3,9.4],['旅行','活动','风光','商业'],['一镜走天下','专业可靠'],'焦段覆盖非常实用','F4暗光一般','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 28-75mm F2.8','FF','变焦','28-75','F2.8','AF',565,5500,[9.1,9.2,8.1,9.1,9.3,8.8],['人像','活动','旅行'],['大光圈'],'轻量F2.8','广角端28mm','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 70-180mm F2.8','FF','变焦','70-180','F2.8','AF',795,7800,[9.2,9.3,7.0,9.1,9.3,8.9],['人像','活动','婚礼'],['长焦','大光圈','轻便'],'轻量大光圈长焦','少20mm','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 70-200mm F2.8 VR S','FF','变焦','70-200','F2.8','AF',1360,15500,[9.9,9.8,4.5,9.4,7.0,9.8],['人像','婚礼','体育','商业'],['长焦','大光圈','防抖','专业可靠'],'大三元长焦顶级画质','重','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 100-400mm F4.5-5.6 VR S','FF','变焦','100-400','F4.5-5.6','AF',1435,16000,[9.7,9.7,4.5,9.0,7.0,9.7],['生态','体育','风光'],['长焦','防抖'],'S-Line长焦高画质','昂贵','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 180-600mm F5.6-6.3 VR','FF','变焦','180-600','F5.6-6.3','AF',1955,11500,[9.2,9.6,3.2,8.5,9.1,9.1],['生态','体育','月亮'],['超长焦','防抖'],'生态性价比高','重','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 26mm F2.8','FF','定焦','26','F2.8','AF',125,3500,[8.8,8.8,10.0,8.8,8.7,8.8],['街拍','旅行'],['轻便'],'真正饼干镜','F2.8不算大','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 35mm F1.8 S','FF','定焦','35','F1.8','AF',370,5200,[9.5,9.4,8.9,9.2,8.8,9.4],['街拍','人像','婚礼'],['大光圈','轻便'],'画质稳定、用途广','F1.8价格不低','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 50mm F1.8 S','FF','定焦','50','F1.8','AF',415,4300,[9.7,9.3,8.5,9.1,9.4,9.3],['人像','街拍','静物'],['大光圈'],'画质超出价位','体积不像传统50/1.8','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 85mm F1.8 S','FF','定焦','85','F1.8','AF',470,5200,[9.7,9.4,8.3,9.0,9.2,9.4],['人像','约拍','婚礼'],['人像虚化','大光圈'],'人像画质非常稳','无VR','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 85mm F1.2 S','FF','定焦','85','F1.2','AF',1160,19000,[10.0,9.7,4.8,8.9,6.2,9.9],['人像','商业','婚礼'],['人像虚化','大光圈','专业可靠'],'极致人像虚化','巨大昂贵','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 105mm F2.8 VR S Macro','FF','定焦','105','F2.8','AF',630,6500,[9.8,9.1,7.7,8.8,8.8,9.6],['微距','产品','静物','人像'],['近摄','防抖'],'微距旗舰','AF不为高速题材设计','原厂'),
+L('Z','尼康','Nikon','NIKKOR Z 135mm F1.8 S Plena','FF','定焦','135','F1.8','AF',995,19000,[10.0,9.7,5.3,9.1,5.8,9.9],['人像','婚礼','商业'],['人像虚化','长焦','大光圈'],'散景与画质顶级','价格极高','原厂'),
+L('Z','尼康','Viltrox 唯卓仕','AF 16mm F1.8 Z','FF','定焦','16','F1.8','AF',570,3900,[9.2,9.1,7.8,9.1,9.7,8.9],['星空','风光','建筑','视频'],['超广角','大光圈','视频'],'Z口超广大光圈高性价比','较大','国产'),
+L('Z','尼康','Viltrox 唯卓仕','AF 20mm F2.8 Z','FF','定焦','20','F2.8','AF',173,1200,[8.3,8.5,9.9,8.7,9.8,8.0],['旅行','街拍','Vlog'],['超广角','轻便'],'轻便便宜','边缘普通','国产'),
+L('Z','尼康','Viltrox 唯卓仕','AF 85mm F1.8 II Z','FF','定焦','85','F1.8','AF',540,2500,[9.0,8.7,7.9,8.4,9.7,8.5],['人像','约拍'],['人像虚化','大光圈'],'低预算人像','AF不及S-Line','国产'),
+L('Z','尼康','Viltrox 唯卓仕','AF 135mm F1.8 LAB Z','FF','定焦','135','F1.8','AF',1265,6500,[9.8,9.5,4.5,9.0,9.8,9.3],['人像','舞台','商业'],['人像虚化','长焦','大光圈'],'LAB旗舰、高性价比','很重','国产'),
+L('Z','尼康','Viltrox 唯卓仕','AF 27mm F1.2 Pro Z','APS-C','定焦','27','F1.2','AF',560,3300,[9.7,9.2,7.2,8.8,9.7,9.1],['人像','街拍','商业'],['大光圈','人像虚化'],'APS-C高画质大光圈','较重','国产'),
+L('Z','尼康','Viltrox 唯卓仕','AF 75mm F1.2 Pro Z','APS-C','定焦','75','F1.2','AF',670,3600,[9.7,9.1,6.5,8.7,9.7,9.1],['人像','约拍'],['人像虚化','大光圈'],'人像虚化强','焦段较长','国产'),
+L('Z','尼康','Sigma','16mm F1.4 DC DN C','APS-C','定焦','16','F1.4','AF',420,2900,[9.2,9.0,8.4,9.1,9.5,8.6],['星空','Vlog','环境人像'],['超广角','大光圈'],'Z DX大光圈广角','仅APS-C','副厂'),
+L('Z','尼康','Sigma','23mm F1.4 DC DN C','APS-C','定焦','23','F1.4','AF',340,3200,[9.2,9.0,9.0,9.0,9.4,8.6],['街拍','人像','旅行'],['大光圈','轻便'],'等效35mm好用','仅APS-C','副厂'),
+L('Z','尼康','Sigma','30mm F1.4 DC DN C','APS-C','定焦','30','F1.4','AF',295,2300,[9.0,8.9,9.3,8.8,9.7,8.4],['人像','街拍'],['大光圈','轻便'],'便宜标准大光圈','边缘一般','副厂'),
+L('Z','尼康','Sigma','56mm F1.4 DC DN C','APS-C','定焦','56','F1.4','AF',295,2800,[9.4,9.0,9.4,8.8,9.7,8.6],['人像','约拍'],['人像虚化','大光圈'],'APS-C人像高性价比','用途偏专','副厂'),
+L('Z','尼康','Tamron','35-150mm F2-2.8 Di III VXD Z','FF','变焦','35-150','F2-2.8','AF',1190,10000,[9.5,9.3,4.3,8.7,9.0,9.0],['婚礼','活动','人像','商业'],['一镜走天下','大光圈'],'活动效率极高','重','副厂'),
+L('Z','尼康','Tamron','50-400mm F4.5-6.3 Di III VC VXD Z','FF','变焦','50-400','F4.5-6.3','AF',1180,8200,[9.0,9.1,4.9,8.5,9.1,8.8],['旅行','生态','体育'],['一镜走天下','长焦','防抖'],'跨度大','光圈小','副厂'),
+// ====================== FUJIFILM X ======================
+L('X','富士','Fujifilm','XF 8-16mm F2.8 R LM WR','APS-C','变焦','8-16','F2.8','AF',805,11000,[9.5,9.4,5.7,9.0,7.0,9.6],['风光','建筑','星空'],['超广角','大光圈','专业可靠'],'极致超广高画质','重且贵','原厂'),
+L('X','富士','Fujifilm','XF 10-24mm F4 R OIS WR','APS-C','变焦','10-24','F4','AF',385,5600,[9.0,9.1,9.0,9.3,8.7,9.1],['旅行','风光','Vlog'],['超广角','轻便','防抖'],'旅行广角实用','F4虚化一般','原厂'),
+L('X','富士','Fujifilm','XF 16-55mm F2.8 R LM WR II','APS-C','变焦','16-55','F2.8','AF',410,8500,[9.6,9.6,8.8,9.3,8.0,9.6],['商业','人像','旅行','活动'],['大光圈','轻便','专业可靠'],'二代轻量大三元','价格高','原厂'),
+L('X','富士','Fujifilm','XF 16-50mm F2.8-4.8 R LM WR','APS-C','变焦','16-50','F2.8-4.8','AF',240,4500,[9.0,9.3,9.8,9.2,9.0,8.9],['旅行','日常','视频'],['轻便','视频'],'新套头非常轻','长端光圈小','原厂'),
+L('X','富士','Fujifilm','XF 18-55mm F2.8-4 R LM OIS','APS-C','变焦','18-55','F2.8-4','AF',310,3500,[8.9,8.9,9.4,9.0,9.4,8.8],['旅行','人像','日常'],['轻便','防抖'],'经典高素质套头','较老','原厂'),
+L('X','富士','Fujifilm','XF 18-120mm F4 LM PZ WR','APS-C','变焦','18-120','F4','AF',460,5500,[8.9,9.2,8.7,9.7,8.8,9.0],['视频','旅行','活动'],['一镜走天下','视频'],'电动变焦、视频友好','F4虚化一般','原厂'),
+L('X','富士','Fujifilm','XF 50-140mm F2.8 R LM OIS WR','APS-C','变焦','50-140','F2.8','AF',995,9300,[9.6,9.5,5.2,9.2,8.0,9.6],['人像','活动','体育','婚礼'],['长焦','大光圈','防抖'],'富士大三元长焦','重','原厂'),
+L('X','富士','Fujifilm','XF 70-300mm F4-5.6 R LM OIS WR','APS-C','变焦','70-300','F4-5.6','AF',580,5200,[9.0,9.3,8.0,8.8,9.2,9.1],['旅行','生态','体育'],['长焦','轻便','防抖'],'轻量长焦','暗光一般','原厂'),
+L('X','富士','Fujifilm','XF 150-600mm F5.6-8 R LM OIS WR','APS-C','变焦','150-600','F5.6-8','AF',1605,12000,[9.2,9.5,3.8,8.5,8.5,9.4],['生态','体育','月亮'],['超长焦','防抖'],'等效超长焦覆盖','光圈小、重','原厂'),
+L('X','富士','Fujifilm','XF 18mm F1.4 R LM WR','APS-C','定焦','18','F1.4','AF',370,5800,[9.7,9.5,8.9,9.3,8.6,9.5],['街拍','环境人像','旅行'],['大光圈','轻便'],'高画质等效28mm','价格高','原厂'),
+L('X','富士','Fujifilm','XF 23mm F1.4 R LM WR','APS-C','定焦','23','F1.4','AF',375,5700,[9.7,9.5,8.8,9.3,8.5,9.5],['街拍','人像','婚礼'],['大光圈'],'等效35mm旗舰','价格高','原厂'),
+L('X','富士','Fujifilm','XF 27mm F2.8 R WR','APS-C','定焦','27','F2.8','AF',84,2800,[8.7,8.8,10.0,8.8,9.0,8.7],['街拍','旅行','日常'],['轻便'],'极致饼干便携','F2.8虚化有限','原厂'),
+L('X','富士','Fujifilm','XF 33mm F1.4 R LM WR','APS-C','定焦','33','F1.4','AF',360,5600,[9.8,9.6,8.9,9.3,8.6,9.6],['人像','街拍','商业'],['大光圈'],'等效50mm高画质','价格高','原厂'),
+L('X','富士','Fujifilm','XF 35mm F1.4 R','APS-C','定焦','35','F1.4','AF',187,3300,[9.0,7.7,9.7,7.8,9.5,8.6],['人像','街拍','氛围'],['大光圈','轻便'],'经典“富士味”','AF较慢','原厂'),
+L('X','富士','Fujifilm','XF 56mm F1.2 R WR','APS-C','定焦','56','F1.2','AF',445,5800,[9.7,9.2,8.2,8.8,8.6,9.5],['人像','约拍','商业'],['人像虚化','大光圈'],'人像旗舰虚化','不算便宜','原厂'),
+L('X','富士','Fujifilm','XF 90mm F2 R LM WR','APS-C','定焦','90','F2','AF',540,5600,[9.7,9.5,7.6,8.8,8.8,9.5],['人像','舞台','商业'],['长焦','人像虚化'],'锐度与压缩感强','室内空间要求高','原厂'),
+// SIGMA X current family
+L('X','富士','Sigma','10-18mm F2.8 DC DN C','APS-C','变焦','10-18','F2.8','AF',250,4000,[9.1,9.1,9.8,9.4,9.5,8.6],['Vlog','旅行','风光'],['超广角','大光圈','轻便','视频'],'超轻F2.8广角','长端较短','副厂'),
+L('X','富士','Sigma','18-50mm F2.8 DC DN C','APS-C','变焦','18-50','F2.8','AF',285,3500,[9.2,9.1,9.6,9.3,9.7,8.6],['旅行','人像','视频','日常'],['大光圈','轻便','视频'],'富士X高性价比标准变焦','无防抖','副厂'),
+L('X','富士','Sigma','16-300mm F3.5-6.7 DC OS C','APS-C','变焦','16-300','F3.5-6.7','AF',615,5200,[8.8,9.0,7.3,8.8,9.2,8.8],['旅行','生态','日常'],['一镜走天下','防抖'],'超大变焦倍率','长端光圈小','副厂'),
+L('X','富士','Sigma','100-400mm F5-6.3 DG DN OS C','APS-C','变焦','100-400','F5-6.3','AF',1135,6500,[9.0,9.0,4.9,8.5,9.2,8.8],['生态','体育'],['超长焦','防抖'],'富士副厂长焦选择','较重','副厂'),
+L('X','富士','Sigma','12mm F1.4 DC C','APS-C','定焦','12','F1.4','AF',225,4200,[9.3,9.1,9.6,9.3,9.1,8.8],['星空','风光','Vlog'],['超广角','大光圈','轻便'],'超广F1.4且轻','价位不算低','副厂'),
+L('X','富士','Sigma','15mm F1.4 DC C','APS-C','定焦','15','F1.4','AF',250,4200,[9.3,9.1,9.5,9.3,9.1,8.8],['环境人像','旅行','视频'],['超广角','大光圈','轻便'],'等效约23mm、用途广','价位不算低','副厂'),
+L('X','富士','Sigma','16mm F1.4 DC DN C','APS-C','定焦','16','F1.4','AF',405,2600,[9.2,9.0,8.5,9.1,9.6,8.6],['星空','环境人像','Vlog'],['超广角','大光圈'],'经典大光圈广角','稍大','副厂'),
+L('X','富士','Sigma','23mm F1.4 DC DN C','APS-C','定焦','23','F1.4','AF',340,3000,[9.2,9.0,9.0,9.0,9.5,8.6],['街拍','人像','旅行'],['大光圈','轻便'],'等效35mm高性价比','无光圈环','副厂'),
+L('X','富士','Sigma','30mm F1.4 DC DN C','APS-C','定焦','30','F1.4','AF',275,2100,[9.0,8.9,9.4,8.8,9.8,8.4],['人像','街拍','日常'],['大光圈','轻便'],'便宜标准定焦','边缘一般','副厂'),
+L('X','富士','Sigma','56mm F1.4 DC DN C','APS-C','定焦','56','F1.4','AF',280,2600,[9.4,9.0,9.4,8.8,9.8,8.6],['人像','约拍'],['人像虚化','大光圈','轻便'],'APS-C人像性价比高','用途偏专','副厂'),
+// Viltrox X
+L('X','富士','Viltrox 唯卓仕','AF 13mm F1.4 XF','APS-C','定焦','13','F1.4','AF',420,2800,[9.3,9.0,8.3,9.1,9.6,8.8],['星空','风光','Vlog'],['超广角','大光圈','视频'],'富士星空/视频强','较大','国产'),
+L('X','富士','Viltrox 唯卓仕','AF 23mm F1.4 XF','APS-C','定焦','23','F1.4','AF',260,1600,[8.9,8.7,9.3,8.6,9.8,8.2],['街拍','人像','旅行'],['大光圈','轻便'],'低价等效35mm','逆光和AF一般','国产'),
+L('X','富士','Viltrox 唯卓仕','AF 27mm F1.2 Pro XF','APS-C','定焦','27','F1.2','AF',560,3300,[9.7,9.2,7.2,8.8,9.8,9.1],['人像','街拍','商业'],['大光圈','人像虚化'],'F1.2+旗舰画质','较重','国产'),
+L('X','富士','Viltrox 唯卓仕','AF 33mm F1.4 XF','APS-C','定焦','33','F1.4','AF',270,1600,[8.9,8.7,9.2,8.6,9.8,8.2],['人像','街拍','日常'],['大光圈','轻便'],'便宜标准定焦','边缘/逆光一般','国产'),
+L('X','富士','Viltrox 唯卓仕','AF 56mm F1.4 XF','APS-C','定焦','56','F1.4','AF',290,1700,[9.0,8.7,9.1,8.5,9.8,8.3],['人像','约拍'],['人像虚化','大光圈'],'便宜人像定焦','AF不及原厂新款','国产'),
+L('X','富士','Viltrox 唯卓仕','AF 75mm F1.2 Pro XF','APS-C','定焦','75','F1.2','AF',670,3600,[9.7,9.1,6.5,8.7,9.8,9.1],['人像','约拍','舞台'],['人像虚化','大光圈'],'APS-C虚化王之一','很重','国产'),
+L('X','富士','Tamron','11-20mm F2.8 Di III-A RXD X','APS-C','变焦','11-20','F2.8','AF',335,4000,[9.0,8.9,9.1,9.2,9.3,8.5],['Vlog','旅行','风光'],['超广角','大光圈','轻便'],'超广F2.8','原厂风格操控缺少','副厂'),
+L('X','富士','Tamron','17-70mm F2.8 Di III-A VC RXD X','APS-C','变焦','17-70','F2.8','AF',530,4800,[9.1,8.9,8.1,9.2,9.6,8.6],['旅行','人像','活动','视频'],['一镜走天下','大光圈','防抖'],'焦段大、恒定F2.8','较重','副厂'),
+L('X','富士','Tamron','18-300mm F3.5-6.3 Di III-A VC VXD X','APS-C','变焦','18-300','F3.5-6.3','AF',620,4200,[8.6,8.9,7.2,8.6,9.5,8.5],['旅行','生态','日常'],['一镜走天下','防抖'],'真正一镜走天下','画质不追求极致','副厂'),
+// ====================== L MOUNT ======================
+L('L','松下/徕卡/适马','Panasonic','LUMIX S PRO 16-35mm F4','FF','变焦','16-35','F4','AF',500,8500,[9.2,9.3,8.4,9.3,8.2,9.5],['风光','旅行','视频'],['超广角','轻便','视频'],'S Pro做工/画质好','F4','原厂'),
+L('L','松下/徕卡/适马','Panasonic','LUMIX S 20-60mm F3.5-5.6','FF','变焦','20-60','F3.5-5.6','AF',350,2300,[8.7,9.0,9.3,9.3,9.8,8.7],['旅行','Vlog','风光'],['超广角','轻便','视频'],'20mm套头很实用','长端短、光圈小','原厂'),
+L('L','松下/徕卡/适马','Panasonic','LUMIX S PRO 24-70mm F2.8','FF','变焦','24-70','F2.8','AF',935,12000,[9.6,9.4,5.3,9.4,7.5,9.7],['商业','婚礼','人像','视频'],['大光圈','专业可靠'],'S Pro大三元','重','原厂'),
+L('L','松下/徕卡/适马','Panasonic','LUMIX S 24-105mm F4 Macro OIS','FF','变焦','24-105','F4','AF',680,6500,[9.0,9.2,7.6,9.3,9.0,9.1],['旅行','商业','视频','近摄'],['一镜走天下','防抖','近摄'],'焦段全面、0.5x近摄','F4','原厂'),
+L('L','松下/徕卡/适马','Panasonic','LUMIX S 28-200mm F4-7.1 Macro OIS','FF','变焦','28-200','F4-7.1','AF',413,6000,[8.8,9.1,8.9,9.2,9.2,8.9],['旅行','日常','近摄'],['一镜走天下','轻便','防抖'],'全画幅旅行超轻','光圈小','原厂'),
+L('L','松下/徕卡/适马','Panasonic','LUMIX S PRO 70-200mm F2.8 OIS','FF','变焦','70-200','F2.8','AF',1570,14000,[9.7,9.4,3.7,9.3,7.0,9.8],['人像','体育','婚礼','商业'],['长焦','大光圈','防抖'],'大三元长焦、做工强','非常重','原厂'),
+L('L','松下/徕卡/适马','Panasonic','LUMIX S 18mm F1.8','FF','定焦','18','F1.8','AF',340,4800,[9.2,9.2,9.2,9.5,8.9,9.0],['风光','Vlog','视频'],['超广角','大光圈','轻便','视频'],'轻量视频定焦体系','不是最便宜','原厂'),
+L('L','松下/徕卡/适马','Panasonic','LUMIX S 35mm F1.8','FF','定焦','35','F1.8','AF',295,4000,[9.1,9.2,9.5,9.6,9.0,9.0],['街拍','人像','视频'],['大光圈','轻便','视频'],'视频一致性很好','F1.8','原厂'),
+L('L','松下/徕卡/适马','Panasonic','LUMIX S 50mm F1.8','FF','定焦','50','F1.8','AF',300,3000,[9.1,9.2,9.5,9.6,9.4,8.9],['人像','视频','日常'],['大光圈','轻便','视频'],'便宜、轻、视频友好','非旗舰','原厂'),
+L('L','松下/徕卡/适马','Panasonic','LUMIX S 85mm F1.8','FF','定焦','85','F1.8','AF',355,3800,[9.3,9.2,9.2,9.5,9.3,9.0],['人像','约拍','视频'],['人像虚化','大光圈','轻便','视频'],'轻便人像、视频统一体系','无OIS','原厂'),
+L('L','松下/徕卡/适马','Sigma','14-24mm F2.8 DG DN Art L','FF','变焦','14-24','F2.8','AF',795,7500,[9.5,9.2,6.2,8.9,9.0,9.2],['风光','建筑','星空'],['超广角','大光圈'],'超广F2.8','滤镜不便','副厂'),
+L('L','松下/徕卡/适马','Sigma','16-28mm F2.8 DG DN C L','FF','变焦','16-28','F2.8','AF',450,5200,[9.1,9.1,9.0,9.1,9.3,8.7],['旅行','风光','视频'],['超广角','大光圈','轻便'],'轻量F2.8','焦段短','副厂'),
+L('L','松下/徕卡/适马','Sigma','24-70mm F2.8 DG DN II Art L','FF','变焦','24-70','F2.8','AF',745,7800,[9.6,9.4,7.1,9.2,9.4,9.2],['商业','人像','婚礼'],['大光圈'],'大三元高性价比','仍有重量','副厂'),
+L('L','松下/徕卡/适马','Sigma','28-105mm F2.8 DG DN Art L','FF','变焦','28-105','F2.8','AF',995,10500,[9.6,9.4,5.6,9.0,8.8,9.3],['商业','婚礼','活动'],['一镜走天下','大光圈'],'大跨度F2.8','重','副厂'),
+L('L','松下/徕卡/适马','Sigma','70-200mm F2.8 DG DN OS Sports L','FF','变焦','70-200','F2.8','AF',1345,9200,[9.6,9.4,4.5,9.0,9.3,9.4],['人像','体育','婚礼'],['长焦','大光圈','防抖'],'长焦大三元性价比高','重','副厂'),
+L('L','松下/徕卡/适马','Sigma','35mm F1.4 DG DN Art L','FF','定焦','35','F1.4','AF',645,4800,[9.4,9.0,7.2,8.8,9.4,9.1],['人像','街拍','婚礼'],['大光圈'],'高画质性价比','较重','副厂'),
+L('L','松下/徕卡/适马','Sigma','50mm F1.2 DG DN Art L','FF','定焦','50','F1.2','AF',745,9000,[9.8,9.3,6.9,9.0,8.6,9.3],['人像','婚礼','商业'],['大光圈'],'F1.2旗舰级画质','高价','副厂'),
+L('L','松下/徕卡/适马','Sigma','85mm F1.4 DG DN Art L','FF','定焦','85','F1.4','AF',625,6000,[9.7,9.2,7.7,8.8,9.6,9.2],['人像','约拍','婚礼'],['人像虚化','大光圈'],'人像高性价比','无OIS','副厂'),
+// ====================== M4/3 ======================
+L('M43','M4/3','Panasonic','LEICA DG 10-25mm F1.7','M4/3','变焦','10-25','F1.7','AF',690,10500,[9.6,9.4,5.8,9.7,7.3,9.6],['视频','商业','人像'],['大光圈','视频'],'M4/3视频大光圈变焦','贵且重','原厂'),
+L('M43','M4/3','Panasonic','LUMIX G X 12-35mm F2.8 II OIS','M4/3','变焦','12-35','F2.8','AF',305,5200,[9.1,9.2,9.3,9.5,8.8,9.1],['旅行','视频','活动'],['大光圈','轻便','防抖'],'小型大三元标准','虚化受画幅限制','原厂'),
+L('M43','M4/3','Panasonic','LEICA DG 12-60mm F2.8-4 OIS','M4/3','变焦','12-60','F2.8-4','AF',320,4500,[9.1,9.2,9.1,9.4,9.1,9.2],['旅行','视频','日常'],['一镜走天下','轻便','防抖'],'旅行焦段全面','长端F4','原厂'),
+L('M43','M4/3','Panasonic','LEICA DG 25-50mm F1.7','M4/3','变焦','25-50','F1.7','AF',654,9500,[9.6,9.4,6.0,9.7,7.5,9.6],['人像','视频','商业'],['大光圈','视频'],'长焦端F1.7、视频强','贵','原厂'),
+L('M43','M4/3','OM System','M.ZUIKO DIGITAL ED 12-40mm F2.8 PRO II','M4/3','变焦','12-40','F2.8','AF',382,5600,[9.5,9.4,8.8,9.3,8.7,9.6],['旅行','风光','活动'],['大光圈','轻便','专业可靠'],'PRO做工、近摄强','无镜头防抖','原厂'),
+L('M43','M4/3','OM System','M.ZUIKO DIGITAL ED 40-150mm F2.8 PRO','M4/3','变焦','40-150','F2.8','AF',760,9000,[9.6,9.6,6.2,9.2,8.2,9.7],['人像','体育','生态'],['长焦','大光圈','专业可靠'],'等效80-300 F2.8','较重','原厂'),
+L('M43','M4/3','Sigma','16mm F1.4 DC DN C M43','M4/3','定焦','16','F1.4','AF',405,2400,[9.2,9.0,8.5,9.1,9.7,8.6],['环境人像','视频','星空'],['大光圈'],'便宜大光圈','较大','副厂'),
+L('M43','M4/3','Sigma','30mm F1.4 DC DN C M43','M4/3','定焦','30','F1.4','AF',265,2000,[9.0,8.9,9.4,8.8,9.8,8.4],['人像','日常'],['大光圈','轻便'],'性价比高','边缘一般','副厂'),
+L('M43','M4/3','Sigma','56mm F1.4 DC DN C M43','M4/3','定焦','56','F1.4','AF',280,2500,[9.4,9.0,9.4,8.8,9.8,8.6],['人像','舞台'],['人像虚化','大光圈','轻便'],'等效112mm人像','焦段较长','副厂')
+];
+
+// ====================== 国产手动镜头批量扩充：七工匠 / 铭匠 / 星曜 ======================
+const manualFamilies = [
+  {maker:'7Artisans 七工匠', model:'25mm F1.8', focal:'25', aperture:'F1.8', weight:143, price:500, uses:['街拍','日常','入门'], prefs:['轻便','大光圈'], scores:[7.8,0,9.8,6.0,9.9,7.8], pros:'超低预算、体积小', cons:'纯手动对焦'},
+  {maker:'7Artisans 七工匠', model:'35mm F1.2 II', focal:'35', aperture:'F1.2', weight:218, price:950, uses:['人像','街拍','氛围'], prefs:['大光圈','人像虚化'], scores:[8.2,0,9.4,6.1,9.8,8.1], pros:'F1.2低成本玩虚化', cons:'纯手动、全开需技巧'},
+  {maker:'7Artisans 七工匠', model:'50mm F0.95', focal:'50', aperture:'F0.95', weight:416, price:1400, uses:['人像','氛围','夜景'], prefs:['大光圈','人像虚化'], scores:[8.3,0,7.9,6.0,9.6,8.3], pros:'F0.95氛围与虚化', cons:'重且手动'},
+  {maker:'7Artisans 七工匠', model:'60mm F2.8 Macro II', focal:'60', aperture:'F2.8', weight:339, price:1100, uses:['微距','静物','产品'], prefs:['近摄'], scores:[8.6,0,8.6,5.8,9.6,8.2], pros:'低价1:1微距', cons:'手动对焦'},
+  {maker:'TTArtisan 铭匠', model:'25mm F2', focal:'25', aperture:'F2', weight:166, price:450, uses:['街拍','旅行','入门'], prefs:['轻便'], scores:[8.0,0,9.7,6.0,9.9,8.0], pros:'极低价小巧', cons:'手动'},
+  {maker:'TTArtisan 铭匠', model:'35mm F1.4', focal:'35', aperture:'F1.4', weight:180, price:500, uses:['人像','街拍','氛围'], prefs:['大光圈','轻便'], scores:[7.9,0,9.6,6.0,9.9,7.9], pros:'便宜大光圈', cons:'全开画质与手动门槛'},
+  {maker:'TTArtisan 铭匠', model:'40mm F2.8 Macro', focal:'40', aperture:'F2.8', weight:371, price:800, uses:['微距','静物','产品'], prefs:['近摄'], scores:[8.5,0,8.2,5.8,9.8,8.1], pros:'低成本微距', cons:'手动、体积一般'},
+  {maker:'TTArtisan 铭匠', model:'50mm F0.95', focal:'50', aperture:'F0.95', weight:411, price:1500, uses:['人像','夜景','氛围'], prefs:['大光圈','人像虚化'], scores:[8.4,0,7.8,6.0,9.6,8.3], pros:'F0.95氛围', cons:'手动、较重'},
+  {maker:'Brightin Star 星曜', model:'23mm F1.4', focal:'23', aperture:'F1.4', weight:220, price:650, uses:['街拍','环境人像','旅行'], prefs:['大光圈','轻便'], scores:[8.0,0,9.3,6.0,9.8,8.0], pros:'低价等效35mm附近', cons:'手动'},
+  {maker:'Brightin Star 星曜', model:'35mm F0.95', focal:'35', aperture:'F0.95', weight:370, price:1100, uses:['人像','夜景','氛围'], prefs:['大光圈','人像虚化'], scores:[8.2,0,8.1,5.9,9.7,8.1], pros:'F0.95低预算', cons:'手动、全开需要取舍'},
+  {maker:'Brightin Star 星曜', model:'50mm F0.95', focal:'50', aperture:'F0.95', weight:410, price:1300, uses:['人像','氛围'], prefs:['大光圈','人像虚化'], scores:[8.3,0,7.9,5.9,9.7,8.2], pros:'低价大光圈', cons:'手动、重'}
+];
+['E','Z','X','RF','L','M43'].forEach(m=>{
+  const sys={E:'索尼',Z:'尼康',X:'富士',RF:'佳能',L:'松下/徕卡/适马',M43:'M4/3'}[m];
+  const frame=m==='M43'?'M4/3':'APS-C';
+  manualFamilies.forEach(f=>lenses.push(L(m,sys,f.maker,f.model,frame,'定焦',f.focal,f.aperture,'MF',f.weight,f.price,f.scores,f.uses,f.prefs,f.pros,f.cons,'国产')));
+});
+
+// 美科自动对焦跨卡口
+[['E','索尼'],['Z','尼康'],['X','富士'],['L','松下/徕卡/适马']].forEach(([m,sys])=>{
+  lenses.push(L(m,sys,'Meike 美科','AF 55mm F1.8',m==='X'?'APS-C':'FF','定焦','55','F1.8','AF',390,1800,[8.8,8.6,8.8,8.6,9.8,8.3],['人像','街拍','日常'],['大光圈','轻便'],'国产AF标头、价格低','AF与做工不及高端','国产'));
+  lenses.push(L(m,sys,'Meike 美科','AF 55mm F1.4',m==='X'?'APS-C':'FF','定焦','55','F1.4','AF',430,2200,[9.0,8.7,8.3,8.6,9.8,8.5],['人像','约拍','街拍'],['大光圈','人像虚化'],'F1.4低成本AF','体积/AF中端','国产'));
+});
+[['E','索尼'],['Z','尼康'],['L','松下/徕卡/适马']].forEach(([m,sys])=>{
+  lenses.push(L(m,sys,'Meike 美科','AF 85mm F1.4', 'FF','定焦','85','F1.4','AF',800,3200,[9.0,8.6,6.2,8.4,9.7,8.5],['人像','约拍'],['人像虚化','大光圈'],'低价全画幅F1.4 AF','较重','国产'));
+});
+
+const mountNames={E:'索尼 E',RF:'佳能 RF',Z:'尼康 Z',X:'富士 X',L:'L 卡口',M43:'M4/3'};
+const useList=['人像','约拍','街拍','旅行','风光','商业','婚礼','活动','Vlog','视频','生态','体育','微距','静物','星空'];
+const prefList=['一镜走天下','大光圈','人像虚化','超广角','长焦','超长焦','轻便','视频','防抖','近摄','专业可靠'];
+const budgetList=[{v:1500,t:'1500以内'},{v:3000,t:'1500–3000'},{v:5000,t:'3000–5000'},{v:8000,t:'5000–8000'},{v:12000,t:'8000–12000'},{v:20000,t:'12000–20000'},{v:99999,t:'20000以上'}];
+const state={mount:'',frame:'',use:'',prefs:[],type:'',budget:0};
+let libraryMountLock='';
+
+function avgScore(l){const arr=l.scores.filter((s,i)=>!(i===1&&l.focus==='MF'));return arr.reduce((a,b)=>a+b,0)/arr.length}
+function scoreClass(s){if(s>=9.2)return'score-high';if(s>=8.5)return'score-mid';return'score-low'}
+function frameTag(f){if(f==='FF')return'<span class="tag ff">全画幅</span>';if(f==='M4/3')return'<span class="tag m43">M4/3</span>';return'<span class="tag apsc">APS-C</span>'}
+function focusTag(f){return f==='AF'?'<span class="tag af">AF</span>':'<span class="tag mf">MF</span>'}
+function originTag(o){return `<span class="tag ${o==='原厂'?'native':o==='国产'?'cn':'third'}">${o}</span>`}
+function priceBand(n){if(n<=1500)return'≤1500';if(n<=3000)return'1500–3000';if(n<=5000)return'3000–5000';if(n<=8000)return'5000–8000';if(n<=12000)return'8000–12000';return'12000+'}
+function compatible(l){
+ if(state.mount && l.mount!==state.mount) return false;
+ if(state.frame==='FF' && l.frame!=='FF') return false;
+ if(state.frame==='M4/3' && l.frame!=='M4/3') return false;
+ if(state.frame==='APS-C' && l.frame==='M4/3') return false;
+ return true;
+}
+function relatedUse(use,uses){
+ const groups=[['人像','约拍','婚礼','商业'],['旅行','街拍','日常'],['视频','Vlog'],['生态','体育'],['微距','静物','产品'],['风光','建筑','星空']];
+ return groups.some(g=>g.includes(use)&&g.some(x=>uses.includes(x)));
+}
+function matchScore(l){
+ let s=50;
+ if(state.use){if(l.uses.includes(state.use))s+=23;else if(relatedUse(state.use,l.uses))s+=11;else s-=5}
+ state.prefs.forEach(p=>{if(l.prefs.includes(p))s+=6;else s-=1});
+ if(state.type){s += l.type===state.type ? 10 : -14}
+ if(state.budget){if(l.price<=state.budget)s+=10;else if(l.price<=state.budget*1.15)s+=2;else s-=18}
+ if(state.frame==='APS-C'&&l.frame==='APS-C')s+=4;
+ if(state.frame==='APS-C'&&l.frame==='FF')s-=1;
+ if(state.frame==='FF'&&l.frame==='FF')s+=4;
+ if(l.focus==='MF'){
+   if(['婚礼','活动','体育','生态','儿童','Vlog','视频'].includes(state.use))s-=18;
+   else if(['人像','街拍','静物','微距'].includes(state.use))s-=5;
+ }
+ s += (avgScore(l)-8.5)*4;
+ return Math.max(1,Math.min(99,Math.round(s)));
+}
+function guideResults(){
+ return lenses.filter(compatible).filter(l=>!state.type||l.type===state.type).filter(l=>!state.budget||l.price<=state.budget*1.15).map(l=>({...l,match:matchScore(l)})).sort((a,b)=>b.match-a.match||avgScore(b)-avgScore(a));
+}
+function choiceButton(text,value,selected,onclick,cls='choice'){return `<button class="${cls}${selected?' selected':''}" onclick="${onclick}">${text}</button>`}
+function initChoices(){
+ document.getElementById('mountChoices').innerHTML=Object.entries(mountNames).map(([v,t])=>choiceButton(t,v,state.mount===v,`setSingle('mount','${v}')`)).join('');
+ const frames=state.mount==='X'?[['APS-C','APS-C']]:state.mount==='M43'?[['M4/3','M4/3']]:[['FF','全画幅'],['APS-C','APS-C']];
+ document.getElementById('frameChoices').innerHTML=frames.map(([v,t])=>choiceButton(t,v,state.frame===v,`setSingle('frame','${v}')`)).join('');
+ document.getElementById('useChoices').innerHTML=useList.map(v=>choiceButton(v,v,state.use===v,`setSingle('use','${v}')`)).join('');
+ document.getElementById('prefChoices').innerHTML=prefList.map(v=>choiceButton(v,v,state.prefs.includes(v),`togglePref('${v}')`,'choice secondary')).join('');
+ document.getElementById('typeChoices').innerHTML=[['','不限'],['变焦','优先变焦'],['定焦','优先定焦']].map(([v,t])=>choiceButton(t,v,state.type===v,`setSingle('type','${v}')`)).join('');
+ document.getElementById('budgetChoices').innerHTML=[{v:0,t:'不限'}].concat(budgetList).map(o=>choiceButton(o.t,o.v,state.budget==o.v,`setBudget(${o.v})`)).join('');
+}
+function setSingle(k,v){state[k]=state[k]===v&&k!=='frame'?'':v;if(k==='mount'){state.frame='';if(v==='X')state.frame='APS-C';if(v==='M43')state.frame='M4/3';}updateGuide()}
+function togglePref(v){const i=state.prefs.indexOf(v);i>=0?state.prefs.splice(i,1):state.prefs.push(v);updateGuide()}
+function setBudget(v){state.budget=Number(v);updateGuide()}
+function summaryText(k){
+ if(k==='mount')return state.mount?mountNames[state.mount]:'尚未选择';
+ if(k==='frame')return state.frame?(state.frame==='FF'?'全画幅':state.frame):'尚未选择';
+ if(k==='use')return state.use||'尚未选择';
+ if(k==='pref')return state.prefs.length?state.prefs.join(' / '):'可多选';
+ if(k==='type')return state.type||'不限';
+ if(k==='budget')return state.budget?(state.budget===99999?'20000以上':`≤ ¥${state.budget.toLocaleString()}`):'不限';
+}
+function updateStepStyles(){
+ const keys=['mount','frame','use','pref','type','budget'];
+ keys.forEach((k,i)=>{document.getElementById('sum'+k[0].toUpperCase()+k.slice(1)).textContent=summaryText(k);const el=document.querySelector(`.step[data-step="${k}"]`);const done=k==='pref'?state.prefs.length>0:k==='budget'?state.budget>0:!!state[k];el.classList.toggle('done',done);el.classList.toggle('active',!done && keys.slice(0,i).every(x=>x==='pref'?true:(x==='budget'?true:!!state[x])));});
+}
+function renderTop(data){const box=document.getElementById('topRecommendations');box.innerHTML='';data.slice(0,3).forEach((l,i)=>{box.innerHTML+=`<div class="recommend-card"><div class="rank">${['最匹配','更均衡','备选方案'][i]||'推荐'}</div><h3>${l.maker} ${l.model}</h3><div class="meta">${mountNames[l.mount]} · ${l.frame==='FF'?'全画幅':l.frame} · ${l.type} · ${focusTag(l.focus)} · 参考 ${priceBand(l.price)}</div><div class="match">${l.match}<small> / 99 场景匹配</small></div><div class="proscons"><b>优势：</b>${l.pros}<br><b>注意：</b>${l.cons}</div></div>`});}
+function lensRow(l,withMatch=false){return `<tr>${withMatch?`<td class="match-cell">${l.match}</td>`:''}<td class="maker">${l.maker}</td><td class="model">${l.model}</td>${withMatch?`<td>${mountNames[l.mount]}</td>`:''}<td>${frameTag(l.frame)}</td><td>${l.type}</td><td>${l.focal}mm</td><td>${l.aperture}</td><td>${focusTag(l.focus)}</td>${withMatch?'':`<td>${originTag(l.origin)}</td>`}<td><span class="price">${priceBand(l.price)}</span><span class="small-note">筛选锚点 ~¥${l.price.toLocaleString()}</span></td><td>${l.weight}g</td>${l.scores.map((s,i)=>`<td class="score-cell ${i===1&&l.focus==='MF'?'':scoreClass(s)}">${i===1&&l.focus==='MF'?'手动':s.toFixed(1)}</td>`).join('')}${withMatch?'':`<td class="total">${avgScore(l).toFixed(1)}</td>`}<td>${l.uses.join(' / ')}</td></tr>`}
+function updateGuide(){initChoices();updateStepStyles();const data=guideResults();document.getElementById('guideCount').textContent=data.length;renderTop(data);document.getElementById('guideBody').innerHTML=data.slice(0,40).map(l=>lensRow(l,true)).join('');document.getElementById('guideEmpty').style.display=data.length?'none':'block';document.getElementById('guideTableWrap').style.display=data.length?'block':'none';const chips=[];if(state.mount)chips.push(['卡口',mountNames[state.mount]]);if(state.frame)chips.push(['画幅',state.frame==='FF'?'全画幅':state.frame]);if(state.use)chips.push(['用途',state.use]);state.prefs.forEach(p=>chips.push(['偏好',p]));if(state.type)chips.push(['类型',state.type]);if(state.budget)chips.push(['预算',`≤¥${state.budget}`]);document.getElementById('quickSummary').innerHTML=chips.map(c=>`<span class="chip"><strong>${c[0]}</strong>${c[1]}</span>`).join('')||'<span class="chip">从第1步开始选择</span>';enableSorting(document.getElementById('guideTable'));}
+function resetGuide(){Object.assign(state,{mount:'',frame:'',use:'',prefs:[],type:'',budget:0});updateGuide()}
+function showAllGuideResults(){document.getElementById('guideTableWrap').scrollIntoView({behavior:'smooth',block:'start'})}
+
+function renderLibrary(){
+ const mount=libraryMountLock||document.getElementById('libMount').value;const maker=document.getElementById('libMaker').value;const frame=document.getElementById('libFrame').value;const type=document.getElementById('libType').value;const focus=document.getElementById('libFocus').value;const origin=document.getElementById('libOrigin').value;const q=document.getElementById('libSearch').value.toLowerCase().trim();
+ const data=lenses.filter(l=>(!mount||l.mount===mount)&&(!maker||l.maker===maker)&&(!frame||l.frame===frame)&&(!type||l.type===type)&&(!focus||l.focus===focus)&&(!origin||l.origin===origin)&&(!q||[l.maker,l.model,l.focal,l.aperture,l.uses.join(' '),l.prefs.join(' ')].join(' ').toLowerCase().includes(q)));
+ document.getElementById('allBody').innerHTML=data.map(l=>`<tr><td>${mountNames[l.mount]}</td>${lensRow(l,false).replace(/^<tr>|<\/tr>$/g,'')}</tr>`).join('');document.getElementById('libraryCount').textContent=data.length;document.getElementById('librarySummary').textContent=`原厂 ${data.filter(x=>x.origin==='原厂').length} · 副厂 ${data.filter(x=>x.origin==='副厂').length} · 国产 ${data.filter(x=>x.origin==='国产').length} · AF ${data.filter(x=>x.focus==='AF').length} · MF ${data.filter(x=>x.focus==='MF').length}`;enableSorting(document.getElementById('allTable'));
+}
+function resetLibrary(){['libMount','libMaker','libFrame','libType','libFocus','libOrigin'].forEach(id=>document.getElementById(id).value='');document.getElementById('libSearch').value='';libraryMountLock='';document.getElementById('libMount').disabled=false;document.getElementById('libraryTitle').textContent='镜头总库';renderLibrary()}
+function openSheet(id,button){document.querySelectorAll('.sheet').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.sheet-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');button.classList.add('active');if(id==='all'){libraryMountLock='';document.getElementById('libMount').disabled=false;document.getElementById('libraryTitle').textContent='镜头总库';renderLibrary()}}
+function openMount(mount,button){document.querySelectorAll('.sheet').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.sheet-btn').forEach(b=>b.classList.remove('active'));document.getElementById('all').classList.add('active');button.classList.add('active');libraryMountLock=mount;document.getElementById('libMount').value=mount;document.getElementById('libMount').disabled=true;document.getElementById('libraryTitle').textContent=mountNames[mount]+' 镜头库';document.getElementById('librarySub').textContent='原厂 + 适马 / 腾龙 / 唯卓仕 / 国产镜头';renderLibrary()}
+
+const sortState=new WeakMap();
+function parseVal(t){const s=String(t).replace(/,/g,'');const n=parseFloat(s.replace(/[^\d.-]/g,''));return Number.isNaN(n)?null:n}
+function enableSorting(table){if(table.dataset.sortReady)return;table.dataset.sortReady='1';table.querySelectorAll('thead th.sortable').forEach(th=>{th.addEventListener('click',()=>{const idx=[...th.parentNode.children].indexOf(th);const tbody=table.tBodies[0];let st=sortState.get(table)||{idx:-1,dir:'desc'};const dir=st.idx===idx&&st.dir==='asc'?'desc':'asc';const rows=[...tbody.rows];rows.sort((a,b)=>{const av=a.cells[idx]?.innerText||'',bv=b.cells[idx]?.innerText||'';const an=parseVal(av),bn=parseVal(bv);let r=(an!==null&&bn!==null)?an-bn:av.localeCompare(bv,'zh-CN',{numeric:true});return dir==='asc'?r:-r});rows.forEach(r=>tbody.appendChild(r));table.querySelectorAll('thead th').forEach(x=>x.classList.remove('sort-asc','sort-desc'));th.classList.add(dir==='asc'?'sort-asc':'sort-desc');sortState.set(table,{idx,dir})})})}
+function init(){document.getElementById('dbCount').textContent=`已收录 ${lenses.length} 支镜头｜原厂 · 适马 · 腾龙 · 唯卓仕 · 七工匠 · 铭匠 · 星曜 · 美科`;const makers=[...new Set(lenses.map(l=>l.maker))].sort((a,b)=>a.localeCompare(b,'zh-CN'));document.getElementById('libMaker').innerHTML='<option value="">全部品牌</option>'+makers.map(m=>`<option value="${m}">${m}</option>`).join('');updateGuide();renderLibrary();enableSorting(document.getElementById('allTable'))}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
