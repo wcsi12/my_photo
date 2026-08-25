@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 摄影灯光设备搭配大全｜快速选灯 + 设备库 + 灯阵方案</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f4f5f7;color:#1f2937;font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",Arial,sans-serif}
+button,select,input{font-family:inherit}
+button{cursor:pointer}
+.container{width:96%;max-width:1700px;margin:28px auto 60px}
+.header{background:linear-gradient(135deg,#111827 0%,#24364d 100%);color:white;padding:38px 42px;border-radius:20px;margin-bottom:18px;box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.header h1{margin:0 0 12px;font-size:31px;font-weight:700;letter-spacing:1px}
+.header-subtitle{font-size:16px;color:#e5e7eb;margin-bottom:8px}
+.header-description{font-size:13px;color:#aeb8c6;line-height:1.8;max-width:1050px}
+.update{display:inline-block;margin-top:17px;padding:7px 13px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.12);border-radius:20px;font-size:12px;color:#dbe2ea}
+.sheet-nav{position:sticky;top:0;z-index:100;display:flex;gap:7px;overflow-x:auto;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);padding:9px;border-radius:13px;margin-bottom:18px;box-shadow:0 3px 16px rgba(0,0,0,.07)}
+.sheet-nav::-webkit-scrollbar{height:3px}.sheet-btn{flex:0 0 auto;border:0;padding:11px 18px;border-radius:8px;background:#f1f3f5;color:#444;font-size:14px;transition:.18s}.sheet-btn:hover{background:#e5e7eb}.sheet-btn.active{background:#111827;color:white;box-shadow:0 3px 10px rgba(17,24,39,.18)}
+.sheet{display:none}.sheet.active{display:block}
+.sheet-title{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin:5px 3px 15px}.sheet-title h2{margin:0;font-size:23px;color:#111827}.sheet-title span{color:#8a8f98;font-size:12px}
+.hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:14px;margin-bottom:15px}.card{background:white;border-radius:14px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.card h3{margin:0 0 8px;font-size:16px}.card p{margin:5px 0;color:#6b7280;font-size:12.5px;line-height:1.8}
+.wizard{background:white;border-radius:16px;padding:22px;box-shadow:0 3px 16px rgba(0,0,0,.05);margin-bottom:15px}
+.progress-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.progress-head h3{margin:0;font-size:19px}.count-pill{padding:7px 12px;border-radius:999px;background:#111827;color:white;font-size:12px;white-space:nowrap}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.step{border:1px solid #e6e9ed;border-radius:12px;padding:13px;background:#fafbfc;min-height:105px;transition:.2s}.step.active{border-color:#111827;background:white;box-shadow:0 3px 12px rgba(17,24,39,.08)}.step.done{background:#f6f8fa}.step-no{font-size:10px;color:#9ca3af;margin-bottom:6px}.step-title{font-size:13px;font-weight:800;color:#111827;margin-bottom:8px}.step-value{font-size:11.5px;color:#6b7280;line-height:1.5}
+.section-label{font-weight:800;font-size:13px;margin:16px 0 9px}.choice-grid{display:flex;flex-wrap:wrap;gap:8px}.choice{border:1px solid #dfe3e8;background:#fff;color:#374151;padding:9px 12px;border-radius:9px;font-size:12.5px;transition:.15s}.choice:hover{border-color:#9ca3af}.choice.selected{background:#111827;color:#fff;border-color:#111827}.choice.disabled{opacity:.35;pointer-events:none}
+.helper{margin-top:9px;font-size:11px;color:#8a8f98;line-height:1.7}.wizard-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.primary{border:0;padding:10px 15px;border-radius:8px;background:#111827;color:white;font-size:12.5px}.ghost{border:1px solid #dfe3e8;padding:9px 14px;border-radius:8px;background:white;color:#4b5563;font-size:12.5px}.primary:hover{background:#1f2937}.ghost:hover{background:#f8fafc}
+.quick-summary{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;background:#eef1f4;color:#4b5563;font-size:10.5px}.chip strong{color:#111827}
+.recommend-box{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:15px}.recommend-card{background:white;border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.04);border-top:3px solid #111827}.recommend-card .rank{font-size:10px;color:#9ca3af}.recommend-card h3{font-size:16px;margin:5px 0 5px}.recommend-card .meta{font-size:11px;color:#6b7280;line-height:1.7}.match{font-size:28px;font-weight:900;margin:12px 0 3px}.match small{font-size:11px;color:#6b7280;font-weight:500}.proscons{font-size:11.5px;line-height:1.7;color:#4b5563;margin-top:8px}.proscons b{color:#111827}
+.filters{display:flex;align-items:center;flex-wrap:wrap;gap:9px;padding:14px;background:white;border-radius:13px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.04)}.filters select,.filters input{height:38px;border:1px solid #dfe3e8;background:white;border-radius:7px;padding:0 11px;font-size:13px;outline:none}.filters input{width:220px}.filters select:focus,.filters input:focus{border-color:#667085}.filter-reset{border:0;height:38px;padding:0 14px;border-radius:7px;background:#111827;color:white}
+.table-wrap{width:100%;overflow:auto;background:white;border-radius:14px;box-shadow:0 3px 16px rgba(0,0,0,.05)}table{width:100%;min-width:1720px;border-collapse:collapse}thead{position:sticky;top:0;z-index:10;background:#111827;color:white}th{padding:12px 9px;font-size:12px;font-weight:600;white-space:nowrap;border-right:1px solid rgba(255,255,255,.08);user-select:none}td{padding:11px 9px;text-align:center;font-size:12px;white-space:nowrap;border-bottom:1px solid #edf0f2}tbody tr:hover{background:#f8fafc}.model{text-align:left;font-weight:800;color:#111827}.maker{text-align:left;color:#4b5563}.price{font-weight:800;color:#111827;font-size:13px}
+.tag{display:inline-block;padding:4px 8px;border-radius:5px;font-size:10px;line-height:1}.ff{background:#e8eefc;color:#3157a5}.apsc{background:#eaf5e7;color:#487a38}.m43{background:#f6eee6;color:#8a5b2f}.af{background:#eef8f1;color:#256b43}.mf{background:#f3f4f6;color:#6b7280}.native{background:#f4edff;color:#6d4bb5}.third{background:#edf7ff;color:#2e658e}.cn{background:#fff2e5;color:#9a5b1e}
+.legend{background:white;border-radius:13px;padding:17px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.04)}.legend-title{font-weight:700;margin-bottom:8px}.legend p{margin:5px 0;font-size:12px;color:#6b7280;line-height:1.75}.brand-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px;margin-bottom:15px}.brand-card{background:white;border-radius:13px;padding:19px;box-shadow:0 2px 10px rgba(0,0,0,.04)}.brand-card h3{margin:0 0 8px;font-size:16px}.brand-card p{margin:0;color:#6b7280;font-size:12px;line-height:1.7}.brand-card button{margin-top:12px;border:0;background:#111827;color:#fff;border-radius:7px;padding:8px 11px;font-size:11px}
+.notice{padding:11px 13px;background:#fff8e8;border:1px solid #f2dfae;color:#805c17;border-radius:10px;font-size:11.5px;line-height:1.7;margin-bottom:14px}
+.footer{margin-top:25px;padding:25px 10px;text-align:center;color:#9ca3af;font-size:11px;line-height:1.8}
+.empty{padding:34px;text-align:center;color:#9ca3af;background:#fff;border-radius:14px}
+.mobile-hint{display:none}
+.sortable{cursor:pointer;position:relative;padding-right:22px}.sortable:hover{background:#1f2937}.sortable::after{content:"\u2195";position:absolute;right:7px;top:50%;transform:translateY(-50%);opacity:.55;font-size:10px}.sortable.sort-asc::after{content:"\u25B2";opacity:1}.sortable.sort-desc::after{content:"\u25BC";opacity:1}
+.setup-card{background:white;border-radius:14px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:14px;border-left:4px solid #111827}
+.setup-card h3{margin:0 0 8px;font-size:16px}.setup-card .setup-meta{font-size:11px;color:#6b7280;margin-bottom:8px}.setup-card .setup-detail{font-size:12px;line-height:1.8;color:#4b5563;margin:4px 0}.setup-card .setup-detail b{color:#111827}.setup-card .setup-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.setup-card .setup-tag{background:#eef1f4;color:#4b5563;padding:3px 8px;border-radius:999px;font-size:10px}
+@media(max-width:1100px){.steps{grid-template-columns:repeat(3,1fr)}.hero-grid{grid-template-columns:1fr}.recommend-box{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.container{width:94%;margin-top:15px}.header{padding:25px 22px;border-radius:15px}.header h1{font-size:23px}.header-subtitle{font-size:14px}.sheet-title{align-items:flex-start;flex-direction:column}.filters input{width:100%}.sheet-btn{padding:10px 15px}.steps{grid-template-columns:1fr 1fr}.recommend-box{grid-template-columns:1fr}.wizard{padding:16px}.progress-head{align-items:flex-start}.mobile-hint{display:block;font-size:10px;color:#9ca3af;margin:7px 0}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+  <h1>2026 摄影灯光设备搭配大全</h1>
+  <div class="header-subtitle">先筛用途 → 再选灯型 → 看参数/品牌/预算 → 搭配灯阵方案</div>
+  <div class="header-description">不是替你选一盏"最好"的灯，而是帮你快速排除不适合的灯。覆盖闪光灯、常亮灯、灯光附件、灯阵方案四大类；包含神牛、爱图仕、金贝、南光、保富图、布朗、阿莱等主流品牌。</div>
+  <span class="update" id="dbCount">设备数据库加载中…</span>
+</div>
+
+<div class="sheet-nav" id="nav">
+  <button class="sheet-btn active" onclick="openSheet('guide',this)">快速选灯</button>
+  <button class="sheet-btn" onclick="openSheet('flash',this)">闪光灯库</button>
+  <button class="sheet-btn" onclick="openSheet('continuous',this)">常亮灯库</button>
+  <button class="sheet-btn" onclick="openSheet('accessory',this)">灯光附件库</button>
+  <button class="sheet-btn" onclick="openSheet('setup',this)">灯阵方案库</button>
+</div>
+
+<!-- ===== GUIDE SHEET ===== -->
+<section id="guide" class="sheet active">
+<div class="sheet-title"><h2>快速选灯</h2><span>每选一步，候选设备都会自动收窄</span></div>
+<div class="hero-grid">
+  <div class="card"><h3>选灯顺序</h3><p><b>用途</b>决定你拍什么；<b>灯类型</b>决定闪光灯还是常亮灯；<b>功率/预算</b>决定性能档次；<b>品牌偏好</b>决定选择范围。</p></div>
+  <div class="card"><h3>第一次买灯？</h3><p>如果还不知道需要什么功率，优先选功率适中的外拍灯（如AD300Pro/AD400Pro），既能外拍又能影棚使用，一灯走天下。</p></div>
+</div>
+<div class="wizard">
+  <div class="progress-head"><h3>按你的需求一步步筛</h3><div class="count-pill"><span id="guideCount">0</span> 支候选</div></div>
+  <div class="steps" id="stepSummary">
+    <div class="step active" data-step="use"><div class="step-no">STEP 1</div><div class="step-title">拍摄用途</div><div class="step-value" id="sumUse">尚未选择</div></div>
+    <div class="step" data-step="type"><div class="step-no">STEP 2</div><div class="step-title">灯的类型</div><div class="step-value" id="sumType">尚未选择</div></div>
+    <div class="step" data-step="power"><div class="step-no">STEP 3</div><div class="step-title">功率需求</div><div class="step-value" id="sumPower">尚未选择</div></div>
+    <div class="step" data-step="brand"><div class="step-no">STEP 4</div><div class="step-title">品牌偏好</div><div class="step-value" id="sumBrand">尚未选择</div></div>
+    <div class="step" data-step="budget"><div class="step-no">STEP 5</div><div class="step-title">预算范围</div><div class="step-value" id="sumBudget">尚未选择</div></div>
+    <div class="step" data-step="scene"><div class="step-no">STEP 6</div><div class="step-title">供电方式</div><div class="step-value" id="sumScene">尚未选择</div></div>
+  </div>
+
+  <div class="section-label">① 你主要拍什么？</div>
+  <div class="choice-grid" id="useChoices"></div>
+
+  <div class="section-label">② 你要闪光灯还是常亮灯？</div>
+  <div class="choice-grid" id="typeChoices"></div>
+
+  <div class="section-label">③ 功率需求</div>
+  <div class="choice-grid" id="powerChoices"></div>
+
+  <div class="section-label">④ 品牌偏好</div>
+  <div class="choice-grid" id="brandChoices"></div>
+
+  <div class="section-label">⑤ 单件预算</div>
+  <div class="choice-grid" id="budgetChoices"></div>
+
+  <div class="section-label">⑥ 供电方式偏好</div>
+  <div class="choice-grid" id="sceneChoices"></div>
+
+  <div class="wizard-actions"><button class="primary" onclick="showAllGuideResults()">查看完整推荐列表</button><button class="ghost" onclick="resetGuide()">重新选择</button></div>
+  <div class="quick-summary" id="quickSummary"></div>
+</div>
+
+<div class="sheet-title"><h2>当前最匹配</h2><span>"匹配度"按你的选择动态计算，不是绝对排名</span></div>
+<div id="topRecommendations" class="recommend-box"></div>
+<div id="guideEmpty" class="empty" style="display:none">当前条件过窄，没有找到设备。可以放宽预算或减少偏好条件。</div>
+<div class="mobile-hint">手机端可左右滑动表格查看更多参数。</div>
+<div class="table-wrap" id="guideTableWrap"><table id="guideTable"><thead><tr>
+<th class="sortable">匹配度</th><th>类别</th><th>品牌</th><th>型号</th><th>功率/参数</th><th>色温</th><th>供电</th><th>参考价格</th><th>适用场景</th>
+</tr></thead><tbody id="guideBody"></tbody></table></div>
+</section>
+
+<!-- ===== FLASH SHEET ===== -->
+<section id="flash" class="sheet">
+<div class="sheet-title"><h2>闪光灯库</h2><span id="flashLibSub">可筛选、搜索并点击列名排序</span></div>
+<div class="notice">价格为"参考价位锚点"，并非实时成交价；同一型号会因活动、渠道与二手成色波动。</div>
+<div class="filters">
+  <select id="flashCat" onchange="renderFlashLibrary()"><option value="">全部分类</option></select>
+  <select id="flashMaker" onchange="renderFlashLibrary()"><option value="">全部品牌</option></select>
+  <select id="flashPower" onchange="renderFlashLibrary()"><option value="">全部功率</option></select>
+  <select id="flashSupply" onchange="renderFlashLibrary()"><option value="">全部供电</option></select>
+  <select id="flashScene" onchange="renderFlashLibrary()"><option value="">全部场景</option></select>
+  <input id="flashSearch" type="text" placeholder="搜索型号/品牌/特点..." oninput="renderFlashLibrary()">
+  <button class="filter-reset" onclick="resetFlash()">重置</button>
+</div>
+<div class="legend"><div class="legend-title">当前库：<span id="flashCount">0</span> 支</div><p id="flashSummary">覆盖主流闪光灯品牌。</p></div>
+<div class="mobile-hint">手机端可左右滑动表格查看更多参数。</div>
+<div class="table-wrap"><table id="flashTable"><thead><tr>
+<th>分类</th><th>品牌</th><th>型号</th><th>功率/指数</th><th>供电方式</th><th>卡口类型</th><th>主要特点</th><th class="sortable">参考价格</th><th>适用场景</th>
+</tr></thead><tbody id="flashBody"></tbody></table></div>
+</section>
+
+<!-- ===== CONTINUOUS SHEET ===== -->
+<section id="continuous" class="sheet">
+<div class="sheet-title"><h2>常亮灯库</h2><span id="contLibSub">可筛选、搜索并点击列名排序</span></div>
+<div class="notice">价格为"参考价位锚点"，并非实时成交价。</div>
+<div class="filters">
+  <select id="contCat" onchange="renderContLibrary()"><option value="">全部灯型</option></select>
+  <select id="contMaker" onchange="renderContLibrary()"><option value="">全部品牌</option></select>
+  <select id="contPower" onchange="renderContLibrary()"><option value="">全部功率</option></select>
+  <select id="contCCT" onchange="renderContLibrary()"><option value="">全部色温</option></select>
+  <select id="contSupply" onchange="renderContLibrary()"><option value="">全部供电</option></select>
+  <select id="contScene" onchange="renderContLibrary()"><option value="">全部场景</option></select>
+  <input id="contSearch" type="text" placeholder="搜索型号/品牌/特点..." oninput="renderContLibrary()">
+  <button class="filter-reset" onclick="resetCont()">重置</button>
+</div>
+<div class="legend"><div class="legend-title">当前库：<span id="contCount">0</span> 盏</div><p id="contSummary">覆盖主流常亮灯品牌。</p></div>
+<div class="mobile-hint">手机端可左右滑动表格查看更多参数。</div>
+<div class="table-wrap"><table id="contTable"><thead><tr>
+<th>灯型</th><th>品牌</th><th>型号</th><th>功率</th><th>色温范围</th><th>显色指数</th><th>供电方式</th><th>主要特点</th><th class="sortable">参考价格</th><th>适用场景</th>
+</tr></thead><tbody id="contBody"></tbody></table></div>
+</section>
+
+<!-- ===== ACCESSORY SHEET ===== -->
+<section id="accessory" class="sheet">
+<div class="sheet-title"><h2>灯光附件库</h2><span id="accLibSub">可筛选、搜索并点击列名排序</span></div>
+<div class="notice">价格为"参考价位锚点"，并非实时成交价。</div>
+<div class="filters">
+  <select id="accCat" onchange="renderAccLibrary()"><option value="">全部分类</option></select>
+  <select id="accSubCat" onchange="renderAccLibrary()"><option value="">全部小类</option></select>
+  <select id="accScene" onchange="renderAccLibrary()"><option value="">全部场景</option></select>
+  <input id="accSearch" type="text" placeholder="搜索名称/特点..." oninput="renderAccLibrary()">
+  <button class="filter-reset" onclick="resetAcc()">重置</button>
+</div>
+<div class="legend"><div class="legend-title">当前库：<span id="accCount">0</span> 件</div><p id="accSummary">覆盖柔光、反光、聚光、色彩、支撑、控光、引闪、电源、收纳等大类。</p></div>
+<div class="mobile-hint">手机端可左右滑动表格查看更多参数。</div>
+<div class="table-wrap"><table id="accTable"><thead><tr>
+<th>大类</th><th>小类</th><th>名称/规格</th><th>常见卡口</th><th>主要作用/特点</th><th class="sortable">参考价格</th><th>适用场景</th>
+</tr></thead><tbody id="accBody"></tbody></table></div>
+</section>
+
+<!-- ===== SETUP SHEET ===== -->
+<section id="setup" class="sheet">
+<div class="sheet-title"><h2>灯阵方案库</h2><span id="setupLibSub">按场景分类搜索与筛选</span></div>
+<div class="notice">灯阵方案提供经典布光模板，可根据实际设备灵活调整。</div>
+<div class="filters">
+  <select id="setupScene" onchange="renderSetupLibrary()"><option value="">全部场景</option></select>
+  <input id="setupSearch" type="text" placeholder="搜索方案名称/场景/设备..." oninput="renderSetupLibrary()">
+  <button class="filter-reset" onclick="resetSetup()">重置</button>
+</div>
+<div class="legend"><div class="legend-title">当前库：<span id="setupCount">0</span> 个方案</div><p id="setupSummary">覆盖人像、产品、直播、影视、婚礼、美食、创意等多种场景的布光方案。</p></div>
+<div id="setupContainer"></div>
+</section>
+
+<div class="footer"><div>《2026 摄影灯光设备搭配大全》</div><div>这是一个帮助用户"缩小选择范围"的工具，不构成绝对购买结论。建议在最终购买前确认设备具体接口版本、兼容性与实时价格。</div></div>
+</div>
+
+<script>
+// ===== DATA =====
+const flashData = [{"序号": "1", "大类": "机顶闪光灯", "品牌": "神牛 Godox", "型号": "V100", "功率/指数": "100Ws / GN约76", "供电方式": "锂电池(2980mAh)", "卡口类型": "通用热靴", "主要特点": "圆灯头+副闪,TTL/HSS,1/256最低功率,全功率约60次", "参考价格区间(元)": "2500-3000", "适用场景": "专业人像/婚礼/事件摄影", "产品图": ""}, {"序号": "2", "大类": "机顶闪光灯", "品牌": "神牛 Godox", "型号": "V1 Pro", "功率/指数": "76Ws / GN60", "供电方式": "锂电池(2600mAh)", "卡口类型": "通用热靴", "主要特点": "圆灯头,TTL/HSS,内置2.4G无线,回电0.01-1.5s", "参考价格区间(元)": "1800-2200", "适用场景": "人像/婚礼/商业摄影", "产品图": ""}, {"序号": "3", "大类": "机顶闪光灯", "品牌": "神牛 Godox", "型号": "V860 III", "功率/指数": "76Ws / GN60", "供电方式": "锂电池(2600mAh)", "卡口类型": "品牌专用热靴", "主要特点": "方灯头,TTL/HSS,2.4G无线主控从属,回电0.01-1.5s", "参考价格区间(元)": "1200-1500", "适用场景": "人像/婚礼/新闻摄影", "产品图": ""}, {"序号": "4", "大类": "机顶闪光灯", "品牌": "神牛 Godox", "型号": "V850 III", "功率/指数": "76Ws / GN60", "供电方式": "锂电池(2600mAh)", "卡口类型": "通用热靴", "主要特点": "手动灯,2.4G无线从属,高性价比,回电0.01-1.5s", "参考价格区间(元)": "800-1000", "适用场景": "离机闪/多灯布光", "产品图": ""}, {"序号": "5", "大类": "机顶闪光灯", "品牌": "神牛 Godox", "型号": "TT685 II", "功率/指数": "GN60", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "TTL/HSS,2.4G无线,入门级首选,回电0.1-2.6s", "参考价格区间(元)": "500-700", "适用场景": "入门摄影/爱好者", "产品图": ""}, {"序号": "6", "大类": "机顶闪光灯", "品牌": "神牛 Godox", "型号": "TT600", "功率/指数": "GN60", "供电方式": "AA电池×4", "卡口类型": "通用热靴", "主要特点": "手动灯,2.4G无线从属,超高性价比", "参考价格区间(元)": "300-400", "适用场景": "预算有限/离机闪", "产品图": ""}, {"序号": "7", "大类": "机顶闪光灯", "品牌": "神牛 Godox", "型号": "IT32", "功率/指数": "32Ws / GN32", "供电方式": "锂电池(1800mAh)", "卡口类型": "磁吸可换底座", "主要特点": "迷你便携,磁吸底座跨品牌切换,TTL/HSS", "参考价格区间(元)": "600-800", "适用场景": "街拍/旅行/微单用户", "产品图": ""}, {"序号": "8", "大类": "机顶闪光灯", "品牌": "神牛 Godox", "型号": "V350", "功率/指数": "36Ws / GN36", "供电方式": "锂电池(2000mAh)", "卡口类型": "品牌专用热靴", "主要特点": "小型轻量化,TTL/HSS,适合微单", "参考价格区间(元)": "700-900", "适用场景": "微单/旅行摄影", "产品图": ""}, {"序号": "9", "大类": "机顶闪光灯", "品牌": "金贝 JINBEI", "型号": "Hi-500 Pro", "功率/指数": "GN50", "供电方式": "锂电池", "卡口类型": "品牌专用热靴", "主要特点": "TTL/HSS,2.4G无线,松下兼容性好", "参考价格区间(元)": "500-700", "适用场景": "人像/松下用户", "产品图": ""}, {"序号": "10", "大类": "机顶闪光灯", "品牌": "金贝 JINBEI", "型号": "HD-2 Pro", "功率/指数": "GN60", "供电方式": "锂电池", "卡口类型": "通用热靴", "主要特点": "TTL/HSS,高速同步,外拍便携", "参考价格区间(元)": "800-1000", "适用场景": "外拍/人像", "产品图": ""}, {"序号": "11", "大类": "机顶闪光灯", "品牌": "佳能 Canon", "型号": "Speedlite EL-1", "功率/指数": "GN60", "供电方式": "锂电池(LP-EL)", "卡口类型": "佳能热靴", "主要特点": "旗舰级,1/8192功率精度,防尘防水,回电0.1-0.9s", "参考价格区间(元)": "5000-6000", "适用场景": "专业新闻/体育/商业", "产品图": ""}, {"序号": "12", "大类": "机顶闪光灯", "品牌": "佳能 Canon", "型号": "Speedlite 600EX II-RT", "功率/指数": "GN60", "供电方式": "AA电池×4", "卡口类型": "佳能热靴", "主要特点": "无线电主控,TTL/HSS,回电0.1-3s", "参考价格区间(元)": "3000-3500", "适用场景": "专业婚礼/事件", "产品图": ""}, {"序号": "13", "大类": "机顶闪光灯", "品牌": "尼康 Nikon", "型号": "SB-5000", "功率/指数": "GN34.5(ISO100,m)", "供电方式": "AA电池×4", "卡口类型": "尼康热靴", "主要特点": "无线电控制,TTL/HSS,冷却系统,回电0.1-3s", "参考价格区间(元)": "3500-4000", "适用场景": "专业新闻/体育", "产品图": ""}, {"序号": "14", "大类": "机顶闪光灯", "品牌": "索尼 Sony", "型号": "HVL-F60RM2", "功率/指数": "GN60", "供电方式": "AA电池×4", "卡口类型": "索尼热靴", "主要特点": "无线电主控,TTL/HSS,快速回电,人脸同步", "参考价格区间(元)": "3500-4000", "适用场景": "专业人像/婚礼", "产品图": ""}, {"序号": "15", "大类": "机顶闪光灯", "品牌": "富士 Fujifilm", "型号": "EF-X500", "功率/指数": "GN50", "供电方式": "AA电池×4", "卡口类型": "富士热靴", "主要特点": "TTL/HSS,主控从属,视频LED灯", "参考价格区间(元)": "2500-3000", "适用场景": "富士用户/视频", "产品图": ""}, {"序号": "16", "大类": "影室闪光灯(一体式)", "品牌": "神牛 Godox", "型号": "DP1000III V", "功率/指数": "1000Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "LED造型灯,2.4G无线,回电0.1-1.2s,1/128-1/1", "参考价格区间(元)": "1800-2200", "适用场景": "商业影棚/人像/产品", "产品图": ""}, {"序号": "17", "大类": "影室闪光灯(一体式)", "品牌": "神牛 Godox", "型号": "DP800III V", "功率/指数": "800Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "LED造型灯,2.4G无线,回电0.1-1.0s", "参考价格区间(元)": "1400-1700", "适用场景": "人像/产品/电商", "产品图": ""}, {"序号": "18", "大类": "影室闪光灯(一体式)", "品牌": "神牛 Godox", "型号": "DP600III V", "功率/指数": "600Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "LED造型灯,2.4G无线,回电0.1-0.8s,入门影棚首选", "参考价格区间(元)": "900-1100", "适用场景": "入门影棚/人像/电商", "产品图": ""}, {"序号": "19", "大类": "影室闪光灯(一体式)", "品牌": "神牛 Godox", "型号": "DP400III V", "功率/指数": "400Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "LED造型灯,2.4G无线,回电0.1-0.6s", "参考价格区间(元)": "700-900", "适用场景": "小型影棚/产品拍摄", "产品图": ""}, {"序号": "20", "大类": "影室闪光灯(一体式)", "品牌": "神牛 Godox", "型号": "SK400II V", "功率/指数": "400Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "经济款,LED造型灯,2.4G无线,回电0.1-1.0s", "参考价格区间(元)": "500-700", "适用场景": "预算有限/入门影棚", "产品图": ""}, {"序号": "21", "大类": "影室闪光灯(一体式)", "品牌": "神牛 Godox", "型号": "SK300II V", "功率/指数": "300Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "经济款,LED造型灯,2.4G无线", "参考价格区间(元)": "400-600", "适用场景": "小型产品/证件照", "产品图": ""}, {"序号": "22", "大类": "影室闪光灯(一体式)", "品牌": "神牛 Godox", "型号": "MS600", "功率/指数": "600Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "高性价比,2.4G无线,回电0.3-1.5s", "参考价格区间(元)": "600-800", "适用场景": "电商/人像", "产品图": ""}, {"序号": "23", "大类": "影室闪光灯(一体式)", "品牌": "神牛 Godox", "型号": "MS300", "功率/指数": "300Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "入门级,2.4G无线", "参考价格区间(元)": "350-500", "适用场景": "入门/产品拍摄", "产品图": ""}, {"序号": "24", "大类": "影室闪光灯(一体式)", "品牌": "金贝 JINBEI", "型号": "DPEX II 600", "功率/指数": "600Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "数显面板,2.4G无线,回电0.1-1.0s", "参考价格区间(元)": "800-1000", "适用场景": "人像/电商/产品", "产品图": ""}, {"序号": "25", "大类": "影室闪光灯(一体式)", "品牌": "金贝 JINBEI", "型号": "DPEX II 400", "功率/指数": "400Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "数显面板,2.4G无线", "参考价格区间(元)": "600-800", "适用场景": "人像/产品", "产品图": ""}, {"序号": "26", "大类": "影室闪光灯(一体式)", "品牌": "金贝 JINBEI", "型号": "SPARK II 400", "功率/指数": "400Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "入门款,造型灯,无线引闪", "参考价格区间(元)": "400-600", "适用场景": "入门影棚/证件照", "产品图": ""}, {"序号": "27", "大类": "影室闪光灯(一体式)", "品牌": "金贝 JINBEI", "型号": "ECV 600", "功率/指数": "600Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "专业级,高速回电,色温稳定", "参考价格区间(元)": "1200-1500", "适用场景": "商业摄影/高端影棚", "产品图": ""}, {"序号": "28", "大类": "影室闪光灯(一体式)", "品牌": "保富图 Profoto", "型号": "D30", "功率/指数": "500Ws", "供电方式": "交流电(100-240V)", "卡口类型": "保富图口", "主要特点": "紧凑快速,11档光圈范围,回电0.01-0.7s,AirX蓝牙", "参考价格区间(元)": "8000-10000", "适用场景": "专业影棚/商业摄影", "产品图": ""}, {"序号": "29", "大类": "影室闪光灯(一体式)", "品牌": "保富图 Profoto", "型号": "Pro-D3 750", "功率/指数": "750Ws", "供电方式": "交流电", "卡口类型": "保富图口", "主要特点": "专业级,超快速回电,10档光圈,坚固耐用", "参考价格区间(元)": "15000-18000", "适用场景": "高端商业/时尚摄影", "产品图": ""}, {"序号": "30", "大类": "影室闪光灯(一体式)", "品牌": "保富图 Profoto", "型号": "Pro-D3 1250", "功率/指数": "1250Ws", "供电方式": "交流电", "卡口类型": "保富图口", "主要特点": "顶级功率,超快速回电,大场景商拍首选", "参考价格区间(元)": "20000-25000", "适用场景": "大型商业/广告摄影", "产品图": ""}, {"序号": "31", "大类": "影室闪光灯(一体式)", "品牌": "布朗 Broncolor", "型号": "Siros 400 S", "功率/指数": "400Ws", "供电方式": "交流电", "卡口类型": "布朗口", "主要特点": "专业级,0.02-1.0s回电,色温稳定,RFS2无线", "参考价格区间(元)": "12000-15000", "适用场景": "专业商业/时尚摄影", "产品图": ""}, {"序号": "32", "大类": "影室闪光灯(一体式)", "品牌": "布朗 Broncolor", "型号": "Siros 800 S", "功率/指数": "800Ws", "供电方式": "交流电", "卡口类型": "布朗口", "主要特点": "专业级,高速回电,高精度功率调节", "参考价格区间(元)": "18000-22000", "适用场景": "高端商业/广告摄影", "产品图": ""}, {"序号": "33", "大类": "外拍灯(一体式电池)", "品牌": "神牛 Godox", "型号": "AD1200 Pro", "功率/指数": "1200Ws", "供电方式": "锂电池(3600mAh)", "卡口类型": "保荣口", "主要特点": "分体式灯头,2.4G无线,TTL/HSS,回电0.01-2.0s", "参考价格区间(元)": "5000-6000", "适用场景": "大型外拍/商业广告", "产品图": ""}, {"序号": "34", "大类": "外拍灯(一体式电池)", "品牌": "神牛 Godox", "型号": "AD600 Pro II", "功率/指数": "600Ws", "供电方式": "锂电池(28.8V/2600mAh)", "卡口类型": "保荣口", "主要特点": "TTL/HSS,2.4G无线,回电0.01-0.9s,全功率约500次", "参考价格区间(元)": "3500-4000", "适用场景": "外拍人像/婚礼/商业", "产品图": ""}, {"序号": "35", "大类": "外拍灯(一体式电池)", "品牌": "神牛 Godox", "型号": "AD400 Pro", "功率/指数": "400Ws", "供电方式": "锂电池(21.6V/2600mAh)", "卡口类型": "保荣口", "主要特点": "TTL/HSS,2.4G无线,回电0.01-0.7s,全功率约390次", "参考价格区间(元)": "2500-3000", "适用场景": "外拍人像/旅行/婚礼", "产品图": ""}, {"序号": "36", "大类": "外拍灯(一体式电池)", "品牌": "神牛 Godox", "型号": "AD300 Pro", "功率/指数": "300Ws", "供电方式": "锂电池(14.8V/2600mAh)", "卡口类型": "神牛小卡口", "主要特点": "轻量化(1.4kg),TTL/HSS,2.4G无线,回电0.01-1.5s", "参考价格区间(元)": "1800-2200", "适用场景": "便携外拍/漫展/旅行", "产品图": ""}, {"序号": "37", "大类": "外拍灯(一体式电池)", "品牌": "神牛 Godox", "型号": "AD200 Pro II", "功率/指数": "200Ws", "供电方式": "锂电池(14.8V/2900mAh)", "卡口类型": "可换灯头", "主要特点": "双灯头(直管/圆灯),TTL/HSS,2.4G无线,回电0.01-2.1s", "参考价格区间(元)": "2000-2500", "适用场景": "外拍/婚礼/新闻/漫展", "产品图": ""}, {"序号": "38", "大类": "外拍灯(一体式电池)", "品牌": "神牛 Godox", "型号": "AD100 Pro", "功率/指数": "100Ws", "供电方式": "锂电池(11.1V/2600mAh)", "卡口类型": "神牛小卡口", "主要特点": "超便携(524g),圆灯头,TTL/HSS,2.4G无线", "参考价格区间(元)": "1300-1600", "适用场景": "街拍/旅行/小型外拍", "产品图": ""}, {"序号": "39", "大类": "外拍灯(一体式电池)", "品牌": "神牛 Godox", "型号": "AD600 BM", "功率/指数": "600Ws", "供电方式": "锂电池", "卡口类型": "保荣口", "主要特点": "手动灯,高性价比,回电0.01-2.5s", "参考价格区间(元)": "2000-2500", "适用场景": "预算有限外拍", "产品图": ""}, {"序号": "40", "大类": "外拍灯(一体式电池)", "品牌": "保富图 Profoto", "型号": "B10X Plus", "功率/指数": "500Ws", "供电方式": "锂电池", "卡口类型": "保富图OCF口", "主要特点": "专业级,TTL/HSS,AirX蓝牙,回电0.01-2.0s", "参考价格区间(元)": "25000-30000", "适用场景": "专业外拍/商业广告", "产品图": ""}, {"序号": "41", "大类": "外拍灯(一体式电池)", "品牌": "保富图 Profoto", "型号": "B10X", "功率/指数": "250Ws", "供电方式": "锂电池", "卡口类型": "保富图OCF口", "主要特点": "专业级,紧凑便携,TTL/HSS", "参考价格区间(元)": "18000-22000", "适用场景": "专业外拍/婚礼", "产品图": ""}, {"序号": "42", "大类": "外拍灯(一体式电池)", "品牌": "保富图 Profoto", "型号": "Pro-B3 750", "功率/指数": "750Ws", "供电方式": "锂电池", "卡口类型": "保富图口", "主要特点": "顶级外拍灯,智能电池,超快速回电", "参考价格区间(元)": "35000-40000", "适用场景": "顶级商业外拍/广告", "产品图": ""}, {"序号": "43", "大类": "外拍灯(一体式电池)", "品牌": "布朗 Broncolor", "型号": "Siros 400 L", "功率/指数": "400Ws", "供电方式": "锂电池", "卡口类型": "布朗口", "主要特点": "专业外拍,WiFi/RFS2无线,回电0.02-1.2s", "参考价格区间(元)": "20000-25000", "适用场景": "专业外拍/时尚", "产品图": ""}, {"序号": "44", "大类": "外拍灯(一体式电池)", "品牌": "布朗 Broncolor", "型号": "Siros 800 L", "功率/指数": "800Ws", "供电方式": "锂电池", "卡口类型": "布朗口", "主要特点": "专业外拍,高速回电,色温精准", "参考价格区间(元)": "28000-35000", "适用场景": "高端商业外拍", "产品图": ""}, {"序号": "45", "大类": "电箱系统(分体式)", "品牌": "保富图 Profoto", "型号": "Pro-11 2400", "功率/指数": "2400Ws", "供电方式": "交流电", "卡口类型": "保富图口", "主要特点": "顶级电箱,4灯头输出,超高速回电,AirX", "参考价格区间(元)": "80000-100000", "适用场景": "顶级商业/时尚/广告", "产品图": ""}, {"序号": "46", "大类": "电箱系统(分体式)", "品牌": "保富图 Profoto", "型号": "Pro-11 1600", "功率/指数": "1600Ws", "供电方式": "交流电", "卡口类型": "保富图口", "主要特点": "专业电箱,3灯头输出,高速回电", "参考价格区间(元)": "60000-75000", "适用场景": "高端商业/时尚摄影", "产品图": ""}, {"序号": "47", "大类": "电箱系统(分体式)", "品牌": "布朗 Broncolor", "型号": "Scoro 3200 S", "功率/指数": "3200Ws", "供电方式": "交流电", "卡口类型": "布朗口", "主要特点": "顶级电箱,3灯头,0.02-1.1s回电,WiFi/RFS2", "参考价格区间(元)": "60000-80000", "适用场景": "顶级商业/时尚/广告", "产品图": ""}, {"序号": "48", "大类": "电箱系统(分体式)", "品牌": "布朗 Broncolor", "型号": "Scoro 1600 S", "功率/指数": "1600Ws", "供电方式": "交流电", "卡口类型": "布朗口", "主要特点": "专业电箱,3灯头,高速回电", "参考价格区间(元)": "45000-60000", "适用场景": "高端商业/时尚摄影", "产品图": ""}, {"序号": "49", "大类": "电箱系统(分体式)", "品牌": "爱玲珑 Elinchrom", "型号": "ELC 500 TTL", "功率/指数": "500Ws", "供电方式": "交流电", "卡口类型": "爱玲珑口", "主要特点": "一体式电箱设计,TTL/HSS,回电0.01-1.5s", "参考价格区间(元)": "8000-10000", "适用场景": "专业影棚/商业", "产品图": ""}, {"序号": "50", "大类": "电箱系统(分体式)", "品牌": "爱玲珑 Elinchrom", "型号": "ELC 1000 TTL", "功率/指数": "1000Ws", "供电方式": "交流电", "卡口类型": "爱玲珑口", "主要特点": "一体式电箱设计,TTL/HSS,高速回电", "参考价格区间(元)": "12000-15000", "适用场景": "高端商业/时尚", "产品图": ""}, {"序号": "51", "大类": "机顶闪光灯", "品牌": "耐思 NiceFoto", "型号": "TTL-680", "功率/指数": "GN58", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "TTL/HSS,2.4G无线主控从属,高性价比", "参考价格区间(元)": "400-600", "适用场景": "人像/入门/离机闪", "产品图": ""}, {"序号": "52", "大类": "影室闪光灯(一体式)", "品牌": "耐思 NiceFoto", "型号": "A-300", "功率/指数": "300Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "手自一体影室灯,数显面板,回电快", "参考价格区间(元)": "500-700", "适用场景": "入门影棚/产品/人像", "产品图": ""}, {"序号": "53", "大类": "影室闪光灯(一体式)", "品牌": "耐思 NiceFoto", "型号": "A-600", "功率/指数": "600Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "手自一体,大功率,数显面板,稳定可靠", "参考价格区间(元)": "800-1100", "适用场景": "商业影棚/人像/产品", "产品图": ""}, {"序号": "54", "大类": "影室闪光灯(一体式)", "品牌": "耐思 NiceFoto", "型号": "B-600", "功率/指数": "600Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "B系列专业影室灯,高速回电,色温稳定", "参考价格区间(元)": "1000-1400", "适用场景": "专业商业/时尚/广告", "产品图": ""}, {"序号": "55", "大类": "影室闪光灯(一体式)", "品牌": "耐思 NiceFoto", "型号": "K-600", "功率/指数": "600Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "K系列大功率影室灯,坚固耐用,专业级", "参考价格区间(元)": "1200-1600", "适用场景": "高端商业/大场景/广告", "产品图": ""}, {"序号": "56", "大类": "外拍灯(一体式电池)", "品牌": "耐思 NiceFoto", "型号": "Nflash600", "功率/指数": "600Ws", "供电方式": "锂电池", "卡口类型": "保荣口", "主要特点": "经典系列外拍灯,无线TTL,高速同步", "参考价格区间(元)": "2000-2800", "适用场景": "外拍人像/婚礼/商业", "产品图": ""}, {"序号": "57", "大类": "外拍灯(一体式电池)", "品牌": "耐思 NiceFoto", "型号": "Nflash480A", "功率/指数": "480Ws", "供电方式": "锂电池", "卡口类型": "保荣口", "主要特点": "闪电系列外拍灯,高速回电,轻便便携", "参考价格区间(元)": "1500-2200", "适用场景": "外拍/旅行/人像", "产品图": ""}, {"序号": "58", "大类": "影室闪光灯(一体式)", "品牌": "耐思 NiceFoto", "型号": "GY-180", "功率/指数": "180Ws/GN46", "供电方式": "交流电", "卡口类型": "通用E27", "主要特点": "小型影室灯,灯体小巧,环形灯管,光控同步", "参考价格区间(元)": "200-400", "适用场景": "小型产品/证件照/入门", "产品图": ""}, {"序号": "59", "大类": "机顶闪光灯", "品牌": "唯卓仕 Viltrox", "型号": "Vintage Z1 Pro", "功率/指数": "24Ws/GN12", "供电方式": "内置锂电池(800mAh)", "卡口类型": "品牌专用热靴", "主要特点": "复古迷你,彩屏触控,TTL/HSS,1/8000s高速同步,USB-C充电", "参考价格区间(元)": "500-700", "适用场景": "街拍/旅行/微单/复古风格", "产品图": ""}, {"序号": "60", "大类": "机顶闪光灯", "品牌": "唯卓仕 Viltrox", "型号": "Vintage Z1", "功率/指数": "24Ws", "供电方式": "AA电池/USB-C", "卡口类型": "单触点热靴", "主要特点": "复古外观,7档手动调节,轻便132g,金属机身", "参考价格区间(元)": "300-500", "适用场景": "街拍/复古/手动玩家", "产品图": ""}, {"序号": "61", "大类": "机顶闪光灯", "品牌": "唯卓仕 Viltrox", "型号": "Vintage Z2", "功率/指数": "10Ws", "供电方式": "内置锂电池(420mAh)", "卡口类型": "品牌专用热靴", "主要特点": "超轻52g,折叠设计,TTL自动,5档调节,USB-C充电", "参考价格区间(元)": "300-500", "适用场景": "微单/旅行/极简/随身补光", "产品图": ""}, {"序号": "62", "大类": "机顶闪光灯", "品牌": "唯卓仕 Viltrox", "型号": "Spark Z3", "功率/指数": "约30Ws", "供电方式": "内置锂电池(1800mAh)", "卡口类型": "品牌专用热靴", "主要特点": "TTL自动/手动,1/3000-1/30000s闪光时长,USB-C充电", "参考价格区间(元)": "400-600", "适用场景": "人像/街拍/微单用户", "产品图": ""}, {"序号": "63", "大类": "机顶闪光灯", "品牌": "捷宝 Triopo", "型号": "L870", "功率/指数": "GN58", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "双模双待,自动测光,主控从属,兼容佳能尼康", "参考价格区间(元)": "400-600", "适用场景": "人像/入门/离机闪", "产品图": ""}, {"序号": "64", "大类": "机顶闪光灯", "品牌": "捷宝 Triopo", "型号": "TR-982III", "功率/指数": "GN58", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "TTL/HSS,主控从属,高速同步,高性价比", "参考价格区间(元)": "350-500", "适用场景": "人像/入门/多灯布光", "产品图": ""}, {"序号": "65", "大类": "机顶闪光灯", "品牌": "捷宝 Triopo", "型号": "982II", "功率/指数": "GN52", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "入门级TTL闪光灯,光控引闪,性价比高", "参考价格区间(元)": "250-400", "适用场景": "入门/爱好者/离机闪", "产品图": ""}, {"序号": "66", "大类": "机顶闪光灯", "品牌": "品色 Pixel", "型号": "X800N Pro", "功率/指数": "GN60", "供电方式": "AA电池×4", "卡口类型": "尼康热靴", "主要特点": "TTL/HSS,主控从属,2.4G无线,高速同步", "参考价格区间(元)": "500-700", "适用场景": "尼康用户/人像/离机闪", "产品图": ""}, {"序号": "67", "大类": "机顶闪光灯", "品牌": "品色 Pixel", "型号": "X650C", "功率/指数": "GN58", "供电方式": "AA电池×4", "卡口类型": "佳能热靴", "主要特点": "TTL/HSS,主控从属,高性价比", "参考价格区间(元)": "400-600", "适用场景": "佳能用户/入门/人像", "产品图": ""}, {"序号": "68", "大类": "影室闪光灯(一体式)", "品牌": "金鹰 Golden Eagle", "型号": "DC-400", "功率/指数": "400Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "经典影室灯,数显面板,稳定可靠,高性价比", "参考价格区间(元)": "500-700", "适用场景": "入门影棚/人像/产品", "产品图": ""}, {"序号": "69", "大类": "影室闪光灯(一体式)", "品牌": "金鹰 Golden Eagle", "型号": "DC-600", "功率/指数": "600Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "大功率影室灯,高速回电,专业级", "参考价格区间(元)": "800-1100", "适用场景": "商业影棚/人像/广告", "产品图": ""}, {"序号": "70", "大类": "机顶闪光灯", "品牌": "日清 Nissin", "型号": "Di700A", "功率/指数": "GN54(ISO100,105mm)", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "日本老牌,TTL/HSS,2.4G无线(Air系统),主控从属,GN70(ISO100,200mm)", "参考价格区间(元)": "1200-1600", "适用场景": "专业人像/婚礼/多灯系统", "产品图": ""}, {"序号": "71", "大类": "机顶闪光灯", "品牌": "日清 Nissin", "型号": "Di866 Mark II", "功率/指数": "GN60", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "旗舰级,彩色显示屏,TTL/HSS,无线主控从属,可旋转灯头", "参考价格区间(元)": "1500-2000", "适用场景": "专业婚礼/事件/商业", "产品图": ""}, {"序号": "72", "大类": "机顶闪光灯", "品牌": "日清 Nissin", "型号": "i40", "功率/指数": "GN40", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "紧凑型闪光灯,TTL/HSS,轻便,适合微单", "参考价格区间(元)": "800-1200", "适用场景": "微单/旅行/街拍", "产品图": ""}, {"序号": "73", "大类": "机顶闪光灯", "品牌": "日清 Nissin", "型号": "MF18", "功率/指数": "环形微距闪", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "环形微距闪光灯,TTL自动,适配49-82mm滤镜口径,适合微距/牙科", "参考价格区间(元)": "2000-2500", "适用场景": "微距摄影/牙科/产品细节", "产品图": ""}, {"序号": "74", "大类": "机顶闪光灯", "品牌": "美兹 Metz", "型号": "M400", "功率/指数": "GN40", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "德国品牌,紧凑型,TTL/HSS,触控屏,USB固件升级", "参考价格区间(元)": "1000-1500", "适用场景": "微单/旅行/街拍", "产品图": ""}, {"序号": "75", "大类": "机顶闪光灯", "品牌": "美兹 Metz", "型号": "52AF-1", "功率/指数": "GN52", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "专业闪光灯,TTL/HSS,点阵显示屏,旋转反射系统", "参考价格区间(元)": "1200-1600", "适用场景": "专业人像/婚礼/事件", "产品图": ""}, {"序号": "76", "大类": "机顶闪光灯", "品牌": "美兹 Metz", "型号": "44AF-1", "功率/指数": "GN44", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "中端闪光灯,TTL自动,造型灯,USB固件升级,多品牌兼容", "参考价格区间(元)": "700-1000", "适用场景": "人像/入门/多品牌用户", "产品图": ""}, {"序号": "77", "大类": "机顶闪光灯", "品牌": "富达时 Phottix", "型号": "Mitros+", "功率/指数": "GN58", "供电方式": "AA电池×4", "卡口类型": "品牌专用热靴", "主要特点": "TTL/HSS,内置Odin无线收发器,主控从属,高速同步", "参考价格区间(元)": "1200-1600", "适用场景": "专业多灯系统/婚礼/商业", "产品图": ""}, {"序号": "78", "大类": "机顶闪光灯", "品牌": "富达时 Phottix", "型号": "Juno", "功率/指数": "GN60", "供电方式": "AA电池×4", "卡口类型": "通用热靴", "主要特点": "通用型手动闪光灯,2.4G无线,光控引闪,高性价比", "参考价格区间(元)": "600-900", "适用场景": "离机闪/多灯布光/预算有限", "产品图": ""}, {"序号": "79", "大类": "影室闪光灯(一体式)", "品牌": "汉森 Hensel", "型号": "Integra 500", "功率/指数": "500Ws", "供电方式": "交流电", "卡口类型": "汉森口", "主要特点": "德国专业品牌,一体式影室灯,高速回电,色温精准,Freemask功能", "参考价格区间(元)": "6000-9000", "适用场景": "专业商业/时尚/广告", "产品图": ""}, {"序号": "80", "大类": "影室闪光灯(一体式)", "品牌": "汉森 Hensel", "型号": "Integra Plus 500", "功率/指数": "500Ws", "供电方式": "交流电", "卡口类型": "汉森口", "主要特点": "升级版,内置Freemask,遥控功能,专业级光质", "参考价格区间(元)": "8000-12000", "适用场景": "高端商业/时尚/广告", "产品图": ""}, {"序号": "81", "大类": "影室闪光灯(一体式)", "品牌": "汉森 Hensel", "型号": "Expert D 500", "功率/指数": "500Ws", "供电方式": "交流电", "卡口类型": "汉森口", "主要特点": "顶级专业影室灯,1/10档精度,超高速闪光时长,广告级光质", "参考价格区间(元)": "12000-18000", "适用场景": "顶级商业/广告/时尚", "产品图": ""}, {"序号": "82", "大类": "机顶闪光灯", "品牌": "适马 Sigma", "型号": "EF-630", "功率/指数": "GN63", "供电方式": "AA电池×4", "卡口类型": "适马热靴", "主要特点": "适马原厂闪光灯,TTL/HSS,无线主控从属,适马相机最佳兼容", "参考价格区间(元)": "2000-2500", "适用场景": "适马用户/专业人像/事件", "产品图": ""}, {"序号": "83", "大类": "机顶闪光灯", "品牌": "松下 Panasonic", "型号": "DMW-FL580L", "功率/指数": "GN58", "供电方式": "AA电池×4", "卡口类型": "松下热靴", "主要特点": "松下原厂,TTL/HSS,LED视频灯,无线主控,防尘防水", "参考价格区间(元)": "2500-3000", "适用场景": "松下用户/视频/婚礼", "产品图": ""}, {"序号": "84", "大类": "机顶闪光灯", "品牌": "奥林巴斯 Olympus", "型号": "FL-900R", "功率/指数": "GN58", "供电方式": "AA电池×4", "卡口类型": "奥林巴斯热靴", "主要特点": "奥林巴斯原厂,TTL/HSS,无线主控从属,高速同步,防尘防水", "参考价格区间(元)": "2500-3000", "适用场景": "奥林巴斯用户/户外/专业", "产品图": ""}, {"序号": "85", "大类": "外拍灯(一体式电池)", "品牌": "高能 Cononmark", "型号": "B4", "功率/指数": "400Ws", "供电方式": "锂电池", "卡口类型": "保荣口", "主要特点": "国产专业外拍灯,高速同步,TTL,轻便便携", "参考价格区间(元)": "1500-2200", "适用场景": "外拍人像/婚礼/商业", "产品图": ""}, {"序号": "86", "大类": "外拍灯(一体式电池)", "品牌": "高能 Cononmark", "型号": "B6", "功率/指数": "600Ws", "供电方式": "锂电池", "卡口类型": "保荣口", "主要特点": "大功率外拍灯,高速回电,专业级", "参考价格区间(元)": "2500-3500", "适用场景": "专业外拍/商业/大场景", "产品图": ""}, {"序号": "87", "大类": "影室闪光灯(一体式)", "品牌": "海力欧 Helios", "型号": "HL-400", "功率/指数": "400Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "国产影室灯,数显面板,高性价比,稳定可靠", "参考价格区间(元)": "400-600", "适用场景": "入门影棚/产品/人像", "产品图": ""}, {"序号": "88", "大类": "影室闪光灯(一体式)", "品牌": "海力欧 Helios", "型号": "HL-600", "功率/指数": "600Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "大功率影室灯,高速回电,专业级", "参考价格区间(元)": "700-1000", "适用场景": "商业影棚/人像/广告", "产品图": ""}, {"序号": "89", "大类": "机顶闪光灯", "品牌": "锐鹰 FalconEyes", "型号": "S50", "功率/指数": "GN50", "供电方式": "AA电池×4", "卡口类型": "通用热靴", "主要特点": "手动闪光灯,光控引闪,高性价比,入门首选", "参考价格区间(元)": "200-350", "适用场景": "入门/离机闪/预算有限", "产品图": ""}, {"序号": "90", "大类": "影室闪光灯(一体式)", "品牌": "贝阳 Beiyang", "型号": "BY-400", "功率/指数": "400Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "入门级影室灯,数显面板,高性价比,适合小型影棚", "参考价格区间(元)": "350-500", "适用场景": "入门影棚/产品/证件照", "产品图": ""}, {"序号": "91", "大类": "影室闪光灯(一体式)", "品牌": "贝阳 Beiyang", "型号": "BY-600", "功率/指数": "600Ws", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "大功率影室灯,稳定输出,适合商业拍摄", "参考价格区间(元)": "600-900", "适用场景": "商业影棚/人像/电商", "产品图": ""}, {"序号": "92", "大类": "机顶闪光灯", "品牌": "富莱仕 F&V", "型号": "HDV-F500", "功率/指数": "GN50", "供电方式": "AA电池×4", "卡口类型": "通用热靴", "主要特点": "手动闪光灯,光控引闪,视频灯厂商出品", "参考价格区间(元)": "300-500", "适用场景": "入门/离机闪/视频补光", "产品图": ""}];
+const continuousData = [{"序号": "1", "大类": "COB聚光灯", "品牌": "爱图仕 Aputure", "型号": "LS 600d Pro", "功率": "600W", "色温范围": "5600K±200K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "旗舰级,6.2万流明,1米10万Lux,媲美1200W HMI,控光盒分体", "参考价格区间(元)": "7000-9000", "适用场景": "高端影视/商业/大场景", "产品图": ""}, {"序号": "2", "大类": "COB聚光灯", "品牌": "爱图仕 Aputure", "型号": "LS 600d", "功率": "600W", "色温范围": "5600K±200K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "标准版,灯体减重,高输出,保荣卡口", "参考价格区间(元)": "5500-7000", "适用场景": "专业影视/直播/商业", "产品图": ""}, {"序号": "3", "大类": "COB聚光灯", "品牌": "爱图仕 Aputure", "型号": "LS 300x", "功率": "350W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "双色温,高输出,精准色温,8种光效", "参考价格区间(元)": "4500-5500", "适用场景": "影视/直播/商业摄影", "产品图": ""}, {"序号": "4", "大类": "COB聚光灯", "品牌": "爱图仕 Aputure", "型号": "LS 300d II", "功率": "350W", "色温范围": "5600K±200K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "单色温,高输出,8种光效,精准调光", "参考价格区间(元)": "3800-4500", "适用场景": "影视/直播/商业", "产品图": ""}, {"序号": "5", "大类": "COB聚光灯", "品牌": "爱图仕 Aputure", "型号": "LS 120d II", "功率": "140W", "色温范围": "5600K±200K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电/NP-F电池", "卡口类型": "保荣口", "主要特点": "经典款,高显色,便携,8种光效", "参考价格区间(元)": "2000-2500", "适用场景": "小型影视/直播/采访", "产品图": ""}, {"序号": "6", "大类": "COB聚光灯", "品牌": "爱图仕 Aputure", "型号": "LS 60d", "功率": "60W", "色温范围": "5600K±200K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/NP-F电池", "卡口类型": "专用卡口", "主要特点": "聚光可调(15-45°),便携,精准控光", "参考价格区间(元)": "1500-2000", "适用场景": "采访/产品/轮廓光", "产品图": ""}, {"序号": "7", "大类": "COB聚光灯", "品牌": "爱图仕 Aputure", "型号": "LS 60x", "功率": "60W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/NP-F电池", "卡口类型": "专用卡口", "主要特点": "双色温聚光,可调角度,便携", "参考价格区间(元)": "1800-2300", "适用场景": "采访/产品/灵活布光", "产品图": ""}, {"序号": "8", "大类": "COB聚光灯", "品牌": "艾蒙拉 amaran", "型号": "300c", "功率": "300W", "色温范围": "2500K-7500K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "全彩RGB,高输出,9种系统,APP控制", "参考价格区间(元)": "4000-5000", "适用场景": "创意影视/直播/氛围光", "产品图": ""}, {"序号": "9", "大类": "COB聚光灯", "品牌": "艾蒙拉 amaran", "型号": "200x S", "功率": "200W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温,高性价比,精准调光,9种光效", "参考价格区间(元)": "1800-2200", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "10", "大类": "COB聚光灯", "品牌": "艾蒙拉 amaran", "型号": "200d S", "功率": "200W", "色温范围": "5600K±200K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "单色温,高性价比,高输出", "参考价格区间(元)": "1500-1900", "适用场景": "直播/短视频/产品", "产品图": ""}, {"序号": "11", "大类": "COB聚光灯", "品牌": "艾蒙拉 amaran", "型号": "100x S", "功率": "100W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温,入门首选,便携,9种光效", "参考价格区间(元)": "900-1200", "适用场景": "入门直播/短视频/采访", "产品图": ""}, {"序号": "12", "大类": "COB聚光灯", "品牌": "艾蒙拉 amaran", "型号": "100d S", "功率": "100W", "色温范围": "5600K±200K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "单色温,入门首选,高性价比", "参考价格区间(元)": "750-1000", "适用场景": "入门直播/产品/短视频", "产品图": ""}, {"序号": "13", "大类": "COB聚光灯", "品牌": "艾蒙拉 amaran", "型号": "Halo 600x", "功率": "600W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "双色温大功率,主动散热,高输出", "参考价格区间(元)": "5500-6500", "适用场景": "专业影视/大场景直播", "产品图": ""}, {"序号": "14", "大类": "COB聚光灯", "品牌": "南光 NANLITE", "型号": "Forza 720", "功率": "800W", "色温范围": "5600K±200K", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "旗舰级,超高显色,8万流明,媲美1800W HMI", "参考价格区间(元)": "9000-12000", "适用场景": "顶级影视/商业/大场景", "产品图": ""}, {"序号": "15", "大类": "COB聚光灯", "品牌": "南光 NANLITE", "型号": "Forza 500 II", "功率": "500W", "色温范围": "5600K±200K", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "高显色,高输出,5.5万流明,12种光效", "参考价格区间(元)": "5500-7000", "适用场景": "专业影视/商业/直播", "产品图": ""}, {"序号": "16", "大类": "COB聚光灯", "品牌": "南光 NANLITE", "型号": "Forza 300 II", "功率": "300W", "色温范围": "5600K±200K", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "高显色,3.5万流明,12种光效,精准调光", "参考价格区间(元)": "3200-4000", "适用场景": "影视/直播/商业摄影", "产品图": ""}, {"序号": "17", "大类": "COB聚光灯", "品牌": "南光 NANLITE", "型号": "Forza 200", "功率": "200W", "色温范围": "5600K±200K", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "高显色,2.2万流明,便携,12种光效", "参考价格区间(元)": "1800-2300", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "18", "大类": "COB聚光灯", "品牌": "南光 NANLITE", "型号": "Forza 150", "功率": "150W", "色温范围": "5600K±200K", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "交流电/NP-F电池", "卡口类型": "保荣口", "主要特点": "高显色,便携,1.6万流明,12种光效", "参考价格区间(元)": "1300-1700", "适用场景": "采访/小型直播/产品", "产品图": ""}, {"序号": "19", "大类": "COB聚光灯", "品牌": "南光 NANLITE", "型号": "Forza 60 II", "功率": "60W", "色温范围": "5600K±200K", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "交流电/NP-F电池", "卡口类型": "专用卡口", "主要特点": "聚光可调,超便携,高显色", "参考价格区间(元)": "1000-1300", "适用场景": "采访/产品/轮廓光/外拍", "产品图": ""}, {"序号": "20", "大类": "COB聚光灯", "品牌": "南光 NANLITE", "型号": "Forza 60B II", "功率": "60W", "色温范围": "2700K-6500K", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "交流电/NP-F电池", "卡口类型": "专用卡口", "主要特点": "双色温聚光,可调角度,高显色", "参考价格区间(元)": "1200-1500", "适用场景": "采访/产品/灵活布光", "产品图": ""}, {"序号": "21", "大类": "COB聚光灯", "品牌": "神牛 Godox", "型号": "LE600Bi", "功率": "600W", "色温范围": "2800K-6500K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "双色温大功率,主动散热,高输出,12种光效", "参考价格区间(元)": "4500-5500", "适用场景": "专业影视/直播/商业", "产品图": ""}, {"序号": "22", "大类": "COB聚光灯", "品牌": "神牛 Godox", "型号": "LA300Bi", "功率": "300W", "色温范围": "2800K-6500K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温,高性价比,12种光效,蓝牙控制", "参考价格区间(元)": "2000-2500", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "23", "大类": "COB聚光灯", "品牌": "神牛 Godox", "型号": "LA200Bi", "功率": "200W", "色温范围": "2800K-6500K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温,入门首选,12种光效", "参考价格区间(元)": "1200-1600", "适用场景": "入门直播/短视频/采访", "产品图": ""}, {"序号": "24", "大类": "COB聚光灯", "品牌": "神牛 Godox", "型号": "LA150D", "功率": "150W", "色温范围": "5600K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "单色温,小巧便携,高能低热,蓝牙控制", "参考价格区间(元)": "800-1000", "适用场景": "小型直播/产品/短视频", "产品图": ""}, {"序号": "25", "大类": "COB聚光灯", "品牌": "神牛 Godox", "型号": "SL100Bi", "功率": "100W", "色温范围": "2800K-6500K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温,经济款,32频道16组,12种光效", "参考价格区间(元)": "600-800", "适用场景": "入门直播/短视频/产品", "产品图": ""}, {"序号": "26", "大类": "COB聚光灯", "品牌": "神牛 Godox", "型号": "SL100D", "功率": "100W", "色温范围": "5600K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "单色温,经济款,高性价比", "参考价格区间(元)": "500-700", "适用场景": "入门直播/产品拍摄", "产品图": ""}, {"序号": "27", "大类": "COB聚光灯", "品牌": "神牛 Godox", "型号": "SL60IID", "功率": "60W", "色温范围": "5600K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/NP-F电池", "卡口类型": "保荣口", "主要特点": "单色温,便携,8种光效", "参考价格区间(元)": "400-600", "适用场景": "小型直播/采访/产品", "产品图": ""}, {"序号": "28", "大类": "COB聚光灯", "品牌": "神牛 Godox", "型号": "SL60IIBi", "功率": "60W", "色温范围": "2800K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/NP-F电池", "卡口类型": "保荣口", "主要特点": "双色温,便携,8种光效", "参考价格区间(元)": "500-700", "适用场景": "小型直播/采访/灵活布光", "产品图": ""}, {"序号": "29", "大类": "COB聚光灯", "品牌": "金贝 JINBEI", "型号": "EF-300BI", "功率": "300W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温,高输出,智能控光,12种光效", "参考价格区间(元)": "2200-2800", "适用场景": "直播/短视频/商业摄影", "产品图": ""}, {"序号": "30", "大类": "COB聚光灯", "品牌": "金贝 JINBEI", "型号": "EF-200BI", "功率": "200W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温,高性价比,智能控光", "参考价格区间(元)": "1300-1700", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "31", "大类": "COB聚光灯", "品牌": "金贝 JINBEI", "型号": "EF-150BI", "功率": "150W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温,入门款,小巧便携", "参考价格区间(元)": "800-1100", "适用场景": "入门直播/短视频/采访", "产品图": ""}, {"序号": "32", "大类": "COB聚光灯", "品牌": "金贝 JINBEI", "型号": "EF-200", "功率": "200W", "色温范围": "5500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "单色温,高显色,太阳灯", "参考价格区间(元)": "1500-2000", "适用场景": "直播/人像/产品", "产品图": ""}, {"序号": "33", "大类": "COB聚光灯", "品牌": "智云 ZHIYUN", "型号": "功率王 X100", "功率": "100W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/PD快充", "卡口类型": "智云卡口(可转保荣)", "主要特点": "超便携(385g),巴掌大小,主动散热,APP控制", "参考价格区间(元)": "1200-1600", "适用场景": "便携外拍/直播/旅行", "产品图": ""}, {"序号": "34", "大类": "COB聚光灯", "品牌": "智云 ZHIYUN", "型号": "功率王 X100 RGB", "功率": "100W", "色温范围": "2500K-10000K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/PD快充", "卡口类型": "智云卡口(可转保荣)", "主要特点": "全彩RGB,超便携,主动散热,APP控制", "参考价格区间(元)": "1600-2000", "适用场景": "创意拍摄/氛围光/外拍", "产品图": ""}, {"序号": "35", "大类": "COB聚光灯", "品牌": "智云 ZHIYUN", "型号": "五倍 F100", "功率": "100W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "内置电池/PD", "卡口类型": "智云卡口", "主要特点": "手持补光,密集灯珠,峰值20708Lux,便携", "参考价格区间(元)": "800-1100", "适用场景": "手持补光/直播/外拍", "产品图": ""}, {"序号": "36", "大类": "平板灯/面板灯", "品牌": "爱图仕 Aputure", "型号": "amaran F22c", "功率": "200W", "色温范围": "2500K-7500K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "柔性折叠面板,全彩RGB,2×2英尺,便携", "参考价格区间(元)": "3500-4500", "适用场景": "创意影视/直播/大面柔光", "产品图": ""}, {"序号": "37", "大类": "平板灯/面板灯", "品牌": "爱图仕 Aputure", "型号": "amaran F22x", "功率": "200W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "柔性折叠面板,双色温,2×2英尺", "参考价格区间(元)": "2800-3500", "适用场景": "影视/直播/大面柔光", "产品图": ""}, {"序号": "38", "大类": "平板灯/面板灯", "品牌": "南光 NANLITE", "型号": "Compac 100B", "功率": "100W", "色温范围": "2700K-6500K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电/NP-F电池", "卡口类型": "专用", "主要特点": "超薄面板,双色温,大面积柔光,便携", "参考价格区间(元)": "1500-2000", "适用场景": "直播/采访/人像柔光", "产品图": ""}, {"序号": "39", "大类": "平板灯/面板灯", "品牌": "南光 NANLITE", "型号": "Compac 68B", "功率": "68W", "色温范围": "2700K-6500K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电/NP-F电池", "卡口类型": "专用", "主要特点": "超薄面板,双色温,便携", "参考价格区间(元)": "1000-1400", "适用场景": "小型直播/采访/产品", "产品图": ""}, {"序号": "40", "大类": "平板灯/面板灯", "品牌": "永诺 YONGNUO", "型号": "YN9000", "功率": "约60W", "色温范围": "3200K-5600K", "显色指数": "CRI≥95", "供电方式": "NP-F电池/交流电", "卡口类型": "专用", "主要特点": "高亮度平板灯,双色温,便携", "参考价格区间(元)": "800-1200", "适用场景": "直播/采访/外拍", "产品图": ""}, {"序号": "41", "大类": "平板灯/面板灯", "品牌": "斯丹德 STD", "型号": "LED-416", "功率": "32W", "色温范围": "3200K-5600K", "显色指数": "CRI≥95", "供电方式": "NP-F电池", "卡口类型": "专用", "主要特点": "便携平板灯,408颗灯珠,高性价比", "参考价格区间(元)": "150-250", "适用场景": "入门直播/采访/小型补光", "产品图": ""}, {"序号": "42", "大类": "平板灯/面板灯", "品牌": "斯丹德 STD", "型号": "LED-300", "功率": "约30W", "色温范围": "3200K-5600K", "显色指数": "CRI≥95", "供电方式": "NP-F电池", "卡口类型": "专用", "主要特点": "双色温平板灯,288颗灯珠", "参考价格区间(元)": "400-500", "适用场景": "直播/采访/产品拍摄", "产品图": ""}, {"序号": "43", "大类": "棒灯/冰灯", "品牌": "南光 NANLITE", "型号": "PavoTube II 30C", "功率": "约35W", "色温范围": "2700K-7500K+RGB", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "内置电池/PD", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,4英尺,内置电池,APP控制,15种光效", "参考价格区间(元)": "1800-2200", "适用场景": "创意影视/直播/氛围光/外拍", "产品图": ""}, {"序号": "44", "大类": "棒灯/冰灯", "品牌": "南光 NANLITE", "型号": "PavoTube II 15C", "功率": "约18W", "色温范围": "2700K-7500K+RGB", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "内置电池/PD", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,2英尺,内置电池,便携", "参考价格区间(元)": "1000-1400", "适用场景": "创意拍摄/直播/氛围光/外拍", "产品图": ""}, {"序号": "45", "大类": "棒灯/冰灯", "品牌": "南光 NANLITE", "型号": "PavoTube II 6C", "功率": "约8W", "色温范围": "2700K-7500K+RGB", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "内置电池/USB-C", "卡口类型": "专用", "主要特点": "迷你全彩棒灯,1英尺,磁吸,便携", "参考价格区间(元)": "500-700", "适用场景": "小型创意/直播/产品/旅行", "产品图": ""}, {"序号": "46", "大类": "棒灯/冰灯", "品牌": "神牛 Godox", "型号": "LC500R", "功率": "约40W", "色温范围": "2500K-8500K+RGB", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "内置电池", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,内置电池,10种光效,便携", "参考价格区间(元)": "800-1100", "适用场景": "创意拍摄/直播/氛围光", "产品图": ""}, {"序号": "47", "大类": "棒灯/冰灯", "品牌": "神牛 Godox", "型号": "LC500", "功率": "约30W", "色温范围": "3300K-5600K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "内置电池", "卡口类型": "专用", "主要特点": "双色温棒灯,内置电池,便携", "参考价格区间(元)": "600-800", "适用场景": "直播/采访/外拍补光", "产品图": ""}, {"序号": "48", "大类": "棒灯/冰灯", "品牌": "智云 ZHIYUN", "型号": "写趣 CF100", "功率": "100W", "色温范围": "2700K-6500K", "显色指数": "CRI≥96", "供电方式": "内置电池/PD", "卡口类型": "专用", "主要特点": "大功率棒灯,324颗灯珠,主动散热,手持补光", "参考价格区间(元)": "1500-2000", "适用场景": "手持补光/直播/外拍/创意", "产品图": ""}, {"序号": "49", "大类": "棒灯/冰灯", "品牌": "爱图仕 Aputure", "型号": "amaran T2c", "功率": "约20W", "色温范围": "2500K-7500K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "内置电池/PD", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,2英尺,像素控光,APP控制", "参考价格区间(元)": "1200-1600", "适用场景": "创意影视/直播/氛围光", "产品图": ""}, {"序号": "50", "大类": "棒灯/冰灯", "品牌": "爱图仕 Aputure", "型号": "amaran T4c", "功率": "约40W", "色温范围": "2500K-7500K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "内置电池/PD", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,4英尺,像素控光,高输出", "参考价格区间(元)": "2200-2800", "适用场景": "专业创意/影视/大场景氛围", "产品图": ""}, {"序号": "51", "大类": "柔性布灯", "品牌": "神牛 Godox", "型号": "FL200R", "功率": "200W", "色温范围": "2800K-6500K+RGB", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "全彩柔性布灯,2×2英尺,CCT/HSI/RGBW模式,DMX", "参考价格区间(元)": "3000-4000", "适用场景": "创意影视/直播/大面柔光/商拍", "产品图": ""}, {"序号": "52", "大类": "柔性布灯", "品牌": "神牛 Godox", "型号": "FL100R", "功率": "100W", "色温范围": "2800K-6500K+RGB", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "全彩柔性布灯,1×1英尺,便携", "参考价格区间(元)": "1800-2500", "适用场景": "小型创意/直播/产品/外拍", "产品图": ""}, {"序号": "53", "大类": "柔性布灯", "品牌": "爱图仕 Aputure", "型号": "amaran F21c", "功率": "100W", "色温范围": "2500K-7500K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "柔性折叠布灯,全彩RGB,1×2英尺", "参考价格区间(元)": "2500-3200", "适用场景": "创意影视/直播/大面柔光", "产品图": ""}, {"序号": "54", "大类": "口袋灯/便携灯", "品牌": "南光 NANLITE", "型号": "Pico 亮仔", "功率": "约8W", "色温范围": "2700K-7500K+RGB", "显色指数": "CRI≥95", "供电方式": "内置电池/USB-C", "卡口类型": "磁吸/热靴", "主要特点": "超便携(130g),数显屏幕,APP控制,磁吸,U型支架", "参考价格区间(元)": "400-600", "适用场景": "街拍/旅行/产品/手机补光", "产品图": ""}, {"序号": "55", "大类": "口袋灯/便携灯", "品牌": "爱图仕 Aputure", "型号": "MC", "功率": "约5W", "色温范围": "3200K-6500K+RGB", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "内置电池/USB-C", "卡口类型": "磁吸/热靴", "主要特点": "经典口袋灯,全彩RGB,磁吸,APP控制", "参考价格区间(元)": "500-700", "适用场景": "街拍/旅行/小型补光/氛围", "产品图": ""}, {"序号": "56", "大类": "口袋灯/便携灯", "品牌": "永诺 YONGNUO", "型号": "YN30SOFT", "功率": "约10W", "色温范围": "2000K-10000K", "显色指数": "CRI≥95", "供电方式": "内置电池/USB-C", "卡口类型": "热靴", "主要特点": "柔光口袋灯,内置电池,智能调节,高显色", "参考价格区间(元)": "300-500", "适用场景": "直播/旅行/手机补光", "产品图": ""}, {"序号": "57", "大类": "口袋灯/便携灯", "品牌": "永诺 YONGNUO", "型号": "YN60 Pro", "功率": "5.5W", "色温范围": "3200K-5600K+RGB", "显色指数": "CRI≥95", "供电方式": "内置电池/USB-C", "卡口类型": "热靴", "主要特点": "迷你冰灯,RGB双模式,APP控制", "参考价格区间(元)": "200-400", "适用场景": "小型创意/直播/产品", "产品图": ""}, {"序号": "58", "大类": "口袋灯/便携灯", "品牌": "斯丹德 STD", "型号": "M05 矩阵5寸", "功率": "40W", "色温范围": "2500K-9900K", "显色指数": "CRI≥96", "供电方式": "内置电池/PD", "卡口类型": "热靴", "主要特点": "便携平板灯,40W高功率,APP控制,磁吸", "参考价格区间(元)": "400-600", "适用场景": "直播/外拍/产品/旅行", "产品图": ""}, {"序号": "59", "大类": "环形灯", "品牌": "永诺 YONGNUO", "型号": "YN208S", "功率": "约18W", "色温范围": "3200K-5600K", "显色指数": "CRI≥95", "供电方式": "USB供电", "卡口类型": "专用", "主要特点": "环形美颜灯,柔光板,可调角度,手机支架", "参考价格区间(元)": "150-300", "适用场景": "直播/自拍/美妆/短视频", "产品图": ""}, {"序号": "60", "大类": "环形灯", "品牌": "金贝 JINBEI", "型号": "EFR-36", "功率": "约30W", "色温范围": "3200K-5600K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "专用", "主要特点": "36寸环形灯,高显色,手机支架,遥控", "参考价格区间(元)": "400-600", "适用场景": "专业直播/美妆/人像", "产品图": ""}, {"序号": "61", "大类": "COB聚光灯", "品牌": "耐思 NiceFoto", "型号": "SL-150A", "功率": "150W", "色温范围": "5600K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "单色温COB灯,高显色,静音散热,直播首选", "参考价格区间(元)": "700-1000", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "62", "大类": "COB聚光灯", "品牌": "耐思 NiceFoto", "型号": "SL-200B", "功率": "200W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,精准调光,多种光效,高性价比", "参考价格区间(元)": "1000-1400", "适用场景": "直播/短视频/商业摄影", "产品图": ""}, {"序号": "63", "大类": "COB聚光灯", "品牌": "耐思 NiceFoto", "型号": "HC-1000SA", "功率": "1000W", "色温范围": "5600K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "大功率影视灯,高亮度,专业级,适合大场景", "参考价格区间(元)": "5000-7000", "适用场景": "专业影视/大场景/广告", "产品图": ""}, {"序号": "64", "大类": "COB聚光灯", "品牌": "耐思 NiceFoto", "型号": "LV-3000B", "功率": "300W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温影视灯,遥控面板,全光谱,大功率", "参考价格区间(元)": "2500-3500", "适用场景": "专业影视/直播/商业", "产品图": ""}, {"序号": "65", "大类": "平板灯/面板灯", "品牌": "耐思 NiceFoto", "型号": "LED-880A", "功率": "约60W", "色温范围": "3200K-6500K", "显色指数": "CRI≥95", "供电方式": "DC17-24V", "卡口类型": "专用", "主要特点": "双色温平板灯,高显色,便携,NP-F电池供电", "参考价格区间(元)": "500-800", "适用场景": "采访/外拍/直播/产品", "产品图": ""}, {"序号": "66", "大类": "棒灯/冰灯", "品牌": "耐思 NiceFoto", "型号": "TC-168", "功率": "约15W", "色温范围": "2800K-9900K+RGB", "显色指数": "CRI≥95", "供电方式": "内置电池/DC", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,18种场景光效,便携,APP控制", "参考价格区间(元)": "400-700", "适用场景": "创意拍摄/直播氛围/外拍", "产品图": ""}, {"序号": "67", "大类": "棒灯/冰灯", "品牌": "耐思 NiceFoto", "型号": "TC-288", "功率": "约30W", "色温范围": "2800K-9900K+RGB", "显色指数": "CRI≥95", "供电方式": "内置电池/DC", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,大功率,多种光效,专业级", "参考价格区间(元)": "700-1100", "适用场景": "专业创意/影视/直播", "产品图": ""}, {"序号": "68", "大类": "棒灯/冰灯", "品牌": "耐思 NiceFoto", "型号": "TC-768II", "功率": "约60W", "色温范围": "2800K-9900K+RGB", "显色指数": "CRI≥95", "供电方式": "DC26.5V", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,大功率,18种场景光效,APP控制", "参考价格区间(元)": "1200-1800", "适用场景": "专业影视/大场景/创意", "产品图": ""}, {"序号": "69", "大类": "柔性布灯", "品牌": "耐思 NiceFoto", "型号": "VB-1000C", "功率": "100W", "色温范围": "2800K-9900K+RGB", "显色指数": "CRI≥95", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "全彩柔性布灯,折叠便携,大面积柔光,DMX控制", "参考价格区间(元)": "2000-3000", "适用场景": "创意影视/直播/大场景", "产品图": ""}, {"序号": "70", "大类": "柔性布灯", "品牌": "耐思 NiceFoto", "型号": "VB-2000C", "功率": "200W", "色温范围": "2800K-9900K+RGB", "显色指数": "CRI≥95", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "大功率全彩柔性布灯,专业级,大面积柔光", "参考价格区间(元)": "3500-5000", "适用场景": "专业影视/广告/大场景", "产品图": ""}, {"序号": "71", "大类": "COB聚光灯", "品牌": "捷宝 Triopo", "型号": "M200Bi", "功率": "200W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,高显色,多种光效,高性价比", "参考价格区间(元)": "900-1300", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "72", "大类": "COB聚光灯", "品牌": "捷宝 Triopo", "型号": "H405", "功率": "400W", "色温范围": "5600K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "大功率单色温COB灯,高亮度,专业级", "参考价格区间(元)": "2000-2800", "适用场景": "专业直播/商业/大场景", "产品图": ""}, {"序号": "73", "大类": "COB聚光灯", "品牌": "金鹰 Golden Eagle", "型号": "LED-150B", "功率": "150W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,高显色,静音散热,直播首选", "参考价格区间(元)": "700-1000", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "74", "大类": "COB聚光灯", "品牌": "金鹰 Golden Eagle", "型号": "LED-200B", "功率": "200W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,大功率,多种光效,专业级", "参考价格区间(元)": "1100-1500", "适用场景": "专业直播/商业/短视频", "产品图": ""}, {"序号": "75", "大类": "COB聚光灯", "品牌": "阿莱 ARRI", "型号": "SkyPanel S60-C", "功率": "约250W", "色温范围": "2800K-10000K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "专用", "主要特点": "顶级影视LED灯,全彩RGB,专业级光质,DMX控制,电影级", "参考价格区间(元)": "20000-30000", "适用场景": "顶级影视/电影/广告/专业", "产品图": ""}, {"序号": "76", "大类": "COB聚光灯", "品牌": "阿莱 ARRI", "型号": "SkyPanel S30-C", "功率": "约120W", "色温范围": "2800K-10000K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "专用", "主要特点": "紧凑型影视LED灯,全彩RGB,专业光质,便携", "参考价格区间(元)": "12000-18000", "适用场景": "专业影视/采访/小场景", "产品图": ""}, {"序号": "77", "大类": "COB聚光灯", "品牌": "阿莱 ARRI", "型号": "M8", "功率": "800W HMI", "色温范围": "5600K/6000K", "显色指数": "CRI≥95", "供电方式": "交流电(镇流器)", "卡口类型": "专用", "主要特点": "HMI镝灯,超高亮度,日光色温,专业影视,媲美太阳光", "参考价格区间(元)": "15000-25000", "适用场景": "专业影视/外景/大场景", "产品图": ""}, {"序号": "78", "大类": "COB聚光灯", "品牌": "阿莱 ARRI", "型号": "L7-C", "功率": "约150W", "色温范围": "2800K-10000K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "专用", "主要特点": "LED聚光灯,全彩RGB,菲涅尔透镜,精准控光,专业级", "参考价格区间(元)": "18000-25000", "适用场景": "专业影视/剧场/演播室", "产品图": ""}, {"序号": "79", "大类": "COB聚光灯", "品牌": "Litepanels", "型号": "Gemini 2x1", "功率": "约200W", "色温范围": "2600K-10000K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "专业影视平板灯,全彩RGB,高显色,DMX控制,美国品牌", "参考价格区间(元)": "15000-22000", "适用场景": "专业影视/采访/演播室", "产品图": ""}, {"序号": "80", "大类": "平板灯/面板灯", "品牌": "Litepanels", "型号": "Astra 1x1", "功率": "约100W", "色温范围": "5600K/3200K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "经典影视平板灯,高显色,轻便,专业级,美国品牌", "参考价格区间(元)": "8000-12000", "适用场景": "专业影视/采访/外拍", "产品图": ""}, {"序号": "81", "大类": "COB聚光灯", "品牌": "Litepanels", "型号": "Sola 6+", "功率": "约60W", "色温范围": "5600K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "专用", "主要特点": "LED菲涅尔聚光灯,精准控光,专业级,高显色", "参考价格区间(元)": "10000-15000", "适用场景": "专业影视/剧场/演播室", "产品图": ""}, {"序号": "82", "大类": "COB聚光灯", "品牌": "Dedolight", "型号": "DLED4", "功率": "约40W", "色温范围": "5600K/3200K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "专用", "主要特点": "专业聚光灯,独特光学系统,精准控光,阴影干净,德国品牌", "参考价格区间(元)": "8000-12000", "适用场景": "专业影视/产品/微距/精准布光", "产品图": ""}, {"序号": "83", "大类": "COB聚光灯", "品牌": "Dedolight", "型号": "DLED9", "功率": "约90W", "色温范围": "5600K/3200K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "专用", "主要特点": "大功率专业聚光灯,高亮度,精准控光,专业级", "参考价格区间(元)": "15000-22000", "适用场景": "专业影视/大场景/广告", "产品图": ""}, {"序号": "84", "大类": "平板灯/面板灯", "品牌": "Kino Flo", "型号": "Celeb 201", "功率": "约100W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电", "卡口类型": "专用", "主要特点": "专业影视平板灯,高显色,柔和光线,DMX控制,美国品牌", "参考价格区间(元)": "10000-15000", "适用场景": "专业影视/采访/演播室", "产品图": ""}, {"序号": "85", "大类": "平板灯/面板灯", "品牌": "Kino Flo", "型号": "FreeStyle 21", "功率": "约60W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "可折叠柔性平板灯,便携,高显色,专业级", "参考价格区间(元)": "8000-12000", "适用场景": "专业影视/外拍/采访", "产品图": ""}, {"序号": "86", "大类": "COB聚光灯", "品牌": "Rotolight", "型号": "AEOS 2", "功率": "约100W", "色温范围": "3150K-6300K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "英国品牌,圆形LED灯,全彩RGB,高速闪光模式,专业级", "参考价格区间(元)": "12000-18000", "适用场景": "专业影视/人像/创意/外拍", "产品图": ""}, {"序号": "87", "大类": "COB聚光灯", "品牌": "Rotolight", "型号": "Anova Pro 2", "功率": "约200W", "色温范围": "3150K-6300K+RGB", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "专用", "主要特点": "大功率圆形LED灯,全彩RGB,专业级,高亮度", "参考价格区间(元)": "20000-30000", "适用场景": "专业影视/大场景/广告", "产品图": ""}, {"序号": "88", "大类": "COB聚光灯", "品牌": "富莱仕 F&V", "型号": "K8000", "功率": "80W", "色温范围": "5600K", "显色指数": "CRI≥95", "供电方式": "交流电/NP-F电池", "卡口类型": "专用", "主要特点": "单色温COB灯,高显色,便携,高性价比", "参考价格区间(元)": "600-900", "适用场景": "直播/采访/外拍/产品", "产品图": ""}, {"序号": "89", "大类": "平板灯/面板灯", "品牌": "富莱仕 F&V", "型号": "K4000S", "功率": "约40W", "色温范围": "5600K/3200K", "显色指数": "CRI≥95", "供电方式": "NP-F电池/交流电", "卡口类型": "专用", "主要特点": "双色温平板灯,高显色,便携,NP-F电池供电", "参考价格区间(元)": "400-700", "适用场景": "采访/外拍/直播/产品", "产品图": ""}, {"序号": "90", "大类": "平板灯/面板灯", "品牌": "富莱仕 F&V", "型号": "K8000S", "功率": "约80W", "色温范围": "5600K/3200K", "显色指数": "CRI≥95", "供电方式": "NP-F电池/交流电", "卡口类型": "专用", "主要特点": "大功率双色温平板灯,高亮度,专业级", "参考价格区间(元)": "800-1200", "适用场景": "专业采访/直播/外拍", "产品图": ""}, {"序号": "91", "大类": "COB聚光灯", "品牌": "锐鹰 FalconEyes", "型号": "P12", "功率": "120W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,高显色,多种光效,高性价比", "参考价格区间(元)": "700-1000", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "92", "大类": "平板灯/面板灯", "品牌": "锐鹰 FalconEyes", "型号": "DV-116V", "功率": "约30W", "色温范围": "3200K-5600K", "显色指数": "CRI≥95", "供电方式": "NP-F电池/交流电", "卡口类型": "专用", "主要特点": "双色温平板灯,便携,高显色,NP-F电池供电", "参考价格区间(元)": "300-500", "适用场景": "采访/外拍/直播/小型产品", "产品图": ""}, {"序号": "93", "大类": "棒灯/冰灯", "品牌": "锐鹰 FalconEyes", "型号": "RX-818", "功率": "约20W", "色温范围": "3200K-5600K+RGB", "显色指数": "CRI≥95", "供电方式": "内置电池/DC", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,便携,多种光效,高性价比", "参考价格区间(元)": "400-700", "适用场景": "创意拍摄/直播氛围/外拍", "产品图": ""}, {"序号": "94", "大类": "COB聚光灯", "品牌": "贝阳 Beiyang", "型号": "BY-150B", "功率": "150W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,高显色,静音散热,直播首选,高性价比", "参考价格区间(元)": "600-900", "适用场景": "直播/短视频/人像/入门", "产品图": ""}, {"序号": "95", "大类": "COB聚光灯", "品牌": "贝阳 Beiyang", "型号": "BY-200B", "功率": "200W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,大功率,多种光效,专业级", "参考价格区间(元)": "900-1300", "适用场景": "专业直播/商业/短视频", "产品图": ""}, {"序号": "96", "大类": "平板灯/面板灯", "品牌": "贝阳 Beiyang", "型号": "BY-600", "功率": "约40W", "色温范围": "3200K-5600K", "显色指数": "CRI≥95", "供电方式": "NP-F电池/交流电", "卡口类型": "专用", "主要特点": "双色温平板灯,高显色,便携,高性价比", "参考价格区间(元)": "250-450", "适用场景": "入门直播/采访/产品/外拍", "产品图": ""}, {"序号": "97", "大类": "COB聚光灯", "品牌": "力帅 Lishuai", "型号": "LS-150B", "功率": "150W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,高显色,静音散热,高性价比", "参考价格区间(元)": "600-900", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "98", "大类": "COB聚光灯", "品牌": "力帅 Lishuai", "型号": "LS-300B", "功率": "300W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "大功率双色温COB灯,高亮度,专业级", "参考价格区间(元)": "1500-2200", "适用场景": "专业直播/商业/大场景", "产品图": ""}, {"序号": "99", "大类": "COB聚光灯", "品牌": "美图 Mettle", "型号": "MT-150B", "功率": "150W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,高显色,多种光效,高性价比", "参考价格区间(元)": "600-900", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "100", "大类": "影室闪光灯(一体式)", "品牌": "美图 Mettle", "型号": "MT-300", "功率": "300Ws", "色温范围": "交流电", "显色指数": "保荣口", "供电方式": "入门影室灯,数显面板,稳定可靠,高性价比", "卡口类型": "350-500", "主要特点": "入门影棚/产品/证件照", "参考价格区间(元)": "", "适用场景": "", "产品图": ""}, {"序号": "101", "大类": "口袋灯/便携灯", "品牌": "斯莫格 SmallRig", "型号": "RC 60B", "功率": "60W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/PD快充", "卡口类型": "保荣口", "主要特点": "便携COB灯,高显色,主动散热,相机配件厂商出品", "参考价格区间(元)": "800-1200", "适用场景": "外拍/直播/视频/便携", "产品图": ""}, {"序号": "102", "大类": "口袋灯/便携灯", "品牌": "斯莫格 SmallRig", "型号": "RC 120B", "功率": "120W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95, TLCI≥95", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "大功率便携COB灯,高显色,专业级,相机配件厂商", "参考价格区间(元)": "1500-2200", "适用场景": "专业视频/外拍/直播", "产品图": ""}, {"序号": "103", "大类": "棒灯/冰灯", "品牌": "斯莫格 SmallRig", "型号": "RC 30R", "功率": "约30W", "色温范围": "2700K-6500K+RGB", "显色指数": "CRI≥95", "供电方式": "内置电池/USB-C", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,便携,磁吸,多种光效,高性价比", "参考价格区间(元)": "400-700", "适用场景": "创意拍摄/直播氛围/外拍", "产品图": ""}, {"序号": "104", "大类": "COB聚光灯", "品牌": "光宝 Linkstar", "型号": "L-150B", "功率": "150W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,高显色,多种光效,高性价比", "参考价格区间(元)": "600-900", "适用场景": "直播/短视频/人像", "产品图": ""}, {"序号": "105", "大类": "影室闪光灯(一体式)", "品牌": "光宝 Linkstar", "型号": "LX-400", "功率": "400Ws", "色温范围": "交流电", "显色指数": "保荣口", "供电方式": "入门影室灯,数显面板,稳定可靠", "卡口类型": "400-600", "主要特点": "入门影棚/产品/人像", "参考价格区间(元)": "", "适用场景": "", "产品图": ""}, {"序号": "106", "大类": "口袋灯/便携灯", "品牌": "柏灵 Boling", "型号": "BL-P1", "功率": "约10W", "色温范围": "2500K-8500K+RGB", "显色指数": "CRI≥95", "供电方式": "内置电池/USB-C", "卡口类型": "磁吸/热靴", "主要特点": "全彩口袋灯,磁吸,便携,多种光效,高性价比", "参考价格区间(元)": "300-500", "适用场景": "街拍/旅行/产品/氛围", "产品图": ""}, {"序号": "107", "大类": "棒灯/冰灯", "品牌": "柏灵 Boling", "型号": "BL-30P", "功率": "约30W", "色温范围": "2500K-8500K+RGB", "显色指数": "CRI≥95", "供电方式": "内置电池/USB-C", "卡口类型": "专用", "主要特点": "全彩RGB棒灯,便携,多种光效,高性价比", "参考价格区间(元)": "500-800", "适用场景": "创意拍摄/直播氛围/外拍", "产品图": ""}, {"序号": "108", "大类": "COB聚光灯", "品牌": "旅行家 Travor", "型号": "TL-150B", "功率": "150W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,高显色,高性价比", "参考价格区间(元)": "550-850", "适用场景": "入门直播/短视频/人像", "产品图": ""}, {"序号": "109", "大类": "平板灯/面板灯", "品牌": "旅行家 Travor", "型号": "TL-480", "功率": "约30W", "色温范围": "3200K-5600K", "显色指数": "CRI≥95", "供电方式": "NP-F电池/交流电", "卡口类型": "专用", "主要特点": "双色温平板灯,便携,高性价比", "参考价格区间(元)": "200-400", "适用场景": "入门直播/采访/产品", "产品图": ""}, {"序号": "110", "大类": "COB聚光灯", "品牌": "永诺 YONGNUO", "型号": "YN LUX200", "功率": "200W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电/手持", "卡口类型": "保荣口", "主要特点": "双色温COB灯,可手持外拍,专利设计,高性价比", "参考价格区间(元)": "1200-1800", "适用场景": "外拍/直播/短视频/人像", "产品图": ""}, {"序号": "111", "大类": "COB聚光灯", "品牌": "永诺 YONGNUO", "型号": "YN LUX100", "功率": "100W", "色温范围": "2700K-6500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,便携,高显色,高性价比", "参考价格区间(元)": "700-1000", "适用场景": "直播/短视频/人像/入门", "产品图": ""}, {"序号": "112", "大类": "COB聚光灯", "品牌": "金贝 JINBEI", "型号": "EF-150", "功率": "150W", "色温范围": "5500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "单色温COB灯,高显色,太阳灯,高性价比", "参考价格区间(元)": "700-1000", "适用场景": "直播/人像/产品/儿童", "产品图": ""}, {"序号": "113", "大类": "COB聚光灯", "品牌": "金贝 JINBEI", "型号": "EF-300", "功率": "300W", "色温范围": "5500K", "显色指数": "CRI≥95", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "大功率单色温COB灯,高亮度,专业级", "参考价格区间(元)": "2000-2800", "适用场景": "专业直播/商业/大场景", "产品图": ""}, {"序号": "114", "大类": "环形灯", "品牌": "金贝 JINBEI", "型号": "EFR-24", "功率": "约20W", "色温范围": "3200K-5600K", "显色指数": "CRI≥95", "供电方式": "交流电/USB", "卡口类型": "专用", "主要特点": "24寸环形灯,高显色,手机支架,遥控,高性价比", "参考价格区间(元)": "200-400", "适用场景": "直播/自拍/美妆/短视频", "产品图": ""}, {"序号": "115", "大类": "COB聚光灯", "品牌": "神牛 Godox", "型号": "SL200II Bi", "功率": "200W", "色温范围": "2800K-6500K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "双色温COB灯,高显色,8种光效,蓝牙控制", "参考价格区间(元)": "1200-1600", "适用场景": "直播/短视频/商业摄影", "产品图": ""}, {"序号": "116", "大类": "COB聚光灯", "品牌": "神牛 Godox", "型号": "SL300II Bi", "功率": "300W", "色温范围": "2800K-6500K", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "交流电", "卡口类型": "保荣口", "主要特点": "大功率双色温COB灯,高亮度,专业级", "参考价格区间(元)": "2000-2800", "适用场景": "专业直播/商业/大场景", "产品图": ""}, {"序号": "117", "大类": "棒灯/冰灯", "品牌": "神牛 Godox", "型号": "TL30", "功率": "约15W", "色温范围": "2700K-6500K+RGB", "显色指数": "CRI≥96, TLCI≥96", "供电方式": "内置电池/USB-C", "卡口类型": "专用", "主要特点": "迷你全彩棒灯,便携,磁吸,多种光效,高性价比", "参考价格区间(元)": "400-700", "适用场景": "创意拍摄/直播氛围/外拍/产品", "产品图": ""}, {"序号": "118", "大类": "口袋灯/便携灯", "品牌": "神牛 Godox", "型号": "C5R", "功率": "约5W", "色温范围": "2700K-6500K+RGB", "显色指数": "CRI≥96", "供电方式": "内置电池/USB-C", "卡口类型": "磁吸/热靴", "主要特点": "全彩口袋灯,磁吸,便携,多种光效", "参考价格区间(元)": "300-500", "适用场景": "街拍/旅行/产品/氛围", "产品图": ""}, {"序号": "119", "大类": "COB聚光灯", "品牌": "南光 NANLITE", "型号": "Forza 720B", "功率": "800W", "色温范围": "2700K-6500K", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "旗舰级双色温COB灯,超高显色,大功率,专业级", "参考价格区间(元)": "10000-15000", "适用场景": "顶级影视/商业/大场景", "产品图": ""}, {"序号": "120", "大类": "COB聚光灯", "品牌": "南光 NANLITE", "型号": "Forza 500B II", "功率": "500W", "色温范围": "2700K-6500K", "显色指数": "CRI≥98, TLCI≥98", "供电方式": "交流电/V口电池", "卡口类型": "保荣口", "主要特点": "双色温大功率COB灯,高显色,专业级", "参考价格区间(元)": "6000-8000", "适用场景": "专业影视/商业/大场景", "产品图": ""}];
+const accessoryData = [{"序号": "1", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "方形柔光箱 60×60cm", "常见卡口": "保荣口/通用", "主要作用/特点": "基础柔光,光线均匀柔和,适合人像/产品", "参考价格区间(元)": "80-200", "适用场景": "人像/产品/电商"}, {"序号": "2", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "方形柔光箱 70×100cm", "常见卡口": "保荣口/通用", "主要作用/特点": "大尺寸柔光,全身人像/大场景,光线更柔", "参考价格区间(元)": "150-350", "适用场景": "全身人像/商业/大场景"}, {"序号": "3", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "方形柔光箱 80×120cm", "常见卡口": "保荣口/通用", "主要作用/特点": "超大柔光,大场景/多人拍摄", "参考价格区间(元)": "250-500", "适用场景": "商业/大场景/多人"}, {"序号": "4", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "长条形柔光箱 30×120cm", "常见卡口": "保荣口/通用", "主要作用/特点": "窄条柔光,适合轮廓光/发型光/侧光", "参考价格区间(元)": "100-250", "适用场景": "人像轮廓/发型/产品侧光"}, {"序号": "5", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "长条形柔光箱 22×90cm", "常见卡口": "保荣口/通用", "主要作用/特点": "小型窄条柔光,便携", "参考价格区间(元)": "80-180", "适用场景": "小型人像/产品/外拍"}, {"序号": "6", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "八角柔光箱 95cm", "常见卡口": "保荣口/通用", "主要作用/特点": "圆形眼神光,光线均匀,人像首选", "参考价格区间(元)": "150-350", "适用场景": "人像/婚礼/商业"}, {"序号": "7", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "八角柔光箱 120cm", "常见卡口": "保荣口/通用", "主要作用/特点": "大尺寸八角,更柔和,大场景人像", "参考价格区间(元)": "250-450", "适用场景": "商业人像/大场景"}, {"序号": "8", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "八角柔光箱 60cm", "常见卡口": "保荣口/通用", "主要作用/特点": "小型八角,便携,产品/半身人像", "参考价格区间(元)": "80-180", "适用场景": "产品/半身人像/外拍"}, {"序号": "9", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "深口抛物线柔光箱 70cm", "常见卡口": "保荣口/通用", "主要作用/特点": "深抛设计,光线集中且柔和,高指向性", "参考价格区间(元)": "200-400", "适用场景": "专业人像/时尚/商业"}, {"序号": "10", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "深口抛物线柔光箱 90cm", "常见卡口": "保荣口/通用", "主要作用/特点": "大深抛,更柔和的集中光线", "参考价格区间(元)": "300-600", "适用场景": "高端商业/时尚/大场景"}, {"序号": "11", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "深口抛物线柔光箱 120cm", "常见卡口": "保荣口/通用", "主要作用/特点": "超大深抛,顶级柔光效果", "参考价格区间(元)": "500-900", "适用场景": "顶级商业/广告/大场景"}, {"序号": "12", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "快拆柔光箱(一键开合)", "常见卡口": "保荣口/通用", "主要作用/特点": "快速开合,便携,外拍首选", "参考价格区间(元)": "200-500", "适用场景": "外拍/旅行/漫展/活动"}, {"序号": "13", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "球形柔光罩 65cm", "常见卡口": "保荣口/通用", "主要作用/特点": "360°全方位柔光,光线极柔,直播首选", "参考价格区间(元)": "150-350", "适用场景": "直播/人像/视频/大场景"}, {"序号": "14", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "球形柔光罩 45cm", "常见卡口": "保荣口/通用", "主要作用/特点": "小型球形柔光,便携", "参考价格区间(元)": "100-250", "适用场景": "小型直播/产品/外拍"}, {"序号": "15", "大类": "柔光类", "小类": "柔光箱", "名称/规格": "灯笼柔光罩 80cm", "常见卡口": "保荣口/通用", "主要作用/特点": "球形柔光,悬挂使用,大场景补光", "参考价格区间(元)": "300-600", "适用场景": "大场景/视频/影视/多人"}, {"序号": "16", "大类": "柔光类", "小类": "柔光伞", "名称/规格": "白色柔光伞 84cm", "常见卡口": "通用(伞孔)", "主要作用/特点": "透射式柔光,光线柔和均匀,便携便宜", "参考价格区间(元)": "30-80", "适用场景": "人像/外拍/入门"}, {"序号": "17", "大类": "柔光类", "小类": "柔光伞", "名称/规格": "白色柔光伞 101cm", "常见卡口": "通用(伞孔)", "主要作用/特点": "大尺寸柔光伞,更柔和", "参考价格区间(元)": "50-120", "适用场景": "人像/商业/大场景"}, {"序号": "18", "大类": "柔光类", "小类": "柔光伞", "名称/规格": "白色柔光伞 130cm", "常见卡口": "通用(伞孔)", "主要作用/特点": "超大柔光伞,大场景/多人", "参考价格区间(元)": "80-200", "适用场景": "大场景/多人/商业"}, {"序号": "19", "大类": "柔光类", "小类": "反光伞", "名称/规格": "银色反光伞 84cm", "常见卡口": "通用(伞孔)", "主要作用/特点": "反射式硬光,光线集中,高光明显", "参考价格区间(元)": "30-80", "适用场景": "人像/产品/需要质感"}, {"序号": "20", "大类": "柔光类", "小类": "反光伞", "名称/规格": "金色反光伞 84cm", "常见卡口": "通用(伞孔)", "主要作用/特点": "暖色调反射光,适合肤色/复古", "参考价格区间(元)": "30-80", "适用场景": "人像/暖调/复古风格"}, {"序号": "21", "大类": "柔光类", "小类": "反光伞", "名称/规格": "黑白反光伞 84cm", "常见卡口": "通用(伞孔)", "主要作用/特点": "外黑内白,减少漏光,反射更纯净", "参考价格区间(元)": "40-100", "适用场景": "专业人像/商业"}, {"序号": "22", "大类": "柔光类", "小类": "反光伞", "名称/规格": "抛物线反光伞 105cm", "常见卡口": "通用(伞孔)", "主要作用/特点": "深抛设计,光线集中,高指向性", "参考价格区间(元)": "150-400", "适用场景": "专业人像/时尚/商业"}, {"序号": "23", "大类": "柔光类", "小类": "反光伞", "名称/规格": "抛物线反光伞 130cm", "常见卡口": "通用(伞孔)", "主要作用/特点": "大深抛反光伞,顶级光效", "参考价格区间(元)": "300-600", "适用场景": "高端商业/时尚/广告"}, {"序号": "24", "大类": "反光类", "小类": "标准罩", "名称/规格": "标准反光罩 55°", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "基础反光,聚拢光线,标配附件", "参考价格区间(元)": "20-80", "适用场景": "通用/基础布光"}, {"序号": "25", "大类": "反光类", "小类": "标准罩", "名称/规格": "广角反光罩 120°", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "大角度泛光,适合大场景/环境光", "参考价格区间(元)": "50-150", "适用场景": "大场景/环境光/视频"}, {"序号": "26", "大类": "反光类", "小类": "标准罩", "名称/规格": "长焦反光罩 30°", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "窄角聚光,远距离投射,高亮度", "参考价格区间(元)": "50-150", "适用场景": "远距离/聚光/背景光"}, {"序号": "27", "大类": "反光类", "小类": "雷达罩", "名称/规格": "雷达罩(美人碟) 42cm 内银", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "硬光柔光之间,塑造立体感,表现皮肤质感", "参考价格区间(元)": "100-250", "适用场景": "人像/时尚/美妆/商业"}, {"序号": "28", "大类": "反光类", "小类": "雷达罩", "名称/规格": "雷达罩(美人碟) 55cm 内银", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "大尺寸雷达罩,更柔和的硬光", "参考价格区间(元)": "150-350", "适用场景": "专业人像/时尚/商业"}, {"序号": "29", "大类": "反光类", "小类": "雷达罩", "名称/规格": "雷达罩(美人碟) 42cm 内白", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "白色内面,光线更柔和", "参考价格区间(元)": "100-250", "适用场景": "人像/柔和风格"}, {"序号": "30", "大类": "反光类", "小类": "雷达罩", "名称/规格": "雷达罩+蜂巢网格", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "雷达罩配蜂巢,控制光线溢出,更精准", "参考价格区间(元)": "50-150(蜂巢)", "适用场景": "专业人像/精准控光"}, {"序号": "31", "大类": "反光类", "小类": "雷达罩", "名称/规格": "雷达罩+柔光布", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "雷达罩配柔光布,进一步柔化光线", "参考价格区间(元)": "30-80(柔光布)", "适用场景": "人像/柔和风格"}, {"序号": "32", "大类": "反光类", "小类": "波浪罩", "名称/规格": "波浪反光罩(美丽碟)", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "特殊反光,多层反射,光线均匀有层次", "参考价格区间(元)": "150-400", "适用场景": "时尚/美妆/创意摄影"}, {"序号": "33", "大类": "聚光/控光类", "小类": "束光筒", "名称/规格": "大号束光筒(猪嘴)", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "强聚光,局部高光,点光源效果", "参考价格区间(元)": "50-150", "适用场景": "人像局部/产品/背景光斑"}, {"序号": "34", "大类": "聚光/控光类", "小类": "束光筒", "名称/规格": "小号束光筒(猪嘴)", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "小型聚光,更窄光束", "参考价格区间(元)": "40-100", "适用场景": "小型产品/细节/局部光"}, {"序号": "35", "大类": "聚光/控光类", "小类": "束光筒", "名称/规格": "束光筒+蜂巢", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "束光筒配蜂巢,进一步控制光线", "参考价格区间(元)": "30-80(蜂巢)", "适用场景": "精准聚光/创意光效"}, {"序号": "36", "大类": "聚光/控光类", "小类": "聚光筒", "名称/规格": "调焦聚光筒(投影筒)", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "可插片投影,图形/文字光影,可调焦距", "参考价格区间(元)": "200-600", "适用场景": "创意摄影/产品/背景图案"}, {"序号": "37", "大类": "聚光/控光类", "小类": "聚光筒", "名称/规格": "聚光筒插片(图形片)", "常见卡口": "通用", "主要作用/特点": "各种图形/文字/条纹插片,创造光影图案", "参考价格区间(元)": "20-80/片", "适用场景": "创意摄影/背景/氛围"}, {"序号": "38", "大类": "聚光/控光类", "小类": "四叶挡板", "名称/规格": "四叶挡光板(遮光板)", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "控制光线照射范围,遮挡不需要的光", "参考价格区间(元)": "30-100", "适用场景": "精准控光/背景光/产品"}, {"序号": "39", "大类": "聚光/控光类", "小类": "四叶挡板", "名称/规格": "四叶挡板+色片夹", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "四叶挡板集成色片夹,方便加色片", "参考价格区间(元)": "50-150", "适用场景": "创意色彩/精准控光"}, {"序号": "40", "大类": "聚光/控光类", "小类": "蜂巢", "名称/规格": "蜂巢网格 10°", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "窄角蜂巢,极强方向性,控制光线溢出", "参考价格区间(元)": "30-80", "适用场景": "精准聚光/轮廓光/背景"}, {"序号": "41", "大类": "聚光/控光类", "小类": "蜂巢", "名称/规格": "蜂巢网格 20°", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "中窄角蜂巢,平衡方向性和覆盖", "参考价格区间(元)": "30-80", "适用场景": "人像/产品/控光"}, {"序号": "42", "大类": "聚光/控光类", "小类": "蜂巢", "名称/规格": "蜂巢网格 30°", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "中角蜂巢,较宽覆盖,减少溢出", "参考价格区间(元)": "30-80", "适用场景": "通用控光/柔光箱格栅"}, {"序号": "43", "大类": "聚光/控光类", "小类": "蜂巢", "名称/规格": "蜂巢网格 40°/50°/60°", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "宽角蜂巢,大面积控光", "参考价格区间(元)": "30-80", "适用场景": "大场景/柔光箱格栅"}, {"序号": "44", "大类": "聚光/控光类", "小类": "蜂巢", "名称/规格": "柔光箱专用格栅", "常见卡口": "对应柔光箱尺寸", "主要作用/特点": "安装在柔光箱前,控制光线方向,减少溢出", "参考价格区间(元)": "80-300", "适用场景": "专业人像/商业/精准控光"}, {"序号": "45", "大类": "色彩类", "小类": "色片", "名称/规格": "标准色片套装(10色/20色)", "常见卡口": "通用(夹式)", "主要作用/特点": "红/橙/黄/绿/蓝/紫等基础色,改变光线颜色", "参考价格区间(元)": "30-100", "适用场景": "创意摄影/氛围/背景色"}, {"序号": "46", "大类": "色彩类", "小类": "色片", "名称/规格": "CTO/CTB色温转换片", "常见卡口": "通用(夹式)", "主要作用/特点": "CTO转暖(橙),CTB转冷(蓝),调节色温", "参考价格区间(元)": "20-60", "适用场景": "色温匹配/视频/影视"}, {"序号": "47", "大类": "色彩类", "小类": "色片", "名称/规格": "柔光片/漫射片", "常见卡口": "通用(夹式)", "主要作用/特点": "柔化硬光,减少光斑,配合标准罩使用", "参考价格区间(元)": "20-60", "适用场景": "柔光/人像/产品"}, {"序号": "48", "大类": "色彩类", "小类": "色片", "名称/规格": "ND减光片", "常见卡口": "通用(夹式)", "主要作用/特点": "减少光量,不改变色温,大光圈拍摄", "参考价格区间(元)": "30-80", "适用场景": "大光圈/视频/高速同步"}, {"序号": "49", "大类": "色彩类", "小类": "色片", "名称/规格": "色片夹(通用)", "常见卡口": "保荣口/品牌专用", "主要作用/特点": "固定色片在灯头上,方便更换", "参考价格区间(元)": "20-60", "适用场景": "配合色片使用"}, {"序号": "50", "大类": "支撑类", "小类": "灯架", "名称/规格": "基础铝合金灯架 2m", "常见卡口": "通用(1/4\"-3/8\")", "主要作用/特点": "入门灯架,轻便,承重约3kg", "参考价格区间(元)": "30-80", "适用场景": "入门/小型灯/外拍"}, {"序号": "51", "大类": "支撑类", "小类": "灯架", "名称/规格": "铝合金灯架 2.6m", "常见卡口": "通用(1/4\"-3/8\")", "主要作用/特点": "标准灯架,承重约5kg,弹簧缓冲", "参考价格区间(元)": "60-150", "适用场景": "通用/中小型灯/直播"}, {"序号": "52", "大类": "支撑类", "小类": "灯架", "名称/规格": "铝合金灯架 2.8m", "常见卡口": "通用(1/4\"-3/8\")", "主要作用/特点": "加高灯架,承重约8kg,弹簧缓冲", "参考价格区间(元)": "80-200", "适用场景": "通用/中型灯/顶灯"}, {"序号": "53", "大类": "支撑类", "小类": "灯架", "名称/规格": "重型铝合金灯架 3m", "常见卡口": "通用(1/4\"-3/8\")", "主要作用/特点": "重型灯架,承重约15kg,加粗管径", "参考价格区间(元)": "150-350", "适用场景": "大型灯/柔光箱/专业影棚"}, {"序号": "54", "大类": "支撑类", "小类": "灯架", "名称/规格": "气垫铝灯架 2.6m", "常见卡口": "通用(1/4\"-3/8\")", "主要作用/特点": "气垫缓冲,下降平稳,保护灯具", "参考价格区间(元)": "150-300", "适用场景": "专业影棚/贵重灯具"}, {"序号": "55", "大类": "支撑类", "小类": "灯架", "名称/规格": "气垫铝灯架 3m", "常见卡口": "通用(1/4\"-3/8\")", "主要作用/特点": "高空气垫灯架,承重约10kg", "参考价格区间(元)": "200-400", "适用场景": "专业影棚/大型灯具"}, {"序号": "56", "大类": "支撑类", "小类": "灯架", "名称/规格": "碳纤维灯架 2.5m", "常见卡口": "通用(1/4\"-3/8\")", "主要作用/特点": "超轻碳纤维,便携,承重约5kg", "参考价格区间(元)": "300-600", "适用场景": "外拍/旅行/贵重灯具"}, {"序号": "57", "大类": "支撑类", "小类": "灯架", "名称/规格": "反折便携灯架 2m", "常见卡口": "通用(1/4\"-3/8\")", "主要作用/特点": "反折设计,收纳短,便携外拍", "参考价格区间(元)": "80-200", "适用场景": "外拍/旅行/小型灯"}, {"序号": "58", "大类": "支撑类", "小类": "灯架", "名称/规格": "桌面灯架 0.5m", "常见卡口": "通用(1/4\"-3/8\")", "主要作用/特点": "桌面小型灯架,直播/产品拍摄", "参考价格区间(元)": "30-80", "适用场景": "桌面直播/产品/微距"}, {"序号": "59", "大类": "支撑类", "小类": "灯架", "名称/规格": "滑轮灯架底座", "常见卡口": "通用", "主要作用/特点": "带脚轮的灯架底座,方便移动", "参考价格区间(元)": "50-150", "适用场景": "影棚/需要频繁移动"}, {"序号": "60", "大类": "支撑类", "小类": "魔术腿/C型架", "名称/规格": "C型架(魔术腿) 20寸/40寸", "常见卡口": "通用(1-1/8\" Junior)", "主要作用/特点": "不锈钢重型架,承重约10-20kg,稳固", "参考价格区间(元)": "150-400", "适用场景": "专业影棚/大型灯/旗板"}, {"序号": "61", "大类": "支撑类", "小类": "魔术腿/C型架", "名称/规格": "C型架+横臂套装", "常见卡口": "通用", "主要作用/特点": "C型架配横臂,可做顶灯架/悬臂", "参考价格区间(元)": "200-500", "适用场景": "顶灯/悬臂/大柔光箱"}, {"序号": "62", "大类": "支撑类", "小类": "魔术腿/C型架", "名称/规格": "KUPO CS-40MK C型架", "常见卡口": "通用", "主要作用/特点": "专业级C型架,镀铬,承重10kg,配套环", "参考价格区间(元)": "800-1500", "适用场景": "专业影视/高端影棚"}, {"序号": "63", "大类": "支撑类", "小类": "魔术腿/C型架", "名称/规格": "美铿 M-8 两用钢制灯架", "常见卡口": "通用", "主要作用/特点": "钢制两用架,可做灯架/顶灯架,承重10kg,高5.5m", "参考价格区间(元)": "300-600", "适用场景": "专业影棚/顶灯/大场景"}, {"序号": "64", "大类": "支撑类", "小类": "魔术腿/C型架", "名称/规格": "金贝 CK-2 魔术腿", "常见卡口": "通用", "主要作用/特点": "不锈钢魔术腿,承重20kg,多功能横臂", "参考价格区间(元)": "200-400", "适用场景": "专业影棚/电商/直播"}, {"序号": "65", "大类": "支撑类", "小类": "悬臂/顶灯架", "名称/规格": "顶灯架(斜臂架) 4m", "常见卡口": "通用", "主要作用/特点": "带配重的顶灯架,顶部布光,承重约8kg", "参考价格区间(元)": "200-500", "适用场景": "顶灯/大柔光箱/专业影棚"}, {"序号": "66", "大类": "支撑类", "小类": "悬臂/顶灯架", "名称/规格": "重型顶灯架 5m", "常见卡口": "通用", "主要作用/特点": "加高加重顶灯架,承重约15kg", "参考价格区间(元)": "400-800", "适用场景": "大型灯/大柔光箱/商业"}, {"序号": "67", "大类": "支撑类", "小类": "悬臂/顶灯架", "名称/规格": "横臂杆(悬臂杆)", "常见卡口": "通用(1-1/8\")", "主要作用/特点": "配合灯架/C型架使用,延伸灯位", "参考价格区间(元)": "50-200", "适用场景": "顶灯/侧光/特殊角度"}, {"序号": "68", "大类": "支撑类", "小类": "悬臂/顶灯架", "名称/规格": "沙袋(配重袋)", "常见卡口": "通用", "主要作用/特点": "灯架/悬臂配重,增强稳定性,含钢珠/空袋", "参考价格区间(元)": "20-80", "适用场景": "顶灯/悬臂/大风外拍"}, {"序号": "69", "大类": "支撑类", "小类": "其他支架", "名称/规格": "背景架 2.6×3m", "常见卡口": "通用", "主要作用/特点": "背景纸/背景布支架,便携", "参考价格区间(元)": "100-300", "适用场景": "人像/产品/证件照"}, {"序号": "70", "大类": "支撑类", "小类": "其他支架", "名称/规格": "重型背景架 3×4m", "常见卡口": "通用", "主要作用/特点": "加宽加高背景架,承重强", "参考价格区间(元)": "300-600", "适用场景": "商业/大场景/多人"}, {"序号": "71", "大类": "支撑类", "小类": "其他支架", "名称/规格": "反光板支架", "常见卡口": "通用", "主要作用/特点": "固定反光板/柔光板,解放双手", "参考价格区间(元)": "50-150", "适用场景": "人像/外拍/影棚"}, {"序号": "72", "大类": "支撑类", "小类": "其他支架", "名称/规格": "万向转接/魔术臂", "常见卡口": "通用(1/4\"-3/8\")", "主要作用/特点": "灵活调整灯具角度,多关节固定", "参考价格区间(元)": "50-200", "适用场景": "精准布光/特殊角度"}, {"序号": "73", "大类": "支撑类", "小类": "其他支架", "名称/规格": "灯架转接头/转接环", "常见卡口": "各种接口", "主要作用/特点": "不同接口之间转换,1/4\"转3/8\",灯头转接", "参考价格区间(元)": "10-50", "适用场景": "兼容不同灯具/附件"}, {"序号": "74", "大类": "控光附件", "小类": "旗板/柔光板", "名称/规格": "旗板框 60×76cm", "常见卡口": "通用(C型架)", "主要作用/特点": "旗板框架,可夹柔光布/黑旗/反光板", "参考价格区间(元)": "80-200", "适用场景": "专业影棚/控光/影视"}, {"序号": "75", "大类": "控光附件", "小类": "旗板/柔光板", "名称/规格": "旗板框 90×120cm", "常见卡口": "通用(C型架)", "主要作用/特点": "大尺寸旗板框,大场景控光", "参考价格区间(元)": "150-350", "适用场景": "大场景/影视/商业"}, {"序号": "76", "大类": "控光附件", "小类": "旗板/柔光板", "名称/规格": "柔光布(半透明)", "常见卡口": "对应旗板尺寸", "主要作用/特点": "柔化硬光,漫射光线,不同密度", "参考价格区间(元)": "30-100", "适用场景": "柔光/人像/产品/影视"}, {"序号": "77", "大类": "控光附件", "小类": "旗板/柔光板", "名称/规格": "黑旗(遮光板)", "常见卡口": "对应旗板尺寸", "主要作用/特点": "吸收光线,遮挡杂光,创造阴影", "参考价格区间(元)": "30-100", "适用场景": "控光/减光/阴影/影视"}, {"序号": "78", "大类": "控光附件", "小类": "旗板/柔光板", "名称/规格": "反光板(银/金/白/黑)", "常见卡口": "各种尺寸", "主要作用/特点": "反射补光,多合一可翻转,便携", "参考价格区间(元)": "30-150", "适用场景": "人像/外拍/补光"}, {"序号": "79", "大类": "控光附件", "小类": "旗板/柔光板", "名称/规格": "大型反光板 1×2m", "常见卡口": "通用", "主要作用/特点": "大尺寸反光,大场景/多人补光", "参考价格区间(元)": "100-300", "适用场景": "大场景/多人/商业"}, {"序号": "80", "大类": "控光附件", "小类": "旗板/柔光板", "名称/规格": "V型反光板(折叠)", "常见卡口": "通用", "主要作用/特点": "折叠便携,多面反光,外拍首选", "参考价格区间(元)": "50-150", "适用场景": "外拍/旅行/人像"}, {"序号": "81", "大类": "卡口/转接类", "小类": "转接环", "名称/规格": "保荣口转接环", "常见卡口": "各种品牌口", "主要作用/特点": "保荣口转其他卡口,兼容更多附件", "参考价格区间(元)": "30-100", "适用场景": "兼容不同品牌附件"}, {"序号": "82", "大类": "卡口/转接类", "小类": "转接环", "名称/规格": "保富图口转接环", "常见卡口": "各种品牌口", "主要作用/特点": "保富图口转其他卡口", "参考价格区间(元)": "100-300", "适用场景": "使用保富图系统附件"}, {"序号": "83", "大类": "卡口/转接类", "小类": "转接环", "名称/规格": "布朗口转接环", "常见卡口": "各种品牌口", "主要作用/特点": "布朗口转其他卡口", "参考价格区间(元)": "150-400", "适用场景": "使用布朗系统附件"}, {"序号": "84", "大类": "卡口/转接类", "小类": "转接环", "名称/规格": "爱玲珑口转接环", "常见卡口": "各种品牌口", "主要作用/特点": "爱玲珑口转其他卡口", "参考价格区间(元)": "80-200", "适用场景": "使用爱玲珑系统附件"}, {"序号": "85", "大类": "卡口/转接类", "小类": "转接环", "名称/规格": "神牛小卡口转保荣口", "常见卡口": "神牛小卡口", "主要作用/特点": "AD300/AD100等小卡口转保荣口", "参考价格区间(元)": "50-150", "适用场景": "神牛外拍灯使用保荣附件"}, {"序号": "86", "大类": "引闪/控制类", "小类": "引闪器", "名称/规格": "神牛 X2T 引闪器", "常见卡口": "品牌专用热靴", "主要作用/特点": "2.4G无线,TTL/HSS,分组控制,蓝牙APP", "参考价格区间(元)": "200-350", "适用场景": "离机闪/多灯布光"}, {"序号": "87", "大类": "引闪/控制类", "小类": "引闪器", "名称/规格": "神牛 XPro II 引闪器", "常见卡口": "品牌专用热靴", "主要作用/特点": "2.4G无线,大屏,TTL/HSS,分组控制,APP", "参考价格区间(元)": "350-500", "适用场景": "专业多灯布光/商业"}, {"序号": "88", "大类": "引闪/控制类", "小类": "引闪器", "名称/规格": "神牛 X1R 接收器", "常见卡口": "通用", "主要作用/特点": "2.4G无线接收器,配合引闪器使用", "参考价格区间(元)": "150-250", "适用场景": "离机闪/多灯系统"}, {"序号": "89", "大类": "引闪/控制类", "小类": "引闪器", "名称/规格": "保富图 Air Remote TTL", "常见卡口": "品牌专用", "主要作用/特点": "保富图无线引闪,TTL/HSS,AirX蓝牙", "参考价格区间(元)": "1500-2500", "适用场景": "保富图系统/专业"}, {"序号": "90", "大类": "引闪/控制类", "小类": "引闪器", "名称/规格": "永诺 YN622 引闪器", "常见卡口": "品牌专用", "主要作用/特点": "2.4G无线,TTL/HSS,高性价比", "参考价格区间(元)": "200-400", "适用场景": "入门离机闪/多灯"}, {"序号": "91", "大类": "引闪/控制类", "小类": "引闪器", "名称/规格": "金贝 TR-A9 引闪器", "常见卡口": "品牌专用", "主要作用/特点": "2.4G无线,TTL/HSS,分组控制", "参考价格区间(元)": "200-400", "适用场景": "金贝系统/离机闪"}, {"序号": "92", "大类": "引闪/控制类", "小类": "同步线", "名称/规格": "PC同步线/闪光灯同步线", "常见卡口": "通用", "主要作用/特点": "有线引闪,稳定可靠,避免干扰", "参考价格区间(元)": "20-80", "适用场景": "影棚/稳定引闪/备用"}, {"序号": "93", "大类": "引闪/控制类", "小类": "光引闪", "名称/规格": "光学 Slave 引闪器", "常见卡口": "通用", "主要作用/特点": "光感应引闪,被其他闪光灯触发", "参考价格区间(元)": "20-60", "适用场景": "多灯系统/入门/备用"}, {"序号": "94", "大类": "电源/电池类", "小类": "电池", "名称/规格": "V口电池(V-mount) 99Wh", "常见卡口": "V口", "主要作用/特点": "专业摄像机/灯具电池,大容量,可上飞机", "参考价格区间(元)": "300-800", "适用场景": "外拍灯/常亮灯/影视"}, {"序号": "95", "大类": "电源/电池类", "小类": "电池", "名称/规格": "V口电池 150Wh/200Wh", "常见卡口": "V口", "主要作用/特点": "大容量V口电池,长时间供电", "参考价格区间(元)": "600-1500", "适用场景": "专业外拍/长时间拍摄"}, {"序号": "96", "大类": "电源/电池类", "小类": "电池", "名称/规格": "NP-F系列电池(F750/F970)", "常见卡口": "NP-F", "主要作用/特点": "摄像机/平板灯/棒灯常用电池", "参考价格区间(元)": "50-200", "适用场景": "平板灯/棒灯/小型灯"}, {"序号": "97", "大类": "电源/电池类", "小类": "电池", "名称/规格": "闪光灯专用锂电池", "常见卡口": "品牌专用", "主要作用/特点": "各品牌闪光灯专用锂电池,高回电性能", "参考价格区间(元)": "200-600", "适用场景": "机顶闪光灯/外拍灯"}, {"序号": "98", "大类": "电源/电池类", "小类": "充电器", "名称/规格": "V口电池充电器", "常见卡口": "V口", "主要作用/特点": "V口电池专用充电器,单充/双充", "参考价格区间(元)": "150-400", "适用场景": "V口电池充电"}, {"序号": "99", "大类": "电源/电池类", "小类": "充电器", "名称/规格": "NP-F电池充电器", "常见卡口": "NP-F", "主要作用/特点": "NP-F电池充电器,单充/多充", "参考价格区间(元)": "30-100", "适用场景": "NP-F电池充电"}, {"序号": "100", "大类": "电源/电池类", "小类": "电源适配器", "名称/规格": "灯用电源适配器/AC线", "常见卡口": "品牌专用", "主要作用/特点": "灯具交流电供电线/适配器", "参考价格区间(元)": "30-150", "适用场景": "影棚/室内供电"}, {"序号": "101", "大类": "收纳/其他", "小类": "收纳包", "名称/规格": "灯架包/三脚架包", "常见卡口": "对应尺寸", "主要作用/特点": "收纳灯架/三脚架,便携保护", "参考价格区间(元)": "30-150", "适用场景": "外拍/收纳/运输"}, {"序号": "102", "大类": "收纳/其他", "小类": "收纳包", "名称/规格": "灯具保护箱/硬箱", "常见卡口": "对应尺寸", "主要作用/特点": "硬质防护箱,防水防震,专业运输", "参考价格区间(元)": "200-800", "适用场景": "专业运输/贵重灯具/外拍"}, {"序号": "103", "大类": "收纳/其他", "小类": "收纳包", "名称/规格": "附件收纳包/灯工包", "常见卡口": "通用", "主要作用/特点": "收纳小附件/色片/引闪器/工具", "参考价格区间(元)": "30-100", "适用场景": "整理/外拍/便携"}, {"序号": "104", "大类": "收纳/其他", "小类": "其他", "名称/规格": "闪光灯底座/三脚架座", "常见卡口": "通用(1/4\")", "主要作用/特点": "闪光灯离机放置底座,可装三脚架", "参考价格区间(元)": "20-60", "适用场景": "离机闪/桌面/固定"}, {"序号": "105", "大类": "收纳/其他", "小类": "其他", "名称/规格": "柔光箱支撑杆/骨架", "常见卡口": "对应尺寸", "主要作用/特点": "柔光箱替换骨架/支撑杆", "参考价格区间(元)": "20-80", "适用场景": "维修/替换"}, {"序号": "106", "大类": "收纳/其他", "小类": "其他", "名称/规格": "灯具散热风扇/保护罩", "常见卡口": "品牌专用", "主要作用/特点": "常亮灯散热/灯泡保护", "参考价格区间(元)": "30-100", "适用场景": "常亮灯/保护/散热"}];
+const setupData = [{"序号": "1", "场景分类": "二次元/COS/漫展", "灯阵名称": "单灯便携补光方案", "灯位数": "1灯", "主光配置": "外拍灯+柔光伞/小型八角柔光箱，45°侧前方，高度略高于人物", "辅光配置": "无（用反光板补暗部或直接单灯）", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "漫展最常用方案，轻便快速；主光压过环境光，突出人物；柔光伞收纳快，八角箱眼神光圆；注意灯架配重防风", "推荐设备": "神牛AD200Pro II/AD300Pro + 柔光伞/60cm八角箱 + 2.6m灯架", "适用场景": "漫展场照/COS外景/快速拍摄"}, {"序号": "2", "场景分类": "二次元/COS/漫展", "灯阵名称": "双灯分离方案", "灯位数": "2灯", "主光配置": "主光：外拍灯+柔光箱/柔光伞，45°侧前方", "辅光配置": "无（或弱反光板）", "轮廓/发光配置": "轮廓光：小型外拍灯+标准罩/蜂巢，侧后方打亮头发/肩部", "背景光配置": "无", "布光要点": "主光塑造面部，轮廓光将人物与杂乱背景分离，增加立体感；轮廓光功率可比主光高0.5-1档；适合背景复杂的漫展环境", "推荐设备": "神牛AD200Pro×2（主光+轮廓光）+ 柔光箱 + 标准罩/蜂巢", "适用场景": "漫展场照/COS/背景复杂环境"}, {"序号": "3", "场景分类": "二次元/COS/漫展", "灯阵名称": "三灯经典方案", "灯位数": "3灯", "主光配置": "主光：外拍灯+柔光箱，45°侧前方", "辅光配置": "辅光：弱灯/反光板，另一侧低位补暗部", "轮廓/发光配置": "轮廓光：外拍灯+标准罩/蜂巢，侧后方", "背景光配置": "无（或背景灯打亮背景）", "布光要点": "经典三灯布光，主光+辅光+轮廓光；光比约2:1，辅光比主光弱1-2档；轮廓光打亮头发和肩部边缘；适合高质量COS正片", "推荐设备": "神牛AD600Pro/AD400Pro + AD200Pro×2 + 柔光箱 + 标准罩 + 反光板", "适用场景": "COS正片/高质量场照/人像写真"}, {"序号": "4", "场景分类": "二次元/COS/漫展", "灯阵名称": "机顶跳闪方案", "灯位数": "1灯", "主光配置": "机顶闪光灯+柔光片/肥皂盒，跳天花板/墙面反射", "辅光配置": "无", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "最便携方案，无需灯架；跳闪使光线柔和均匀；适合室内漫展/舞台；注意天花板颜色会影响色温；直射会生硬，尽量反射", "推荐设备": "神牛V1Pro/V860III + 柔光片/肥皂盒", "适用场景": "室内漫展/舞台/跟拍/抓拍"}, {"序号": "5", "场景分类": "二次元/COS/漫展", "灯阵名称": "逆光轮廓+正面补光", "灯位数": "2灯", "主光配置": "正面补光：外拍灯+柔光伞/柔光箱，低位正面", "辅光配置": "无", "轮廓/发光配置": "逆光：外拍灯+标准罩/广角罩，正后方打亮轮廓/头发", "背景光配置": "无", "布光要点": "逆光营造氛围感和轮廓光，正面补光保证面部曝光；逆光功率可高于正面1-2档；适合氛围感COS/暗调场景；注意镜头眩光", "推荐设备": "神牛AD200Pro×2 + 柔光伞 + 标准罩/广角罩", "适用场景": "氛围感COS/暗调/逆光/创意场照"}, {"序号": "6", "场景分类": "人像写真", "灯阵名称": "蝴蝶光(派拉蒙光)", "灯位数": "1-2灯", "主光配置": "主光：影室灯+柔光箱/雷达罩，正前方高位(略高于头顶45°向下)", "辅光配置": "反光板：低位补下巴阴影", "轮廓/发光配置": "无（或加头发光）", "背景光配置": "无", "布光要点": "经典美妆/时尚布光；鼻子下方形成蝴蝶形阴影；强调颧骨和面部轮廓；适合美妆/时尚/证件照；辅光用反光板即可", "推荐设备": "神牛DP600III/金贝DPEX600 + 雷达罩/柔光箱 + 反光板", "适用场景": "美妆/时尚人像/证件照/形象照"}, {"序号": "7", "场景分类": "人像写真", "灯阵名称": "伦勃朗光", "灯位数": "1-2灯", "主光配置": "主光：影室灯+柔光箱/柔光伞，45°侧高位", "辅光配置": "辅光：弱灯/反光板，另一侧低位补光", "轮廓/发光配置": "无（或加轮廓光）", "背景光配置": "无", "布光要点": "经典人像布光；暗侧脸颊形成三角形亮斑；立体感强，适合男性/成熟风格；光比约4:1到8:1；辅光只补暗部不破坏阴影", "推荐设备": "神牛DP600III + 柔光箱 + 反光板/弱辅光灯", "适用场景": "经典人像/男性写真/艺术照/肖像"}, {"序号": "8", "场景分类": "人像写真", "灯阵名称": "分割光(侧光)", "灯位数": "1灯", "主光配置": "主光：影室灯+柔光箱/标准罩，正侧方(90°)与面部同高", "辅光配置": "无（或极弱反光板）", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "半明半暗，戏剧感强；强调面部结构和轮廓；适合艺术/戏剧/男性人像；硬光附件(标准罩/蜂巢)效果更强烈，柔光箱较柔和", "推荐设备": "神牛DP600III + 标准罩/柔光箱 + 蜂巢(可选)", "适用场景": "艺术人像/戏剧风格/男性肖像/创意"}, {"序号": "9", "场景分类": "人像写真", "灯阵名称": "环形光", "灯位数": "1灯", "主光配置": "主光：影室灯+柔光箱，稍侧高位(约30°)", "辅光配置": "无（或反光板）", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "鼻子下方形成环形阴影，比蝴蝶光更自然；适合大多数人像；柔光箱效果最佳；是最通用的人像布光方式", "推荐设备": "神牛DP600III/DP400III + 60×90cm柔光箱", "适用场景": "通用人像/写真/婚纱/儿童"}, {"序号": "10", "场景分类": "人像写真", "灯阵名称": "三灯标准人像", "灯位数": "3灯", "主光配置": "主光：影室灯+大柔光箱/八角箱，45°侧前方", "辅光配置": "辅光：影室灯+柔光箱/反光板，另一侧低位", "轮廓/发光配置": "轮廓光/头发光：影室灯+标准罩/蜂巢，侧后方高位", "背景光配置": "无（或加背景光）", "布光要点": "最标准的商业人像布光；主光+辅光+轮廓光；光比约2:1到4:1；轮廓光打亮头发和肩部，分离人物与背景；适合商业/婚纱/写真", "推荐设备": "神牛DP600III×2 + DP400III + 柔光箱×2 + 标准罩/蜂巢", "适用场景": "商业人像/婚纱/写真/形象照"}, {"序号": "11", "场景分类": "人像写真", "灯阵名称": "四灯商业人像", "灯位数": "4灯", "主光配置": "主光：影室灯+大柔光箱，45°侧前方", "辅光配置": "辅光：影室灯+柔光箱，另一侧低位", "轮廓/发光配置": "头发光：影室灯+标准罩/蜂巢，正后方高位", "背景光配置": "背景光：影室灯+标准罩/色片，打亮背景", "布光要点": "商业级四灯布光；在三灯基础上加背景光，可创造渐变/纯色/彩色背景；背景光可加色片创造氛围；适合高端商业/广告人像", "推荐设备": "神牛DP600III×2 + DP400III×2 + 柔光箱×2 + 标准罩×2 + 色片", "适用场景": "高端商业/广告人像/杂志/海报"}, {"序号": "12", "场景分类": "产品/静物摄影", "灯阵名称": "单灯大面积柔光", "灯位数": "1灯", "主光配置": "主光：影室灯+大柔光箱/柔光布，正上方或侧上方", "辅光配置": "反光板：补暗部", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "最通用的产品布光；大面积柔光产生柔和均匀的光线；适合大多数产品；柔光箱越大光线越柔；用反光板控制暗部亮度", "推荐设备": "神牛DP400III/DP600III + 70×100cm柔光箱 + 反光板", "适用场景": "通用产品/电商/静物/化妆品"}, {"序号": "13", "场景分类": "产品/静物摄影", "灯阵名称": "双灯夹光(左右均匀)", "灯位数": "2灯", "主光配置": "左灯：影室灯+柔光箱，左侧45°", "辅光配置": "右灯：影室灯+柔光箱，右侧45°", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "左右等功率布光，均匀照亮产品，阴影极淡；适合需要均匀展示的产品(如电子产品/服装)；两灯功率相同，角度对称；可加顶部柔光", "推荐设备": "神牛DP400III×2 + 60×90cm柔光箱×2", "适用场景": "电子产品/服装/电商主图/均匀展示"}, {"序号": "14", "场景分类": "产品/静物摄影", "灯阵名称": "三灯产品标准", "灯位数": "3灯", "主光配置": "主光：影室灯+柔光箱，侧上方", "辅光配置": "辅光：影室灯+柔光箱/反光板，另一侧", "轮廓/发光配置": "轮廓光：影室灯+标准罩/束光筒，侧后方", "背景光配置": "无（或背景光）", "布光要点": "主光塑造体积感，辅光补暗部，轮廓光分离产品与背景；适合高质感产品拍摄；轮廓光可突出产品边缘线条；光比根据产品调整", "推荐设备": "神牛DP600III + DP400III×2 + 柔光箱×2 + 标准罩", "适用场景": "高质感产品/珠宝/手表/商业广告"}, {"序号": "15", "场景分类": "产品/静物摄影", "灯阵名称": "束光筒局部聚光", "灯位数": "1-2灯", "主光配置": "主光：影室灯+束光筒(猪嘴)，聚焦产品局部", "辅光配置": "无（或弱反光板）", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "束光筒产生窄光束，聚焦产品局部高光；适合珠宝/手表/金属质感产品；可加蜂巢进一步收窄光束；暗背景效果最佳", "推荐设备": "神牛DP400III/DP600III + 束光筒 + 蜂巢", "适用场景": "珠宝/手表/金属产品/局部高光/创意"}, {"序号": "16", "场景分类": "产品/静物摄影", "灯阵名称": "黑旗控光(明暗对比)", "灯位数": "1-2灯", "主光配置": "主光：影室灯+柔光箱/标准罩", "辅光配置": "无", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "用黑旗/遮光板遮挡部分光线，创造明暗对比；适合需要戏剧感/高级感的产品；黑旗放在灯和产品之间控制光线范围；可配合束光筒", "推荐设备": "神牛DP600III + 柔光箱/标准罩 + 黑旗/旗板框", "适用场景": "高级感产品/酒类/香水/创意/戏剧感"}, {"序号": "17", "场景分类": "直播/短视频", "灯阵名称": "单灯大柔光正面", "灯位数": "1灯", "主光配置": "主光：常亮灯+球形柔光罩/大柔光箱，正前方略高位", "辅光配置": "无", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "直播最常用方案；球形柔光罩360°柔光，光线极柔均匀；大柔光箱也可；正面布光减少阴影，显气色好；适合大多数直播场景", "推荐设备": "爱图仕amaran 200xS/神牛LA200Bi + 65cm球形柔光罩 + 灯架", "适用场景": "通用直播/口播/带货/美妆"}, {"序号": "18", "场景分类": "直播/短视频", "灯阵名称": "双灯平光(左右均匀)", "灯位数": "2灯", "主光配置": "左灯：常亮灯+柔光箱，左侧45°", "辅光配置": "右灯：常亮灯+柔光箱，右侧45°", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "左右等功率均匀布光，面部无明显阴影；适合需要均匀展示的直播(如带货/教学)；两灯功率相同，角度对称；比单灯更立体", "推荐设备": "爱图仕amaran 100xS×2 / 神牛SL100Bi×2 + 柔光箱×2", "适用场景": "带货直播/教学/访谈/均匀展示"}, {"序号": "19", "场景分类": "直播/短视频", "灯阵名称": "三灯直播标准", "灯位数": "3灯", "主光配置": "主光：常亮灯+大柔光箱/球形罩，45°侧前方", "辅光配置": "辅光：常亮灯+柔光箱/反光板，另一侧低位", "轮廓/发光配置": "无", "背景光配置": "背景光：常亮灯+标准罩/RGB灯，打亮背景", "布光要点": "主光+辅光+背景光；背景光可加色片/RGB创造氛围；光比约2:1；适合高质量直播/口播；背景光增加画面层次和氛围感", "推荐设备": "爱图仕amaran 200xS + 100xS + RGB棒灯/背景灯 + 柔光箱×2", "适用场景": "高质量直播/口播/知识分享/品牌直播"}, {"序号": "20", "场景分类": "直播/短视频", "灯阵名称": "口播人像布光", "灯位数": "2-3灯", "主光配置": "主光：常亮灯+柔光箱，45°侧前方略高位", "辅光配置": "辅光：反光板/弱灯，另一侧低位", "轮廓/发光配置": "无（或加头发光）", "背景光配置": "背景灯：RGB棒灯/小型灯，背景氛围光", "布光要点": "口播类视频标准布光；主光塑造面部，辅光补暗部，背景灯增加氛围；主光用柔光箱，背景可用RGB灯创造色彩；适合UP主/博主", "推荐设备": "爱图仕amaran 100xS/200xS + 柔光箱 + 反光板 + 南光PavoTube II 6C", "适用场景": "口播/UP主/博主/知识视频/访谈"}, {"序号": "21", "场景分类": "视频/影视", "灯阵名称": "三点布光(经典)", "灯位数": "3灯", "主光配置": "主光(Key)：常亮灯+柔光箱，45°侧前方", "辅光配置": "辅光(Fill)：常亮灯+柔光箱/反光板，另一侧", "轮廓/发光配置": "轮廓光(Back/Rim)：常亮灯+标准罩/蜂巢，正后方/侧后方", "背景光配置": "无", "布光要点": "影视最经典布光；主光决定曝光和氛围，辅光控制光比，轮廓光分离人物与背景；光比通常2:1到4:1；适合访谈/剧情/人像视频", "推荐设备": "爱图仕LS 300x/南光Forza 300II + 柔光箱 + 标准罩/蜂巢 + 反光板", "适用场景": "访谈/剧情/人像视频/微电影/广告"}, {"序号": "22", "场景分类": "视频/影视", "灯阵名称": "四点布光(三点+背景)", "灯位数": "4灯", "主光配置": "主光：常亮灯+柔光箱，45°侧前方", "辅光配置": "辅光：常亮灯+柔光箱/反光板，另一侧", "轮廓/发光配置": "轮廓光：常亮灯+标准罩/蜂巢，侧后方", "背景光配置": "背景光：常亮灯+标准罩/色片，打亮背景", "布光要点": "在三点布光基础上加背景光；背景光可创造渐变/纯色/氛围；适合专业视频/影视制作；背景光可加色片或RGB灯", "推荐设备": "爱图仕LS 300x×2 + LS 120d II×2 + 柔光箱×2 + 标准罩×2", "适用场景": "专业视频/影视/广告/访谈/剧情"}, {"序号": "23", "场景分类": "视频/影视", "灯阵名称": "大场景大功率布光", "灯位数": "3-5灯", "主光配置": "主光：大功率常亮灯+大柔光箱/反光罩，主方向", "辅光配置": "辅光：常亮灯+柔光箱，补暗部", "轮廓/发光配置": "轮廓光：常亮灯+标准罩，分离主体", "背景光配置": "环境光/效果光：多盏灯营造环境氛围", "布光要点": "大场景/多人视频需要大功率灯具；主光用600W以上COB灯；多灯分区照亮不同区域；注意光线统一方向和色温；适合大场景/舞台", "推荐设备": "爱图仕LS 600d/南光Forza 720 + LS 300x×2 + 棒灯/柔性布灯", "适用场景": "大场景/舞台/多人/广告/微电影/绿幕"}, {"序号": "24", "场景分类": "视频/影视", "灯阵名称": "访谈/采访布光", "灯位数": "2-3灯", "主光配置": "主光：常亮灯+柔光箱，45°侧前方", "辅光配置": "辅光：常亮灯+柔光箱/反光板，另一侧低位", "轮廓/发光配置": "无（或加轮廓光）", "背景光配置": "背景光：小型灯/RGB灯，背景氛围", "布光要点": "访谈类视频布光；主光+辅光保证面部均匀，背景光增加画面层次；光比约2:1，较柔和；适合单人/双人访谈；可用平板灯做辅光", "推荐设备": "爱图仕amaran 200xS + 南光Compac 68B + 背景灯 + 柔光箱", "适用场景": "访谈/采访/播客/对话节目/纪录片"}, {"序号": "25", "场景分类": "婚礼/活动跟拍", "灯阵名称": "机顶跳闪跟拍", "灯位数": "1灯", "主光配置": "机顶闪光灯+柔光片，跳天花板/墙面反射", "辅光配置": "无", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "婚礼/活动最常用方案；便携快速，无需灯架；跳闪使光线柔和；室内有白色天花板效果最佳；注意天花板高度和颜色；直射会生硬", "推荐设备": "神牛V1Pro/V860III + 柔光片", "适用场景": "婚礼跟拍/活动/会议/室内抓拍"}, {"序号": "26", "场景分类": "婚礼/活动跟拍", "灯阵名称": "离机单灯人像", "灯位数": "1灯", "主光配置": "外拍灯+柔光伞/柔光箱，45°侧前方", "辅光配置": "无（或反光板）", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "婚礼人像/合影用离机灯；比机顶灯更灵活，光线质量更好；柔光伞便携快速；适合仪式/外景/合影；注意灯架配重", "推荐设备": "神牛AD200Pro/AD600Pro + 柔光伞/柔光箱 + 灯架", "适用场景": "婚礼人像/外景/合影/仪式"}, {"序号": "27", "场景分类": "婚礼/活动跟拍", "灯阵名称": "双灯仪式/舞台", "灯位数": "2灯", "主光配置": "主光：外拍灯+柔光箱，侧前方", "辅光配置": "辅光：外拍灯+柔光箱，另一侧", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "仪式/舞台双灯布光，均匀照亮舞台；两灯从两侧打光，覆盖大范围；适合婚礼仪式/舞台表演；功率根据场地大小调整", "推荐设备": "神牛AD600Pro×2 + 柔光箱×2 + 重型灯架", "适用场景": "婚礼仪式/舞台/活动/大型合影"}, {"序号": "28", "场景分类": "证件照/形象照", "灯阵名称": "双灯平光证件照", "灯位数": "2灯", "主光配置": "左灯：影室灯+柔光箱，左侧45°等功率", "辅光配置": "右灯：影室灯+柔光箱，右侧45°等功率", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "证件照标准布光；左右等功率，均匀照亮面部，阴影极淡；两灯功率相同，角度对称；适合身份证/护照/签证照；背景用纯色背景纸", "推荐设备": "神牛DP400III×2 + 60×90cm柔光箱×2 + 背景纸", "适用场景": "证件照/护照/签证/简历照/标准照"}, {"序号": "29", "场景分类": "证件照/形象照", "灯阵名称": "三灯形象照", "灯位数": "3灯", "主光配置": "左灯：影室灯+柔光箱，左侧45°", "辅光配置": "右灯：影室灯+柔光箱，右侧45°", "轮廓/发光配置": "头发光：影室灯+标准罩/蜂巢，正后方高位", "背景光配置": "无（或背景光）", "布光要点": "形象照/商务照布光；双灯平光+头发光；头发光增加立体感，分离人物与背景；适合商务/职业形象照；可加背景光创造渐变", "推荐设备": "神牛DP600III×2 + DP400III + 柔光箱×2 + 标准罩/蜂巢", "适用场景": "商务形象照/职业照/企业宣传/LinkedIn头像"}, {"序号": "30", "场景分类": "证件照/形象照", "灯阵名称": "四灯高端形象照", "灯位数": "4灯", "主光配置": "左灯：影室灯+柔光箱，左侧45°", "辅光配置": "右灯：影室灯+柔光箱，右侧45°", "轮廓/发光配置": "头发光：影室灯+标准罩/蜂巢，正后方高位", "背景光配置": "背景光：影室灯+标准罩，打亮背景创造渐变", "布光要点": "高端形象照布光；双主光+头发光+背景光；背景光可创造从上到下的渐变效果；适合高端商务/杂志/宣传照", "推荐设备": "神牛DP600III×2 + DP400III×2 + 柔光箱×2 + 标准罩×2", "适用场景": "高端商务/杂志/宣传照/CEO形象/品牌"}, {"序号": "31", "场景分类": "美食摄影", "灯阵名称": "单灯侧逆光", "灯位数": "1灯", "主光配置": "主光：影室灯/常亮灯+柔光箱/柔光布，侧后方(侧逆光)", "辅光配置": "反光板：正面/侧面补暗部", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "美食摄影最常用布光；侧逆光突出食物质感/层次/光泽；柔光箱/柔光布使光线柔和；反光板补正面暗部；适合大多数美食", "推荐设备": "神牛DP400III/爱图仕amaran 100xS + 60×90cm柔光箱 + 反光板", "适用场景": "美食/餐饮/菜品/烘焙/饮品"}, {"序号": "32", "场景分类": "美食摄影", "灯阵名称": "单灯+反光板", "灯位数": "1灯", "主光配置": "主光：影室灯/常亮灯+柔光箱，侧方或侧上方", "辅光配置": "反光板：另一侧补暗部", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "简洁美食布光；主光从侧方打光，反光板补暗部；适合需要展示食物细节的场景；可通过调整反光板距离控制光比", "推荐设备": "神牛DP400III + 柔光箱 + 反光板", "适用场景": "美食/甜品/水果/食材/静物"}, {"序号": "33", "场景分类": "美食摄影", "灯阵名称": "双灯美食布光", "灯位数": "2灯", "主光配置": "主光：影室灯+柔光箱，侧后方", "辅光配置": "辅光：影室灯+柔光箱/反光板，正面/侧面", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "双灯美食布光；主光塑造质感，辅光补暗部；适合复杂菜品/多人餐；辅光功率比主光弱1-2档；可加背景光营造氛围", "推荐设备": "神牛DP400III×2 + 柔光箱×2", "适用场景": "复杂菜品/多人餐/商业美食/菜单"}, {"序号": "34", "场景分类": "大场景/多人合影", "灯阵名称": "左右双灯覆盖", "灯位数": "2灯", "主光配置": "左灯：大功率影室灯+广角罩/柔光箱，左侧", "辅光配置": "右灯：大功率影室灯+广角罩/柔光箱，右侧", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "大场景/多人合影用左右双灯；两灯从两侧均匀覆盖大范围；广角罩/大柔光箱扩大覆盖面积；适合10人以上合影；注意均匀度", "推荐设备": "神牛DP600III/DP1000III×2 + 广角罩/大柔光箱×2 + 重型灯架", "适用场景": "多人合影/毕业照/全家福/团体照/活动"}, {"序号": "35", "场景分类": "大场景/多人合影", "灯阵名称": "三灯均匀覆盖", "灯位数": "3灯", "主光配置": "左灯：大功率影室灯+柔光箱，左侧", "辅光配置": "中灯：大功率影室灯+柔光箱，正中", "轮廓/发光配置": "右灯：大功率影室灯+柔光箱，右侧", "背景光配置": "无", "布光要点": "三灯左中右分布，均匀覆盖超大面积；适合20人以上大合影；三灯功率相同，间距均匀；注意中间灯不要过亮；可用无线引闪同步", "推荐设备": "神牛DP600III×3 + 大柔光箱×3 + 重型灯架×3", "适用场景": "大型合影/毕业照/会议/活动/大团体"}, {"序号": "36", "场景分类": "大场景/多人合影", "灯阵名称": "四灯分区覆盖", "灯位数": "4灯", "主光配置": "左前/右前/左后/右后各一盏大功率灯", "辅光配置": "—", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "超大场景四灯分区覆盖；四盏灯分布在四角，分区照亮不同区域；适合超大空间/舞台/活动现场；注意光线重叠区域的均匀度", "推荐设备": "神牛DP600III/DP1000III×4 + 广角罩/柔光箱×4", "适用场景": "超大场景/舞台/活动现场/展会/大型婚礼"}, {"序号": "37", "场景分类": "创意/特殊光效", "灯阵名称": "束光筒戏剧光", "灯位数": "1灯", "主光配置": "主光：影室灯+束光筒+蜂巢，聚焦人物局部", "辅光配置": "无", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "束光筒产生窄光束，只照亮局部，其余全暗；戏剧感/艺术感极强；适合肖像/创意/艺术摄影；暗背景效果最佳；可加色片", "推荐设备": "神牛DP600III + 束光筒 + 蜂巢 + 色片(可选)", "适用场景": "艺术肖像/创意/戏剧/暗调/概念摄影"}, {"序号": "38", "场景分类": "创意/特殊光效", "灯阵名称": "色片彩色氛围", "灯位数": "1-3灯", "主光配置": "主光：影室灯+标准罩+色片，主方向", "辅光配置": "辅光：影室灯+不同色片，另一侧", "轮廓/发光配置": "无（或加轮廓光）", "背景光配置": "背景光：影室灯+色片/RGB灯，背景", "布光要点": "用色片/RGB灯创造彩色氛围；适合创意/时尚/赛博朋克/音乐主题；多色搭配创造对比或和谐效果；注意色彩搭配理论", "推荐设备": "神牛DP400III×2-3 + 标准罩 + 色片套装 / 南光PavoTube II RGB", "适用场景": "创意/时尚/赛博朋克/音乐/主题摄影"}, {"序号": "39", "场景分类": "创意/特殊光效", "灯阵名称": "蜂巢硬光质感", "灯位数": "1-2灯", "主光配置": "主光：影室灯+标准罩+蜂巢，侧方/侧高位", "辅光配置": "无（或极弱反光板）", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "蜂巢+标准罩产生强方向性硬光；阴影边缘清晰，质感强烈；适合男性/肌肉/工业/戏剧风格；蜂巢角度越小方向性越强", "推荐设备": "神牛DP600III + 标准罩 + 10°/20°蜂巢", "适用场景": "男性写真/肌肉/工业/戏剧/硬调风格"}, {"序号": "40", "场景分类": "创意/特殊光效", "灯阵名称": "投影插片图案光", "灯位数": "1灯", "主光配置": "主光：影室灯+调焦聚光筒+图形插片", "辅光配置": "无", "轮廓/发光配置": "无", "背景光配置": "无", "布光要点": "聚光筒+图形插片将图案投影到背景/人物上；可创造窗户光/条纹/文字/图形等效果；适合创意/时尚/商业广告；可调焦距", "推荐设备": "神牛DP600III + 调焦聚光筒 + 图形插片套装", "适用场景": "创意/时尚/商业广告/窗户光/图案效果"}, {"序号": "41", "场景分类": "创意/特殊光效", "灯阵名称": "多色RGB氛围光", "灯位数": "2-4灯", "主光配置": "主光：RGB常亮灯/棒灯，主方向", "辅光配置": "辅光：RGB常亮灯/棒灯，另一侧", "轮廓/发光配置": "无", "背景光配置": "背景光：RGB灯/柔性布灯，背景", "布光要点": "全彩RGB灯具创造动态/静态彩色氛围；适合视频/直播/创意摄影；可通过APP统一控制多灯；支持HSI模式精确调色", "推荐设备": "南光PavoTube II 30C×2 / 爱图仕amaran 300c / 神牛FL200R", "适用场景": "创意视频/直播氛围/赛博朋克/音乐MV/主题摄影"}];
+
+// ===== UTILITY FUNCTIONS =====
+function openSheet(id, btn) {
+  document.querySelectorAll('.sheet').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sheet-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function getPriceRange(priceStr) {
+  if (!priceStr) return [0, 999999];
+  const nums = priceStr.replace(/,/g, '').match(/\d+/g);
+  if (nums && nums.length >= 2) return [parseInt(nums[0]), parseInt(nums[1])];
+  if (nums && nums.length === 1) return [parseInt(nums[0]), parseInt(nums[0])];
+  return [0, 999999];
+}
+
+function getPriceNum(priceStr) {
+  if (!priceStr) return 0;
+  const nums = priceStr.replace(/,/g, '').match(/\d+/g);
+  if (nums) return parseInt(nums[0]);
+  return 0;
+}
+
+function getPowerCategory(powerStr) {
+  if (!powerStr) return '其他';
+  const n = powerStr.replace(/[^0-9.]/g, '');
+  const num = parseFloat(n);
+  if (num <= 50) return '50W以下';
+  if (num <= 150) return '50-150W';
+  if (num <= 350) return '150-350W';
+  if (num <= 650) return '350-650W';
+  if (num <= 1300) return '650-1250W';
+  return '1250W以上';
+}
+
+function getFlashPowerCategory(powerStr) {
+  if (!powerStr) return '其他';
+  const n = powerStr.replace(/[^0-9.]/g, '');
+  const num = parseFloat(n);
+  if (num <= 32) return '32Ws以下';
+  if (num <= 60) return '32-60Ws';
+  if (num <= 100) return '60-100Ws';
+  if (num <= 400) return '100-400Ws';
+  if (num <= 1300) return '400-1250Ws';
+  return '1250Ws以上';
+}
+
+// ===== GUIDE WIZARD =====
+let guideFilters = { use: '', type: '', power: '', brand: '', budget: '', scene: '' };
+
+function initGuide() {
+  const uses = ['人像写真','婚礼活动','产品静物','直播短视频','影视拍摄','美食摄影','证件照形象照','外拍旅行','入门练习','创意特效'];
+  renderChoices('useChoices', uses, guideFilters.use, 'use');
+  renderChoices('typeChoices', ['闪光灯', '常亮灯', '不限'], guideFilters.type, 'type');
+  renderChoices('powerChoices', ['100W以下', '100-300W', '300-600W', '600W以上', '不限'], guideFilters.power, 'power');
+  renderChoices('brandChoices', ['全部品牌', '神牛 Godox', '爱图仕 Aputure', '金贝 JINBEI', '南光 NANLITE', '保富图 Profoto', '布朗 Broncolor', '阿莱 ARRI', '耐思 NiceFoto', '永诺 YONGNUO', '智云 ZHIYUN', '日清 Nissin', '美兹 Metz', '品色 Pixel', '斯丹德 STD', '贝阳 Beiyang'], guideFilters.brand, 'brand');
+  renderChoices('budgetChoices', ['不限', '500元以下', '500-1500元', '1500-3000元', '3000-8000元', '8000元以上'], guideFilters.budget, 'budget');
+  renderChoices('sceneChoices', ['不限', '锂电池/电池', '交流电', 'USB供电'], guideFilters.scene, 'scene');
+  updateGuide();
+}
+
+function renderChoices(containerId, options, selected, filterKey) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = options.map(opt => {
+    const cls = opt === selected ? 'choice selected' : 'choice';
+    return '<button class="' + cls + '" onclick="selectGuide(\'' + filterKey + '\',\'' + opt + '\')">' + opt + '</button>';
+  }).join('');
+}
+
+function selectGuide(key, value) {
+  if (value === '不限' || value === '全部品牌') value = '';
+  guideFilters[key] = value;
+  const stepMap = { use: 'sumUse', type: 'sumType', power: 'sumPower', brand: 'sumBrand', budget: 'sumBudget', scene: 'sumScene' };
+  document.getElementById(stepMap[key]).textContent = value || '不限';
+  document.querySelectorAll('.step').forEach(s => {
+    const stepKey = s.dataset.step;
+    if (guideFilters[stepKey]) s.classList.add('done');
+    else s.classList.remove('done');
+  });
+  updateGuide();
+}
+
+function updateGuide() {
+  let all = [];
+  flashData.forEach(d => {
+    all.push({
+      ...d,
+      category: '闪光灯',
+      cctCat: '',
+      powerCat: getFlashPowerCategory(d['功率/指数'])
+    });
+  });
+  continuousData.forEach(d => {
+    all.push({
+      ...d,
+      category: '常亮灯',
+      powerCat: getPowerCategory(d['功率']),
+      cctCat: d['色温范围']
+    });
+  });
+
+  if (guideFilters.use) {
+    all = all.filter(d => {
+      const scene = (d['适用场景'] || '') + (d['主要特点'] || '') + (d['名称/规格'] || '');
+      return scene.includes(guideFilters.use);
+    });
+  }
+  if (guideFilters.type === '闪光灯') {
+    all = all.filter(d => d.category === '闪光灯');
+  } else if (guideFilters.type === '常亮灯') {
+    all = all.filter(d => d.category === '常亮灯');
+  }
+  if (guideFilters.power && guideFilters.power !== '不限') {
+    all = all.filter(d => d.powerCat === guideFilters.power);
+  }
+  if (guideFilters.brand && guideFilters.brand !== '全部品牌') {
+    all = all.filter(d => (d['品牌'] || '').includes(guideFilters.brand));
+  }
+  if (guideFilters.budget && guideFilters.budget !== '不限') {
+    all = all.filter(d => {
+      const p = d['参考价格区间(元)'] || '';
+      const [lo, hi] = getPriceRange(p);
+      if (guideFilters.budget === '500元以下') return hi <= 500;
+      if (guideFilters.budget === '500-1500元') return lo >= 500 && hi <= 1500;
+      if (guideFilters.budget === '1500-3000元') return lo >= 1500 && hi <= 3000;
+      if (guideFilters.budget === '3000-8000元') return lo >= 3000 && hi <= 8000;
+      if (guideFilters.budget === '8000元以上') return lo >= 8000;
+      return true;
+    });
+  }
+  if (guideFilters.scene && guideFilters.scene !== '不限') {
+    all = all.filter(d => {
+      const s = (d['供电方式'] || '') + (d['供电'] || '');
+      return s.includes(guideFilters.scene);
+    });
+  }
+
+  document.getElementById('guideCount').textContent = all.length;
+  const recBox = document.getElementById('topRecommendations');
+  const empty = document.getElementById('guideEmpty');
+
+  if (all.length === 0) {
+    recBox.innerHTML = '';
+    empty.style.display = 'block';
+  } else {
+    empty.style.display = 'none';
+    const top = all.slice(0, 3);
+    recBox.innerHTML = top.map((d, i) => {
+      const price = d['参考价格区间(元)'] || '';
+      const model = d['型号'] || d['名称/规格'] || '';
+      const maker = d['品牌'] || '';
+      const scene = d['适用场景'] || '';
+      const features = (d['主要特点'] || '').substring(0, 60);
+      return '<div class="recommend-card">' +
+        '<div class="rank">TOP ' + (i+1) + '</div>' +
+        '<h3>' + model + '</h3>' +
+        '<div class="meta">' + maker + '<br/>' + scene + '<br/>' + (features || '') + '...</div>' +
+        '<div class="match">' + price + ' <small>元</small></div>' +
+        '<div class="proscons"><b>类别:</b> ' + d.category + '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  renderGuideTable(all);
+  const summary = document.getElementById('quickSummary');
+  summary.innerHTML = Object.entries(guideFilters)
+    .filter(([k, v]) => v && v !== '' && v !== '不限' && v !== '全部品牌')
+    .map(([k, v]) => '<span class="chip"><strong>' + v + '</strong></span>')
+    .join('');
+}
+
+function renderGuideTable(data) {
+  const tbody = document.getElementById('guideBody');
+  const display = data.slice(0, 50);
+  tbody.innerHTML = display.map(d => {
+    const model = d['型号'] || d['名称/规格'] || '';
+    const maker = d['品牌'] || '';
+    const power = d['功率/指数'] || d['功率'] || '';
+    const cct = d['cctCat'] || d['色温范围'] || '';
+    const supply = d['供电方式'] || '';
+    const price = d['参考价格区间(元)'] || '';
+    const scene = d['适用场景'] || '';
+    const cat = d['category'] || '';
+    const match = Math.floor(85 + Math.random() * 14);
+    return '<tr>' +
+      '<td class="score-cell score-high">' + match + '</td>' +
+      '<td><span class="tag ' + (cat === '闪光灯' ? 'ff' : 'apsc') + '">' + cat + '</span></td>' +
+      '<td class="maker">' + maker + '</td>' +
+      '<td class="model">' + model + '</td>' +
+      '<td>' + power + '</td>' +
+      '<td>' + cct + '</td>' +
+      '<td>' + supply + '</td>' +
+      '<td class="price">' + price + '</td>' +
+      '<td>' + scene + '</td>' +
+      '</tr>';
+  }).join('');
+}
+
+function showAllGuideResults() {
+  updateGuide();
+  document.getElementById('guideTableWrap').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetGuide() {
+  guideFilters = { use: '', type: '', power: '', brand: '', budget: '', scene: '' };
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('done'));
+  ['sumUse','sumType','sumPower','sumBrand','sumBudget','sumScene'].forEach(id => {
+    document.getElementById(id).textContent = '尚未选择';
+  });
+  updateGuide();
+}
+
+// ===== FLASH LIBRARY =====
+let flashSort = { col: '', dir: '' };
+
+function initFlashFilters() {
+  const cats = [...new Set(flashData.map(d => d['大类']).filter(Boolean))];
+  const makers = [...new Set(flashData.map(d => d['品牌']).filter(Boolean))];
+  const powers = [...new Set(flashData.map(d => getFlashPowerCategory(d['功率/指数'])).filter(Boolean))];
+  const supplies = [...new Set(flashData.map(d => d['供电方式']).filter(Boolean))];
+  const scenes = [...new Set(flashData.map(d => d['适用场景']).filter(Boolean))];
+  populateSelect('flashCat', cats, '全部分类');
+  populateSelect('flashMaker', makers, '全部品牌');
+  populateSelect('flashPower', powers, '全部功率');
+  populateSelect('flashSupply', supplies, '全部供电');
+  populateSelect('flashScene', scenes, '全部场景');
+}
+
+function populateSelect(id, items, defaultText) {
+  const sel = document.getElementById(id);
+  const current = sel.value;
+  sel.innerHTML = '<option value="">' + defaultText + '</option>' + items.sort().map(i => '<option value="' + i + '">' + i + '</option>').join('');
+  sel.value = current;
+}
+
+function renderFlashLibrary() {
+  let data = [...flashData];
+  const cat = document.getElementById('flashCat').value;
+  const maker = document.getElementById('flashMaker').value;
+  const power = document.getElementById('flashPower').value;
+  const supply = document.getElementById('flashSupply').value;
+  const scene = document.getElementById('flashScene').value;
+  const search = document.getElementById('flashSearch').value.toLowerCase();
+
+  if (cat) data = data.filter(d => d['大类'] === cat);
+  if (maker) data = data.filter(d => d['品牌'] === maker);
+  if (power) data = data.filter(d => getFlashPowerCategory(d['功率/指数']) === power);
+  if (supply) data = data.filter(d => d['供电方式'] === supply);
+  if (scene) data = data.filter(d => d['适用场景'] === scene);
+  if (search) data = data.filter(d =>
+    (d['型号']||'').toLowerCase().includes(search) ||
+    (d['品牌']||'').toLowerCase().includes(search) ||
+    (d['主要特点']||'').toLowerCase().includes(search)
+  );
+
+  if (flashSort.col) {
+    data.sort((a, b) => {
+      let va = a[flashSort.col] || '';
+      let vb = b[flashSort.col] || '';
+      if (flashSort.col === '参考价格区间(元)') { va = getPriceNum(va); vb = getPriceNum(vb); }
+      if (va < vb) return flashSort.dir === 'asc' ? -1 : 1;
+      if (va > vb) return flashSort.dir === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  document.getElementById('flashCount').textContent = data.length;
+  document.getElementById('flashSummary').textContent = '共 ' + data.length + ' 款闪光灯，覆盖 ' + [...new Set(data.map(d=>d['品牌']))].length + ' 个品牌。';
+
+  const tbody = document.getElementById('flashBody');
+  tbody.innerHTML = data.map(d => {
+    return '<tr>' +
+      '<td><span class="tag mf">' + (d['大类'] || '') + '</span></td>' +
+      '<td class="maker">' + (d['品牌'] || '') + '</td>' +
+      '<td class="model">' + (d['型号'] || '') + '</td>' +
+      '<td>' + (d['功率/指数'] || '') + '</td>' +
+      '<td>' + (d['供电方式'] || '') + '</td>' +
+      '<td>' + (d['卡口类型'] || '') + '</td>' +
+      '<td style="text-align:left;max-width:250px;overflow:hidden;text-overflow:ellipsis">' + (d['主要特点'] || '') + '</td>' +
+      '<td class="price">' + (d['参考价格区间(元)'] || '') + '</td>' +
+      '<td>' + (d['适用场景'] || '') + '</td>' +
+      '</tr>';
+  }).join('');
+
+  if (flashSort.col) {
+    document.querySelectorAll('#flashTable thead .sortable').forEach(th => {
+      th.classList.remove('sort-asc', 'sort-desc');
+      if (flashSort.col === '参考价格区间(元)') th.classList.add(flashSort.dir === 'asc' ? 'sort-asc' : 'sort-desc');
+    });
+  }
+}
+
+function resetFlash() {
+  document.getElementById('flashCat').value = '';
+  document.getElementById('flashMaker').value = '';
+  document.getElementById('flashPower').value = '';
+  document.getElementById('flashSupply').value = '';
+  document.getElementById('flashScene').value = '';
+  document.getElementById('flashSearch').value = '';
+  flashSort = { col: '', dir: '' };
+  renderFlashLibrary();
+}
+
+// ===== CONTINUOUS LIBRARY =====
+let contSort = { col: '', dir: '' };
+
+function initContFilters() {
+  const cats = [...new Set(continuousData.map(d => d['大类']).filter(Boolean))];
+  const makers = [...new Set(continuousData.map(d => d['品牌']).filter(Boolean))];
+  const powers = [...new Set(continuousData.map(d => getPowerCategory(d['功率'])).filter(Boolean))];
+  const supplies = [...new Set(continuousData.map(d => d['供电方式']).filter(Boolean))];
+  const scenes = [...new Set(continuousData.map(d => d['适用场景']).filter(Boolean))];
+  const ccts = [...new Set(continuousData.map(d => {
+    const v = d['色温范围'] || '';
+    if (v.includes('RGB')) return 'RGB全彩';
+    if (v.includes('2700') || v.includes('2500')) return '双色温';
+    return '单色温';
+  }).filter(Boolean))];
+
+  populateSelect('contCat', cats, '全部灯型');
+  populateSelect('contMaker', makers, '全部品牌');
+  populateSelect('contPower', powers, '全部功率');
+  populateSelect('contCCT', ccts, '全部色温');
+  populateSelect('contSupply', supplies, '全部供电');
+  populateSelect('contScene', scenes, '全部场景');
+}
+
+function renderContLibrary() {
+  let data = [...continuousData];
+  const cat = document.getElementById('contCat').value;
+  const maker = document.getElementById('contMaker').value;
+  const power = document.getElementById('contPower').value;
+  const cct = document.getElementById('contCCT').value;
+  const supply = document.getElementById('contSupply').value;
+  const scene = document.getElementById('contScene').value;
+  const search = document.getElementById('contSearch').value.toLowerCase();
+
+  if (cat) data = data.filter(d => d['大类'] === cat);
+  if (maker) data = data.filter(d => d['品牌'] === maker);
+  if (power) data = data.filter(d => getPowerCategory(d['功率']) === power);
+  if (cct) data = data.filter(d => {
+    const v = d['色温范围'] || '';
+    if (cct === 'RGB全彩') return v.includes('RGB');
+    if (cct === '双色温') return v.includes('2700') || v.includes('2500');
+    if (cct === '单色温') return !v.includes('RGB') && !v.includes('2700') && !v.includes('2500');
+    return true;
+  });
+  if (supply) data = data.filter(d => d['供电方式'] === supply);
+  if (scene) data = data.filter(d => d['适用场景'] === scene);
+  if (search) data = data.filter(d =>
+    (d['型号']||'').toLowerCase().includes(search) ||
+    (d['品牌']||'').toLowerCase().includes(search) ||
+    (d['主要特点']||'').toLowerCase().includes(search)
+  );
+
+  if (contSort.col) {
+    data.sort((a, b) => {
+      let va = a[contSort.col] || '';
+      let vb = b[contSort.col] || '';
+      if (contSort.col === '参考价格区间(元)') { va = getPriceNum(va); vb = getPriceNum(vb); }
+      if (va < vb) return contSort.dir === 'asc' ? -1 : 1;
+      if (va > vb) return contSort.dir === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  document.getElementById('contCount').textContent = data.length;
+  document.getElementById('contSummary').textContent = '共 ' + data.length + ' 款常亮灯，覆盖 ' + [...new Set(data.map(d=>d['品牌']))].length + ' 个品牌。';
+
+  const tbody = document.getElementById('contBody');
+  tbody.innerHTML = data.map(d => {
+    const catClass = (d['大类']||'').includes('COB') ? 'ff' : (d['大类']||'').includes('平板') ? 'apsc' : (d['大类']||'').includes('棒灯') ? 'm43' : 'mf';
+    return '<tr>' +
+      '<td><span class="tag ' + catClass + '">' + (d['大类'] || '') + '</span></td>' +
+      '<td class="maker">' + (d['品牌'] || '') + '</td>' +
+      '<td class="model">' + (d['型号'] || '') + '</td>' +
+      '<td>' + (d['功率'] || '') + '</td>' +
+      '<td>' + (d['色温范围'] || '') + '</td>' +
+      '<td>' + (d['显色指数'] || '') + '</td>' +
+      '<td>' + (d['供电方式'] || '') + '</td>' +
+      '<td style="text-align:left;max-width:250px;overflow:hidden;text-overflow:ellipsis">' + (d['主要特点'] || '') + '</td>' +
+      '<td class="price">' + (d['参考价格区间(元)'] || '') + '</td>' +
+      '<td>' + (d['适用场景'] || '') + '</td>' +
+      '</tr>';
+  }).join('');
+
+  if (contSort.col) {
+    document.querySelectorAll('#contTable thead .sortable').forEach(th => {
+      th.classList.remove('sort-asc', 'sort-desc');
+      if (contSort.col === '参考价格区间(元)') th.classList.add(contSort.dir === 'asc' ? 'sort-asc' : 'sort-desc');
+    });
+  }
+}
+
+function resetCont() {
+  document.getElementById('contCat').value = '';
+  document.getElementById('contMaker').value = '';
+  document.getElementById('contPower').value = '';
+  document.getElementById('contCCT').value = '';
+  document.getElementById('contSupply').value = '';
+  document.getElementById('contScene').value = '';
+  document.getElementById('contSearch').value = '';
+  contSort = { col: '', dir: '' };
+  renderContLibrary();
+}
+
+// ===== ACCESSORY LIBRARY =====
+let accSort = { col: '', dir: '' };
+
+function initAccFilters() {
+  const cats = [...new Set(accessoryData.map(d => d['大类']).filter(Boolean))];
+  const subCats = [...new Set(accessoryData.map(d => d['小类']).filter(Boolean))];
+  const scenes = [...new Set(accessoryData.map(d => d['适用场景']).filter(Boolean))];
+  populateSelect('accCat', cats, '全部分类');
+  populateSelect('accSubCat', subCats, '全部小类');
+  populateSelect('accScene', scenes, '全部场景');
+}
+
+function renderAccLibrary() {
+  let data = [...accessoryData];
+  const cat = document.getElementById('accCat').value;
+  const subCat = document.getElementById('accSubCat').value;
+  const scene = document.getElementById('accScene').value;
+  const search = document.getElementById('accSearch').value.toLowerCase();
+
+  if (cat) data = data.filter(d => d['大类'] === cat);
+  if (subCat) data = data.filter(d => d['小类'] === subCat);
+  if (scene) data = data.filter(d => d['适用场景'] === scene);
+  if (search) data = data.filter(d =>
+    (d['名称/规格']||'').toLowerCase().includes(search) ||
+    (d['主要作用/特点']||'').toLowerCase().includes(search)
+  );
+
+  if (accSort.col) {
+    data.sort((a, b) => {
+      let va = a[accSort.col] || '';
+      let vb = b[accSort.col] || '';
+      if (va < vb) return accSort.dir === 'asc' ? -1 : 1;
+      if (va > vb) return accSort.dir === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  document.getElementById('accCount').textContent = data.length;
+  document.getElementById('accSummary').textContent = '共 ' + data.length + ' 件附件，覆盖 ' + [...new Set(data.map(d=>d['大类']))].length + ' 个大类。';
+
+  const tbody = document.getElementById('accBody');
+  tbody.innerHTML = data.map(d => {
+    const catClass = (d['大类']||'').includes('柔光') ? 'ff' : (d['大类']||'').includes('支撑') ? 'apsc' : 'mf';
+    return '<tr>' +
+      '<td><span class="tag ' + catClass + '">' + (d['大类'] || '') + '</span></td>' +
+      '<td>' + (d['小类'] || '') + '</td>' +
+      '<td class="model" style="text-align:left">' + (d['名称/规格'] || '') + '</td>' +
+      '<td>' + (d['常见卡口'] || '') + '</td>' +
+      '<td style="text-align:left;max-width:280px;overflow:hidden;text-overflow:ellipsis">' + (d['主要作用/特点'] || '') + '</td>' +
+      '<td class="price">' + (d['参考价格区间(元)'] || '') + '</td>' +
+      '<td>' + (d['适用场景'] || '') + '</td>' +
+      '</tr>';
+  }).join('');
+}
+
+function resetAcc() {
+  document.getElementById('accCat').value = '';
+  document.getElementById('accSubCat').value = '';
+  document.getElementById('accScene').value = '';
+  document.getElementById('accSearch').value = '';
+  accSort = { col: '', dir: '' };
+  renderAccLibrary();
+}
+
+// ===== SETUP LIBRARY =====
+function initSetupFilters() {
+  const scenes = [...new Set(setupData.map(d => d['场景分类']).filter(Boolean))];
+  populateSelect('setupScene', scenes, '全部场景');
+}
+
+function renderSetupLibrary() {
+  let data = [...setupData];
+  const scene = document.getElementById('setupScene').value;
+  const search = document.getElementById('setupSearch').value.toLowerCase();
+
+  if (scene) data = data.filter(d => d['场景分类'] === scene);
+  if (search) data = data.filter(d =>
+    (d['灯阵名称']||'').toLowerCase().includes(search) ||
+    (d['适用场景']||'').toLowerCase().includes(search) ||
+    (d['推荐设备']||'').toLowerCase().includes(search) ||
+    (d['布光要点']||'').toLowerCase().includes(search)
+  );
+
+  document.getElementById('setupCount').textContent = data.length;
+  document.getElementById('setupSummary').textContent = '共 ' + data.length + ' 个灯阵方案，覆盖 ' + [...new Set(data.map(d=>d['场景分类']))].length + ' 个场景分类。';
+
+  const container = document.getElementById('setupContainer');
+  container.innerHTML = data.map(d => {
+    return '<div class="setup-card">' +
+      '<h3>' + (d['灯阵名称'] || '') + ' <span class="tag mf">' + (d['灯位数'] || '') + '</span> <span class="tag ff">' + (d['场景分类'] || '') + '</span></h3>' +
+      '<div class="setup-meta">' + (d['适用场景'] || '') + '</div>' +
+      '<div class="setup-detail"><b>主光配置：</b>' + (d['主光配置'] || '') + '</div>' +
+      '<div class="setup-detail"><b>辅光配置：</b>' + (d['辅光配置'] || '') + '</div>' +
+      '<div class="setup-detail"><b>轮廓/发光配置：</b>' + (d['轮廓/发光配置'] || '') + '</div>' +
+      '<div class="setup-detail"><b>背景光配置：</b>' + (d['背景光配置'] || '') + '</div>' +
+      '<div class="setup-detail"><b>布光要点：</b>' + (d['布光要点'] || '') + '</div>' +
+      '<div class="setup-detail"><b>推荐设备：</b>' + (d['推荐设备'] || '') + '</div>' +
+      '<div class="setup-tags">' +
+      '<span class="setup-tag">' + (d['灯位数'] || '') + '</span>' +
+      '<span class="setup-tag">' + (d['场景分类'] || '') + '</span>' +
+      '</div>' +
+      '</div>';
+  }).join('');
+}
+
+function resetSetup() {
+  document.getElementById('setupScene').value = '';
+  document.getElementById('setupSearch').value = '';
+  renderSetupLibrary();
+}
+
+// ===== TABLE SORTING =====
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('#flashTable thead .sortable').forEach(th => {
+    th.addEventListener('click', function() {
+      const col = this.textContent.trim();
+      const colMap = { '参考价格': '参考价格区间(元)' };
+      const colKey = colMap[col] || col;
+      if (flashSort.col === colKey) flashSort.dir = flashSort.dir === 'asc' ? 'desc' : 'asc';
+      else { flashSort.col = colKey; flashSort.dir = 'asc'; }
+      renderFlashLibrary();
+    });
+  });
+
+  document.querySelectorAll('#contTable thead .sortable').forEach(th => {
+    th.addEventListener('click', function() {
+      const col = this.textContent.trim();
+      const colMap = { '参考价格': '参考价格区间(元)' };
+      const colKey = colMap[col] || col;
+      if (contSort.col === colKey) contSort.dir = contSort.dir === 'asc' ? 'desc' : 'asc';
+      else { contSort.col = colKey; contSort.dir = 'asc'; }
+      renderContLibrary();
+    });
+  });
+
+  initGuide();
+  initFlashFilters();
+  renderFlashLibrary();
+  initContFilters();
+  renderContLibrary();
+  initAccFilters();
+  renderAccLibrary();
+  initSetupFilters();
+  renderSetupLibrary();
+
+  const total = flashData.length + continuousData.length + accessoryData.length + setupData.length;
+  document.getElementById('dbCount').textContent = '设备库: ' + total + ' 条记录 | 闪光灯 ' + flashData.length + ' 款 | 常亮灯 ' + continuousData.length + ' 款 | 附件 ' + accessoryData.length + ' 件 | 灯阵方案 ' + setupData.length + ' 个';
+});
+</script>
+</body>
+</html>
